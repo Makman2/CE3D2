@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 2.4)
+
+project(CE3D2)
+
+set(CE3D2_VERSION_MAJOR 0)
+set(CE3D2_VERSION_MINOR 1)
+set(CE3D2_VERSION_MICRO dev)
+
+include_directories("${PROJECT_SOURCE_DIR}/..")
+
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+
+# Put source code directories here.
+
+add_library(${CMAKE_PROJECT_NAME}
+            SHARED
+            ${SRC})
