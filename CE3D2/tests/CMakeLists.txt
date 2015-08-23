@@ -1,5 +1,10 @@
+set(CE3D2_TEST_ROOT ${CMAKE_CURRENT_LIST_DIR})
+
 # Adds a new test target
 function(add_ce3d2_test target)
+    # TestUtilities are embedded automatically into every test.
+    list(APPEND ARGN ${CE3D2_TEST_ROOT}/TestUtilities)
+
     add_executable(${target} ${ARGN})
 
     target_link_libraries(${target}
