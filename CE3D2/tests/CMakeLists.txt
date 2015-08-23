@@ -17,3 +17,6 @@ function(add_ce3d2_test target)
         VERBATIM)
 
 endfunction()
+
+# Tests in this directory.
+add_ce3d2_test(VectorTest ${CMAKE_CURRENT_LIST_DIR}/VectorTest)

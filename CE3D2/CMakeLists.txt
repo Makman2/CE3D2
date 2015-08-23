@@ -16,7 +16,9 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
-# Put source code directories here.
+set(SRC
+    ${CMAKE_CURRENT_LIST_DIR}/Precision
+    ${CMAKE_CURRENT_LIST_DIR}/Vector)
 
 add_library(${CMAKE_PROJECT_NAME}
             SHARED
