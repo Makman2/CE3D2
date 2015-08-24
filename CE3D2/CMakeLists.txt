@@ -21,6 +21,7 @@ set(SRC
     ${CMAKE_CURRENT_LIST_DIR}/Precision
     ${CMAKE_CURRENT_LIST_DIR}/Vector)
 add_subdirectory("models")
+add_subdirectory("transformation")
 
 add_library(${CMAKE_PROJECT_NAME}
             SHARED

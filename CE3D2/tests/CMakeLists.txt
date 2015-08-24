@@ -28,3 +28,4 @@ add_ce3d2_test(VectorTest ${CMAKE_CURRENT_LIST_DIR}/VectorTest)
 add_ce3d2_test(MatrixTest ${CMAKE_CURRENT_LIST_DIR}/MatrixTest)
 
 add_subdirectory("models")
+add_subdirectory("transformation")

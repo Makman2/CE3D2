@@ -1,0 +1,1 @@
+add_ce3d2_test(TransformationTest ${CMAKE_CURRENT_LIST_DIR}/TransformationTest)
