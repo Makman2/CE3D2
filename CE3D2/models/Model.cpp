@@ -53,5 +53,11 @@ namespace Models
     {
         return m_Vectors;
     }
+
+    void
+    Model::transform(CE3D2::Transformation::Transformation const& transform)
+    {
+        transform.transform(m_Vectors);
+    }
 }
 }

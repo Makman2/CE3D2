@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "CE3D2/transformation/ITransformable.h"
 #include "CE3D2/Vector.h"
 
 
@@ -14,7 +15,7 @@ namespace Models
     /// The base class for all models.
     ///
     /// A model groups vectors together and allows to transform them.
-    class Model
+    class Model : public CE3D2::Transformation::ITransformable
     {
     public:
         /// Instantiates a new model without a name.
@@ -65,6 +66,11 @@ namespace Models
         ///          vectors.
         std::vector<Vector>&
         get_vectors();
+
+        // Inherited documentation.
+        virtual void
+        transform(CE3D2::Transformation::Transformation const& transform)
+            override;
 
     private:
         std::string m_Name;
