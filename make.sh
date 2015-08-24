@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Customization variables.
 CE3D2_SOURCE_DIRECTORY=CE3D2
