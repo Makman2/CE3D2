@@ -53,6 +53,61 @@
 }
 
 
+/// Warns for matrix equality.
+///
+/// @param A First matrix to compare.
+/// @param B Second matrix to compare.
+#define BOOST_WARN_MATRICES_EQUAL(A, B) BOOST_ASSERT_MATRICES_EQUAL(A, B, WARN)
+
+
+/// Checks for matrix equality.
+///
+/// @param A First matrix to compare.
+/// @param B Second matrix to compare.
+#define BOOST_CHECK_MATRICES_EQUAL(A, B) \
+    BOOST_ASSERT_MATRICES_EQUAL(A, B, CHECK)
+
+
+/// Requires matrix equality.
+///
+/// @param A First matrix to compare.
+/// @param B Second matrix to compare.
+#define BOOST_REQUIRE_MATRICES_EQUAL(A, B) \
+    BOOST_ASSERT_MATRICES_EQUAL(A, B, REQUIRE)
+
+
+/// Assert two matrices equal.
+///
+/// You should consider using the specializations BOOST_WARN_MATRICES_EQUAL,
+/// BOOST_CHECK_MATRICES_EQUAL and BOOST_REQUIRE_MATRICES_EQUAL instead.
+///
+/// @param A     First matrix to compare.
+/// @param B     Second matrix to compare.
+/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
+///              "REQUIRE".
+#define BOOST_ASSERT_MATRICES_EQUAL(A, B, LEVEL)                               \
+{                                                                              \
+    BOOST_##LEVEL##_MESSAGE(                                                   \
+        A.size1() == B.size1(),                                                \
+        "Row size of matrices differ, " << A.size1() << " != " << B.size1()    \
+            << ".");                                                           \
+    BOOST_##LEVEL##_MESSAGE(                                                   \
+        A.size2() == B.size2(),                                                \
+        "Column size of matrices differ, " << A.size2() << " != " << B.size2() \
+            << ".");                                                           \
+    for (unsigned int r = 0; r < A.size1(); r++)                               \
+    {                                                                          \
+        for (unsigned int c = 0; c < A.size2(); c++)                           \
+        {                                                                      \
+            BOOST_##LEVEL##_MESSAGE(                                           \
+                A(r, c) == B(r, c),                                            \
+                "Matrices differ in element " << r << "," << c << " ("         \
+                    << A(r, c) << " != " << B(r, c) << ").");                  \
+        }                                                                      \
+    }                                                                          \
+}
+
+
 /// Creates a vector from a list.
 ///
 /// @param numbers The list of numbers to fill the vector with.
