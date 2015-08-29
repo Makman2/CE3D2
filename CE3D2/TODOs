@@ -1,0 +1,73 @@
+// IStandardTransformable:
+// Not related to ITransformable, allows to scale, rotate?, translate and
+// maybe some other common stuff you should be able to do with vectors.
+
+// Maybe not using an interface is better, just implement it into the Model
+// directly. I mean when does it matter if an object is scalable as long as I
+// can apply any valid transformation on it? (even it's a bit more imperformant,
+// but anyway).
+// EDIT: After thinking again: I vote this again up +1
+
+
+// ----- NOT IStandardTransformable RELATED ---------------
+
+// OMG TRANSFORMATION IDEA: Because I allow non-linear transformations, I can
+// implement a RealPerspectiveProjection which has no Z-fighting etc., it's
+// the real deal!!!
+
+
+// Some todos:
+// - Implement linear transformation stuff (+ some generic used ones, projection
+//   scale, rotate, identity, perspective projection comes later)
+// - Implement linear transformation chain with matrix calculation etc.
+// - Implement a transformation chain for all transformations
+// - ModelGroup? (maybe it's worth to add functions in renderers to support
+//   ModelGroup handling, so in fact I don't need a vector where I store models,
+//   but a set, and the ModelGroup is also a set?) -> I think 0.2
+// - First: Text(Buffer)Renderer (I think TextRenderer is good). Writes to an
+//   array of chars/unicodes (need to look over encoding handling).
+//   - Fixed buffer size handling only for 0.1
+// - Second: ConsoleRenderer which actually prints TextRenderer content.
+// - Implement some predefined models (cube, plane, circle, cylinder, pyramid).
+// - doxygen!
+// - coala? yeah why not
+// - some codestyle rules? at least the special stuff like test layout maybe?
+
+// to check: what was the problem with using boost < 1.50? I remember it was
+// something wrong when using C++11. Let's look when the travis builds crash :)
+
+// Write into the readme that C++11 is used.
+
+// So for examples: manually print content to console, don't reset cursor
+// position (use ncurses or other console libraries in v0.2, so I can also
+//	     implement automatic size detection).
+
+// And before release: Write many nice guides! (cool if it's possible to
+// integrate them into doxygen - in markdown :D)
+
+// Make a CE2D2 config header from CMake that supplies version etc?
+
+// Using a *World* class for the Renderer instead of passing directly models?
+// I think that's a good idea, then world transformation and model-storing is
+// handled by this World, while renderer just needs to take the models, copy
+// them, transform them and we're good to go.
+// Possibly a 0.2 goal :D
+
+// CE3D used helper objects for mathematical functions (like linear_function).
+// Maybe it's worth to copy them since I know it's needed for line-mode drawing.
+// (at least I remember that they were quite helpful).
+// but line-mode and triangle-drawing come in 0.2.
+
+// Logo?
+
+// Examples in a separate repository.
+
+// Python bindings for 0.3
+// Other language bindings for 0.4
+
+// For linear transformations: Pass the old matrix into "on_update()" for
+// performance reasons? On first sight I'm against it, it is not so intuitive
+// and the only overhead lies in reserving space for the matrix. This needs
+// to be benchmarked. It's also possible for the user himself to use a
+// "placeholder" matrix for this purpose, since on_update() copies the returned
+// matrix since it needs to obtain ownership.
