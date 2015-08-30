@@ -20,6 +20,7 @@ set(SRC
     ${CMAKE_CURRENT_LIST_DIR}/Matrix
     ${CMAKE_CURRENT_LIST_DIR}/Precision
     ${CMAKE_CURRENT_LIST_DIR}/Vector)
+add_subdirectory("math")
 add_subdirectory("models")
 add_subdirectory("transformation")
 
