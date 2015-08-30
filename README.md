@@ -21,6 +21,7 @@ The libary is located inside the `build/release` directory.
 
 To build CE3D2 you need:
 - a C++11 compiler
+- Boost
 - CMake
 
 CE3D2 is only supported on linux platforms.
