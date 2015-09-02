@@ -1,6 +1,7 @@
 #ifndef CE3D2_TESTS_TESTUTILITIES_H
 #define CE3D2_TESTS_TESTUTILITIES_H
 
+#include <iomanip>
 #include <boost/test/unit_test.hpp>
 
 #include "CE3D2/Vector.h"
@@ -48,7 +49,9 @@
         BOOST_##LEVEL##_MESSAGE(                      \
             a[i] == b[i],                             \
             "Vectors differ in element " << i << " (" \
-                << a[i] << " != " << b[i] << ").");   \
+                << std::setprecision(8) << a[i]       \
+                << " != " << std::setprecision(8)     \
+                << b[i] << ").");                     \
     }                                                 \
 }
 
@@ -102,7 +105,8 @@
             BOOST_##LEVEL##_MESSAGE(                                           \
                 A(r, c) == B(r, c),                                            \
                 "Matrices differ in element " << r << "," << c << " ("         \
-                    << A(r, c) << " != " << B(r, c) << ").");                  \
+                    << std::setprecision(8) << A(r, c) << " != "               \
+                    << std::setprecision(8) << B(r, c) << ").");               \
         }                                                                      \
     }                                                                          \
 }
