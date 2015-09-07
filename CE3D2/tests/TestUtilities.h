@@ -11,34 +11,34 @@
 ///
 /// @param a First vector to compare.
 /// @param b Second vector to compare.
-#define BOOST_WARN_VECTORS_EQUAL(a, b) BOOST_ASSERT_VECTORS_EQUAL(a, b, WARN)
+#define CE3D2_WARN_VECTORS_EQUAL(a, b) CE3D2_ASSERT_VECTORS_EQUAL(a, b, WARN)
 
 
 /// Checks for vector equality.
 ///
 /// @param a First vector to compare.
 /// @param b Second vector to compare.
-#define BOOST_CHECK_VECTORS_EQUAL(a, b) BOOST_ASSERT_VECTORS_EQUAL(a, b, CHECK)
+#define CE3D2_CHECK_VECTORS_EQUAL(a, b) CE3D2_ASSERT_VECTORS_EQUAL(a, b, CHECK)
 
 
 /// Requires vector equality.
 ///
 /// @param a First vector to compare.
 /// @param b Second vector to compare.
-#define BOOST_REQUIRE_VECTORS_EQUAL(a, b) \
-    BOOST_ASSERT_VECTORS_EQUAL(a, b, REQUIRE)
+#define CE3D2_REQUIRE_VECTORS_EQUAL(a, b) \
+    CE3D2_ASSERT_VECTORS_EQUAL(a, b, REQUIRE)
 
 
 /// Assert two vectors equal.
 ///
-/// You should consider using the specializations BOOST_WARN_VECTORS_EQUAL,
-/// BOOST_CHECK_VECTORS_EQUAL and BOOST_REQUIRE_VECTORS_EQUAL instead.
+/// You should consider using the specializations CE3D2_WARN_VECTORS_EQUAL,
+/// CE3D2_CHECK_VECTORS_EQUAL and CE3D2_REQUIRE_VECTORS_EQUAL instead.
 ///
 /// @param a     First vector to compare.
 /// @param b     Second vector to compare.
 /// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
 ///              "REQUIRE".
-#define BOOST_ASSERT_VECTORS_EQUAL(a, b, LEVEL)       \
+#define CE3D2_ASSERT_VECTORS_EQUAL(a, b, LEVEL)       \
 {                                                     \
     BOOST_##LEVEL##_MESSAGE(                          \
         a.size() == b.size(),                         \

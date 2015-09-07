@@ -21,24 +21,24 @@ BOOST_AUTO_TEST_CASE(test_projection_vectors)
     projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
     uut.set_projection_vectors(projection_vectors);
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 1);
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
                               CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
 
     projection_vectors.push_back(CE3D2::ZeroVector(3));
     projection_vectors.push_back(CE3D2_CREATE_VECTOR(-1.0f, 0.0f, 0.0f));
     uut.set_projection_vectors(projection_vectors);
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 3);
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
                               CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[1],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[1],
                               CE3D2::ZeroVector(3));
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[2],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[2],
                               CE3D2_CREATE_VECTOR(-1.0f, 0.0f, 0.0f));
 
     projection_vectors.push_back(CE3D2::UnitVector(2, 1));
     uut.set_projection_vectors(projection_vectors);
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 4);
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[3],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[3],
                               CE3D2::UnitVector(2, 1));
 
     projection_vectors.clear();
@@ -49,9 +49,9 @@ BOOST_AUTO_TEST_CASE(test_projection_vectors)
     uut = CE3D2::Transformation::OrthogonalProjection(projection_vectors);
 
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 2);
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
                               CE3D2_CREATE_VECTOR(-5.0f, 2.3f));
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[1],
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[1],
                               CE3D2_CREATE_VECTOR(7.0f, 0.2f));
 }
 

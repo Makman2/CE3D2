@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(test_transform)
     CE3D2::Vector test_vector = CE3D2::UnitVector(3, 1);
     CE3D2::Vector compare_vector = CE3D2_CREATE_VECTOR(0.0f, 3.0f, 0.0f);
     uut.transform_vector(test_vector);
-    BOOST_CHECK_VECTORS_EQUAL(test_vector, compare_vector);
+    CE3D2_CHECK_VECTORS_EQUAL(test_vector, compare_vector);
 
     std::vector<CE3D2::Vector> test_vector_list = std::vector<CE3D2::Vector>();
     test_vector_list.push_back(CE3D2_CREATE_VECTOR(1.2f, -2.0f, 12.3f));
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(test_transform)
     BOOST_CHECK_EQUAL(test_vector_list.size(), compare_vector_list.size());
     for (unsigned int i = 0; i < compare_vector_list.size(); i++)
     {
-        BOOST_CHECK_VECTORS_EQUAL(test_vector_list[i], compare_vector_list[i]);
+        CE3D2_CHECK_VECTORS_EQUAL(test_vector_list[i], compare_vector_list[i]);
     }
 }
 

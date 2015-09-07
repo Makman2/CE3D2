@@ -13,22 +13,22 @@ BOOST_AUTO_TEST_CASE(test_scaling_vector)
     CE3D2::Vector scale = CE3D2_CREATE_VECTOR(2.0f, 3.0f);
     auto uut = CE3D2::Transformation::Scale(scale);
 
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
 
     scale = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f);
     uut.set_scale(scale);
 
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
 
     scale[0] = -1.0f;
     uut.set_scale(0, -1.0f);
 
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
 
     scale[2] = 444.4f;
     uut.set_scale(2, 444.4f);
 
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_scale(), scale);
 }
 
 BOOST_AUTO_TEST_CASE(test_matrix)
@@ -45,11 +45,11 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     CE3D2::Vector testvector = CE3D2_CREATE_VECTOR(2.2f, 7.0f);
     uut.transform_vector(testvector);
-    BOOST_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(4.4f, 21.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(4.4f, 21.0f));
 
     testvector = CE3D2_CREATE_VECTOR(1.0f, 1.5f);
     uut.transform_vector(testvector);
-    BOOST_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(2.0f, 4.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(2.0f, 4.5f));
 
 
     uut.set_scale(1, 4.0f);
@@ -60,11 +60,11 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     testvector = CE3D2_CREATE_VECTOR(1.0f, 1.0f);
     uut.transform_vector(testvector);
-    BOOST_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(2.0f, 4.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(2.0f, 4.0f));
 
     testvector = CE3D2_CREATE_VECTOR(8.0f, -2.0f);
     uut.transform_vector(testvector);
-    BOOST_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(16.0f, -8.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, CE3D2_CREATE_VECTOR(16.0f, -8.0f));
 
 
     uut.set_scale(CE3D2_CREATE_VECTOR(4.7f, 1.2f, 0.5f));
@@ -82,12 +82,12 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     testvector = CE3D2_CREATE_VECTOR(2.0f, 2.0f, 2.0f);
     uut.transform_vector(testvector);
-    BOOST_CHECK_VECTORS_EQUAL(testvector,
+    CE3D2_CHECK_VECTORS_EQUAL(testvector,
                               CE3D2_CREATE_VECTOR(9.4f, 2.4f, 1.0f));
 
     testvector = CE3D2_CREATE_VECTOR(1.0f, 0.5f, 3.0f);
     uut.transform_vector(testvector);
-    BOOST_CHECK_VECTORS_EQUAL(testvector,
+    CE3D2_CHECK_VECTORS_EQUAL(testvector,
                               CE3D2_CREATE_VECTOR(4.7f, 0.6f, 1.5f));
 }
 

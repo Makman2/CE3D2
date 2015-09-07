@@ -47,27 +47,27 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     CE3D2::Vector compare_vector = CE3D2_CREATE_VECTOR(4.0f, 4.0f);
     uut.transform_vector(testvector);
 
-    BOOST_CHECK_VECTORS_EQUAL(testvector, compare_vector);
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 
     uut.set_scale(0.0f);
     testvector = CE3D2_CREATE_VECTOR(2.0f, 2.0f);
     compare_vector = CE3D2_CREATE_VECTOR(0.0f, 0.0f);
     uut.transform_vector(testvector);
 
-    BOOST_CHECK_VECTORS_EQUAL(testvector, compare_vector);
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 
     uut.set_scale(2.5f);
     testvector = CE3D2_CREATE_VECTOR(4.0f, 2.0f);
     compare_vector = CE3D2_CREATE_VECTOR(15.0f, 15.0f);
     uut.transform_vector(testvector);
 
-    BOOST_CHECK_VECTORS_EQUAL(testvector, compare_vector);
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 
     testvector = CE3D2_CREATE_VECTOR(3.0f, 1.0f);
     compare_vector = CE3D2_CREATE_VECTOR(10.0f, 10.0f);
     uut.transform_vector(testvector);
 
-    BOOST_CHECK_VECTORS_EQUAL(testvector, compare_vector);
+    CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

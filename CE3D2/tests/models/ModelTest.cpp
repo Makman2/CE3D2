@@ -45,11 +45,11 @@ BOOST_AUTO_TEST_CASE(test_vectors)
     BOOST_CHECK_EQUAL(uut.get_vectors().size(), 0);
     vecs.push_back(CE3D2::ZeroVector(3));
     BOOST_CHECK_EQUAL(uut.get_vectors().size(), 1);
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_vectors()[0], CE3D2::ZeroVector(3));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_vectors()[0], CE3D2::ZeroVector(3));
     vecs.push_back(CE3D2::UnitVector(3, 2));
     BOOST_CHECK_EQUAL(uut.get_vectors().size(), 2);
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_vectors()[0], CE3D2::ZeroVector(3));
-    BOOST_CHECK_VECTORS_EQUAL(uut.get_vectors()[1], CE3D2::UnitVector(3, 2));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_vectors()[0], CE3D2::ZeroVector(3));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_vectors()[1], CE3D2::UnitVector(3, 2));
     vecs.clear();
     BOOST_CHECK_EQUAL(uut.get_vectors().size(), 0);
 }
@@ -68,9 +68,9 @@ BOOST_AUTO_TEST_CASE(test_ITransformable)
 
     uut.transform(scale_transform);
 
-    BOOST_CHECK_VECTORS_EQUAL(vecs[0], CE3D2_CREATE_VECTOR(2.0f, 4.0f, 6.0f));
-    BOOST_CHECK_VECTORS_EQUAL(vecs[1], CE3D2_CREATE_VECTOR(-4.0f, 6.6f, 44.0f));
-    BOOST_CHECK_VECTORS_EQUAL(vecs[2], CE3D2_CREATE_VECTOR(8.0f, 5.0f, 0.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vecs[0], CE3D2_CREATE_VECTOR(2.0f, 4.0f, 6.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vecs[1], CE3D2_CREATE_VECTOR(-4.0f, 6.6f, 44.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vecs[2], CE3D2_CREATE_VECTOR(8.0f, 5.0f, 0.0f));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
