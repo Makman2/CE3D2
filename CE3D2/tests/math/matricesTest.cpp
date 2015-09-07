@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(test_invert)
     // Test identity matrix.
     CE3D2::Matrix testmatrix = CE3D2::IdentityMatrix(2);
     BOOST_CHECK(CE3D2::Math::Matrices::invert(testmatrix, output));
-    BOOST_CHECK_MATRICES_EQUAL(output, testmatrix);
+    CE3D2_CHECK_MATRICES_EQUAL(output, testmatrix);
 
     // Test orthonormal matrix.
     testmatrix = CE3D2::Matrix(4, 4);
@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(test_invert)
     testmatrix(3, 3) = 0.5f;
 
     BOOST_CHECK(CE3D2::Math::Matrices::invert(testmatrix, output));
-    BOOST_CHECK_MATRICES_EQUAL(output,
+    CE3D2_CHECK_MATRICES_EQUAL(output,
                                boost::numeric::ublas::trans(testmatrix));
 
     // Test arbitrary matrix.
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(test_invert)
     compare_matrix(2, 2) = 0.0f;
 
     BOOST_CHECK(CE3D2::Math::Matrices::invert(testmatrix, output));
-    BOOST_CHECK_MATRICES_EQUAL(output, compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(output, compare_matrix);
 
     // Test non-invertable matrices.
     testmatrix = CE3D2::ZeroMatrix(3, 3);

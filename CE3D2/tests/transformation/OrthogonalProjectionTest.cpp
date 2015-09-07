@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     uut.set_projection_vectors(projection_vectors);
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), CE3D2::IdentityMatrix(3));
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), CE3D2::IdentityMatrix(3));
 
     // Same dimension, but other base vectors to project on.
     projection_vectors.clear();
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     compare_matrix(2, 1) = 0.0f;
     compare_matrix(2, 2) = 1.0f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 
     // Complicated bases in 4D space.
     projection_vectors.clear();
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     compare_matrix(3, 2) = 1.0f;
     compare_matrix(3, 3) = -0.50000006f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 
     // Project from 3D onto 2D.
     projection_vectors.clear();
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     compare_matrix(1, 1) = 0.25f;
     compare_matrix(1, 2) = 0.25f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 
     // Project from 3D onto 1D.
     projection_vectors.clear();
@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     compare_matrix(0, 1) = 0.4f;
     compare_matrix(0, 2) = 0.0f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 
     // Project from 2D onto 1D.
     projection_vectors.clear();
@@ -159,7 +159,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     compare_matrix(0, 0) = 0.1f;
     compare_matrix(0, 1) = -0.3f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 }
 
 BOOST_AUTO_TEST_CASE(test_matrix_exceptions)

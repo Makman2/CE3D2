@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
     compare_matrix(1, 0) = 0.0f;
     compare_matrix(1, 1) = 3.0f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 
     CE3D2::Vector testvector = CE3D2_CREATE_VECTOR(2.2f, 7.0f);
     uut.transform_vector(testvector);
@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     compare_matrix(1, 1) = 4.0f;
 
-    BOOST_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), compare_matrix);
 
     testvector = CE3D2_CREATE_VECTOR(1.0f, 1.0f);
     uut.transform_vector(testvector);

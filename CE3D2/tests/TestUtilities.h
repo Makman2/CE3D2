@@ -60,35 +60,35 @@
 ///
 /// @param A First matrix to compare.
 /// @param B Second matrix to compare.
-#define BOOST_WARN_MATRICES_EQUAL(A, B) BOOST_ASSERT_MATRICES_EQUAL(A, B, WARN)
+#define CE3D2_WARN_MATRICES_EQUAL(A, B) CE3D2_ASSERT_MATRICES_EQUAL(A, B, WARN)
 
 
 /// Checks for matrix equality.
 ///
 /// @param A First matrix to compare.
 /// @param B Second matrix to compare.
-#define BOOST_CHECK_MATRICES_EQUAL(A, B) \
-    BOOST_ASSERT_MATRICES_EQUAL(A, B, CHECK)
+#define CE3D2_CHECK_MATRICES_EQUAL(A, B) \
+    CE3D2_ASSERT_MATRICES_EQUAL(A, B, CHECK)
 
 
 /// Requires matrix equality.
 ///
 /// @param A First matrix to compare.
 /// @param B Second matrix to compare.
-#define BOOST_REQUIRE_MATRICES_EQUAL(A, B) \
-    BOOST_ASSERT_MATRICES_EQUAL(A, B, REQUIRE)
+#define CE3D2_REQUIRE_MATRICES_EQUAL(A, B) \
+    CE3D2_ASSERT_MATRICES_EQUAL(A, B, REQUIRE)
 
 
 /// Assert two matrices equal.
 ///
-/// You should consider using the specializations BOOST_WARN_MATRICES_EQUAL,
-/// BOOST_CHECK_MATRICES_EQUAL and BOOST_REQUIRE_MATRICES_EQUAL instead.
+/// You should consider using the specializations CE3D2_WARN_MATRICES_EQUAL,
+/// CE3D2_CHECK_MATRICES_EQUAL and CE3D2_REQUIRE_MATRICES_EQUAL instead.
 ///
 /// @param A     First matrix to compare.
 /// @param B     Second matrix to compare.
 /// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
 ///              "REQUIRE".
-#define BOOST_ASSERT_MATRICES_EQUAL(A, B, LEVEL)                               \
+#define CE3D2_ASSERT_MATRICES_EQUAL(A, B, LEVEL)                               \
 {                                                                              \
     BOOST_##LEVEL##_MESSAGE(                                                   \
         A.size1() == B.size1(),                                                \
