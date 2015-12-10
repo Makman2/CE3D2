@@ -1,0 +1,16 @@
+# All sections are disabled by default.
+DEFAULT.enabled = false
+CHECK.enabled = true
+
+[DEFAULT]
+files = CE3D2/**/*.cpp, CE3D2/**/*.h
+
+[CHECK]
+bears = SpaceConsistencyBear, LineLengthBear
+use_spaces = True
+max_line_length = 80
+
+[TODOS]
+bears = KeywordBear
+ci_keywords = \#TODO, \# TODO, \#FIXME, \# FIXME
+cs_keywords =
