@@ -16,7 +16,7 @@ function(add_ce3d2_test target)
     add_custom_command(
         TARGET ${target}
         POST_BUILD
-        COMMAND ${target}
+        COMMAND ${target} --log_level=nothing --report_level=no
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Running ${target}..."
         VERBATIM)
