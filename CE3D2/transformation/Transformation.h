@@ -8,6 +8,10 @@ namespace CE3D2
 {
 namespace Transformation
 {
+    /// The base class for all transformations.
+    ///
+    /// A transformation in CE3D2 is considered as a mapping from an
+    /// m-dimensional vector onto an arbitrary n-dimensional vector.
     class Transformation
     {
     public:

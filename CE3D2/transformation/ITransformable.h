@@ -8,6 +8,7 @@ namespace CE3D2
 {
 namespace Transformation
 {
+    /// Defines an interface that allows to transform objects.
     class ITransformable
     {
     public:

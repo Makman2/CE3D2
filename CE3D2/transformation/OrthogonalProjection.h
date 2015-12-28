@@ -12,6 +12,8 @@ namespace CE3D2
 {
 namespace Transformation
 {
+    /// A transformation describing an orthogonal projection onto an
+    /// arbitrary-dimensioned (hyper)plane.
     class OrthogonalProjection : public LinearTransformation
     {
     public:
