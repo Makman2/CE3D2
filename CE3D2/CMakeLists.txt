@@ -6,16 +6,6 @@ set(CE3D2_VERSION_MAJOR 0)
 set(CE3D2_VERSION_MINOR 1)
 set(CE3D2_VERSION_MICRO dev)
 
-find_package(Boost
-             COMPONENTS unit_test_framework system
-             REQUIRED)
-
-include_directories("${PROJECT_SOURCE_DIR}/..")
-
-set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-
 set(SRC
     ${CMAKE_CURRENT_LIST_DIR}/Matrix
     ${CMAKE_CURRENT_LIST_DIR}/Precision
@@ -24,10 +14,24 @@ add_subdirectory("math")
 add_subdirectory("models")
 add_subdirectory("transformation")
 
-add_library(${CMAKE_PROJECT_NAME}
-            SHARED
-            ${SRC})
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
+   ${CMAKE_BUILD_TYPE} STREQUAL "Release")
 
-if(TESTS_ENABLED)
-    add_subdirectory("tests")
+    include_directories("${PROJECT_SOURCE_DIR}/..")
+
+    find_package(Boost
+                 COMPONENTS unit_test_framework system
+                 REQUIRED)
+
+    set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+
+    add_library(${CMAKE_PROJECT_NAME}
+                SHARED
+                ${SRC})
+
+    if(TESTS_ENABLED)
+        add_subdirectory("tests")
+    endif()
 endif()
