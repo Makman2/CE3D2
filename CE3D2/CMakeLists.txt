@@ -40,4 +40,30 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
     if(TESTS_ENABLED)
         add_subdirectory("tests")
     endif()
+
+elseif(${CMAKE_BUILD_TYPE} STREQUAL "Documentation")
+    find_package(Doxygen REQUIRED)
+    if (DOXYGEN_FOUND)
+        # Get the latest abbreviated commit hash of the working branch.
+        execute_process(COMMAND git log -1 --format=%h
+                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                        OUTPUT_VARIABLE GIT_HEAD
+                        OUTPUT_STRIP_TRAILING_WHITESPACE)
+        # Get the current working branch
+        execute_process(COMMAND git rev-parse --abbrev-ref HEAD
+                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                        OUTPUT_VARIABLE GIT_BRANCH
+                        OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+        configure_file(${CMAKE_SOURCE_DIR}/doxyfile.in
+                       ${CMAKE_BINARY_DIR}/doxyfile)
+        add_custom_target(doc
+                          COMMAND
+                              ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxyfile
+                          DEPENDS ${CMAKE_SOURCE_DIR}/doxyfile.in
+                          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+                          COMMENT "Generating documentation with doxygen"
+                          VERBATIM
+                          SOURCES ${SRC})
+    endif()
 endif()

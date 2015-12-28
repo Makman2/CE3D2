@@ -3,6 +3,7 @@ set -e
 
 # Customization variables.
 CE3D2_SOURCE_DIRECTORY=CE3D2
+CE3D2_DOC_BUILD_DIRECTORY=build/doc
 CE3D2_DEBUG_BUILD_DIRECTORY=build/debug
 CE3D2_RELEASE_BUILD_DIRECTORY=build/release
 
@@ -15,6 +16,7 @@ CE3D2_RELEASE_BUILD_DIRECTORY="$working_dir/$CE3D2_RELEASE_BUILD_DIRECTORY"
 CMAKE_FLAGS=""
 CMAKE_DEBUG_FLAGS="-DCMAKE_BUILD_TYPE=Debug -DTESTS_ENABLED=ON"
 CMAKE_RELEASE_FLAGS="-DCMAKE_BUILD_TYPE=Release"
+CMAKE_DOC_FLAGS="-DCMAKE_BUILD_TYPE=Documentation"
 
 # Executes the given task while displaying the task description.
 function task {
@@ -40,6 +42,8 @@ function TARGET_help {
     echo "debug      Build CE3D2 (debug) into '$CE3D2_DEBUG_BUILD_DIRECTORY'."
     echo "release    Build CE3D2 (release) into" \
                      "'$CE3D2_RELEASE_BUILD_DIRECTORY'."
+    echo "doc        Builds the HTML documentation into" \
+                     "'$CE3D2_DOC_BUILD_DIRECTORY/html'."
     echo "clean      Clean up build files."
 }
 
@@ -59,11 +63,21 @@ function TARGET_release {
     cd $working_dir
 }
 
+function TARGET_doc {
+    create_build_directory $CE3D2_DOC_BUILD_DIRECTORY
+    cd $CE3D2_DOC_BUILD_DIRECTORY
+    cmake $CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $CMAKE_DOC_FLAGS
+    make doc
+    cd $working_dir
+}
+
 function TARGET_clean {
     task "Deleting debug build..." \
         rm -rf $CE3D2_DEBUG_BUILD_DIRECTORY
     task "Deleting release build..." \
         rm -rf $CE3D2_RELEASE_BUILD_DIRECTORY
+    task "Deleting documentation..." \
+        rm -rf $CE3D2_DOC_BUILD_DIRECTORY
 }
 
 
@@ -75,6 +89,8 @@ case $1 in
 	TARGET_debug;;
     "release")
         TARGET_release;;
+    "doc")
+        TARGET_doc;;
     "clean")
         TARGET_clean;;
     *)
