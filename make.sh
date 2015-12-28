@@ -37,8 +37,9 @@ function TARGET_help {
     echo
     echo "help       Displays this help."
     echo
-    echo "debug      Build CE3D2 (debug) into $CE3D2_DEBUG_BUILD_DIRECTORY."
-    echo "release    Build CE3D2 (release) into $CE3D2_RELEASE_BUILD_DIRECTORY."
+    echo "debug      Build CE3D2 (debug) into '$CE3D2_DEBUG_BUILD_DIRECTORY'."
+    echo "release    Build CE3D2 (release) into" \
+                     "'$CE3D2_RELEASE_BUILD_DIRECTORY'."
     echo "clean      Clean up build files."
 }
 
