@@ -30,6 +30,14 @@ CE3D2 is only supported on linux platforms.
 
 Installation to the system is currently not supported, but will come shortly.
 
+## Documentation
+
+HTML-documentation can be built easily with `./make.sh doc` into `build/doc`. To
+display the documentation webpage, invoke your favorite browser with
+`build/doc/html/index.html`.
+
+CE3D2 uses doxygen to generate documenation.
+
 ## Debugging
 
 If you want to debug CE3D2, you need to invoke `./make.sh debug` instead of
