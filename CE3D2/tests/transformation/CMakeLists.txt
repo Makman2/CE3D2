@@ -6,5 +6,7 @@ add_ce3d2_test(MatrixTransformationTest
                ${CMAKE_CURRENT_LIST_DIR}/MatrixTransformationTest)
 add_ce3d2_test(RotationTest ${CMAKE_CURRENT_LIST_DIR}/RotationTest)
 add_ce3d2_test(ScaleTest ${CMAKE_CURRENT_LIST_DIR}/ScaleTest)
+add_ce3d2_test(TransformationChainTest
+               ${CMAKE_CURRENT_LIST_DIR}/TransformationChainTest)
 add_ce3d2_test(OrthogonalProjectionTest
                ${CMAKE_CURRENT_LIST_DIR}/OrthogonalProjectionTest)
