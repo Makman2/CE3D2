@@ -104,4 +104,56 @@ BOOST_AUTO_TEST_CASE(test_complete_fill)
     BOOST_CHECK_EQUAL(uut(1, 2), 'z');
 }
 
+BOOST_AUTO_TEST_CASE(test_is_boundary_valid_point)
+{
+    CE3D2::Render::TextSurface uut(20, 24);
+
+    // Check corners.
+    BOOST_CHECK(uut.is_boundary_valid(0, 0));
+    BOOST_CHECK(uut.is_boundary_valid(0, 19));
+    BOOST_CHECK(uut.is_boundary_valid(23, 19));
+    BOOST_CHECK(uut.is_boundary_valid(23, 0));
+
+    // Check some points from inside of the surface.
+    BOOST_CHECK(uut.is_boundary_valid(11, 2));
+    BOOST_CHECK(uut.is_boundary_valid(2, 11));
+    BOOST_CHECK(uut.is_boundary_valid(7, 13));
+    BOOST_CHECK(uut.is_boundary_valid(22, 5));
+
+    // Check beyond corners.
+    BOOST_CHECK(!uut.is_boundary_valid(0, 20));
+    BOOST_CHECK(!uut.is_boundary_valid(23, 20));
+    BOOST_CHECK(!uut.is_boundary_valid(24, 20));
+    BOOST_CHECK(!uut.is_boundary_valid(24, 19));
+    BOOST_CHECK(!uut.is_boundary_valid(24, 0));
+
+    // Check somewhere far far away.
+    BOOST_CHECK(!uut.is_boundary_valid(100, 100));
+    BOOST_CHECK(!uut.is_boundary_valid(8, 77));
+    BOOST_CHECK(!uut.is_boundary_valid(77, 8));
+    BOOST_CHECK(!uut.is_boundary_valid(99999, 12312));
+}
+
+BOOST_AUTO_TEST_CASE(test_is_boundary_valid_block)
+{
+    CE3D2::Render::TextSurface uut(10, 10);
+
+    // Check inside.
+    BOOST_CHECK(uut.is_boundary_valid(0, 0, 10, 10));
+    BOOST_CHECK(uut.is_boundary_valid(9, 9, 1, 1));
+    BOOST_CHECK(uut.is_boundary_valid(4, 2, 4, 5));
+
+    // Check partially outside.
+    BOOST_CHECK(!uut.is_boundary_valid(0, 0, 4, 11));
+    BOOST_CHECK(!uut.is_boundary_valid(0, 0, 11, 7));
+    BOOST_CHECK(!uut.is_boundary_valid(7, 8, 20, 12));
+
+    // Check completely outside.
+    BOOST_CHECK(!uut.is_boundary_valid(10, 10, 1, 1));
+    BOOST_CHECK(!uut.is_boundary_valid(10, 10, 10, 10));
+    BOOST_CHECK(!uut.is_boundary_valid(2, 10, 5, 5));
+    BOOST_CHECK(!uut.is_boundary_valid(10, 2, 7, 7));
+    BOOST_CHECK(!uut.is_boundary_valid(72, 15, 20, 88));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

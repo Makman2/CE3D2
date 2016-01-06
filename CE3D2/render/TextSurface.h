@@ -11,7 +11,8 @@ namespace Render
     /// A TextSurface represent a two-dimensional surface of char-elements.
     ///
     /// Important: Due to performance reasons non-const accessors like
-    /// `operator ()` do not perform boundary checks!
+    /// `operator ()` do not perform boundary checks!  You can do that manually
+    /// by using the `is_boundary_valid` functions.
     class TextSurface
     {
         using surface_type = std::vector<char>;
@@ -78,6 +79,33 @@ namespace Render
              size_type y,
              size_type width,
              size_type height);
+
+        /// Checks whether the given boundary is valid.
+        ///
+        /// You can invoke this function before using the `operator ()` on this
+        /// object to check for boundary validity.
+        ///
+        /// @param x The x-coordinate to check.
+        /// @param y The y-coordinate to check.
+        /// @returns `true` if boundary is valid, `false` if not.
+        bool
+        is_boundary_valid(size_type x, size_type y) const;
+
+        /// Checks whether the given block-boundary is valid.
+        ///
+        /// You can invoke this function before using e.g. `fill()` on this
+        /// object to check for boundary validity.
+        ///
+        /// @param x      The x-coordinate of the block to check.
+        /// @param y      The y-coordinate of the block to check.
+        /// @param width  The width of the block to check.
+        /// @param height The height of the block to check.
+        /// @returns      `true` if boundary is valid, `false` if not.
+        bool
+        is_boundary_valid(size_type x,
+                          size_type y,
+                          size_type width,
+                          size_type height) const;
 
     private:
         size_type m_Width;

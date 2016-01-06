@@ -70,5 +70,20 @@ namespace Render
             it += m_Width;
         }
     }
+
+    bool
+    TextSurface::is_boundary_valid(size_type x, size_type y) const
+    {
+        return x < m_Height && y < m_Width;
+    }
+
+    bool
+    TextSurface::is_boundary_valid(size_type x,
+                                   size_type y,
+                                   size_type width,
+                                   size_type height) const
+    {
+        return x + height <= m_Height && y + width <= m_Width;
+    }
 }
 }
