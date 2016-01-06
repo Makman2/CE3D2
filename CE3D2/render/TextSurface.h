@@ -10,7 +10,7 @@ namespace Render
 {
     /// A TextSurface represent a two-dimensional surface of char-elements.
     ///
-    /// Important: Due to performance reasons non-const accessors like
+    /// Important: Due to performance reasons object accessors like
     /// `operator ()` or `copy_from()` do not perform boundary checks! You can
     /// do that manually by using the `is_boundary_valid` functions.
     class TextSurface
