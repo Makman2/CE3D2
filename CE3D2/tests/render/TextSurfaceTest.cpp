@@ -104,6 +104,81 @@ BOOST_AUTO_TEST_CASE(test_complete_fill)
     BOOST_CHECK_EQUAL(uut(1, 2), 'z');
 }
 
+BOOST_AUTO_TEST_CASE(test_copy_from_source)
+{
+    CE3D2::Render::TextSurface source(3, 3);
+    source.fill('x');
+    source(0, 0) = 'A';
+    source(1, 1) = 'B';
+    source(2, 2) = 'C';
+    source(2, 0) = 'D';
+
+    CE3D2::Render::TextSurface target(9, 9);
+    target.copy_from(source, 1, 1, 7, 7, 1, 1);
+
+    BOOST_CHECK_EQUAL(target(7, 7), 'B');
+
+    target.copy_from(source, 0, 0, 2, 4, 2, 3);
+
+    BOOST_CHECK_EQUAL(target(2, 4), 'A');
+    BOOST_CHECK_EQUAL(target(2, 5), 'x');
+    BOOST_CHECK_EQUAL(target(3, 4), 'x');
+    BOOST_CHECK_EQUAL(target(3, 5), 'B');
+    BOOST_CHECK_EQUAL(target(4, 4), 'D');
+    BOOST_CHECK_EQUAL(target(4, 5), 'x');
+}
+
+BOOST_AUTO_TEST_CASE(test_copy_from_source_to_coords)
+{
+    CE3D2::Render::TextSurface source(2, 2);
+    source.fill('0');
+    source(1, 1) = 'h';
+
+    CE3D2::Render::TextSurface target(4, 4);
+    target.copy_from(source, 1, 1);
+
+    BOOST_CHECK_EQUAL(target(0, 0), ' ');
+    BOOST_CHECK_EQUAL(target(0, 1), ' ');
+    BOOST_CHECK_EQUAL(target(0, 2), ' ');
+    BOOST_CHECK_EQUAL(target(0, 3), ' ');
+    BOOST_CHECK_EQUAL(target(1, 0), ' ');
+    BOOST_CHECK_EQUAL(target(1, 1), '0');
+    BOOST_CHECK_EQUAL(target(1, 2), '0');
+    BOOST_CHECK_EQUAL(target(1, 3), ' ');
+    BOOST_CHECK_EQUAL(target(2, 0), ' ');
+    BOOST_CHECK_EQUAL(target(2, 1), '0');
+    BOOST_CHECK_EQUAL(target(2, 2), 'h');
+    BOOST_CHECK_EQUAL(target(2, 3), ' ');
+    BOOST_CHECK_EQUAL(target(3, 0), ' ');
+    BOOST_CHECK_EQUAL(target(3, 1), ' ');
+    BOOST_CHECK_EQUAL(target(3, 2), ' ');
+    BOOST_CHECK_EQUAL(target(3, 3), ' ');
+}
+
+BOOST_AUTO_TEST_CASE(test_copy_from_source_completely)
+{
+    CE3D2::Render::TextSurface source(10, 10);
+    source.fill('7');
+
+    CE3D2::Render::TextSurface target(10, 15);
+    target.copy_from(source);
+
+    for (CE3D2::Render::TextSurface::size_type x = 0; x < 10; x++)
+    {
+        for (CE3D2::Render::TextSurface::size_type y = 0; y < 10; y++)
+        {
+            BOOST_CHECK_EQUAL(target(x, y), '7');
+        }
+    }
+    for (CE3D2::Render::TextSurface::size_type x = 10; x < 15; x++)
+    {
+        for (CE3D2::Render::TextSurface::size_type y = 0; y < 10; y++)
+        {
+            BOOST_CHECK_EQUAL(target(x, y), ' ');
+        }
+    }
+}
+
 BOOST_AUTO_TEST_CASE(test_is_boundary_valid_point)
 {
     CE3D2::Render::TextSurface uut(20, 24);

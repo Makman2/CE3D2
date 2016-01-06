@@ -11,8 +11,8 @@ namespace Render
     /// A TextSurface represent a two-dimensional surface of char-elements.
     ///
     /// Important: Due to performance reasons non-const accessors like
-    /// `operator ()` do not perform boundary checks!  You can do that manually
-    /// by using the `is_boundary_valid` functions.
+    /// `operator ()` or `copy_from()` do not perform boundary checks! You can
+    /// do that manually by using the `is_boundary_valid` functions.
     class TextSurface
     {
         using surface_type = std::vector<char>;
@@ -79,6 +79,52 @@ namespace Render
              size_type y,
              size_type width,
              size_type height);
+
+        /// Copies the given source surface to the current target surface.
+        ///
+        /// The source TextSurface is copied completely to this instance at 0,0.
+        ///
+        /// Note that invalid bounds do not raise an exception!
+        ///
+        /// @param source Where to copy data from.
+        void
+        copy_from(TextSurface const& source);
+
+        /// Copies the given source surface to the current target surface.
+        ///
+        /// The source TextSurface is copied completely to this instance at the
+        /// given coordinates.
+        ///
+        /// Note that invalid bounds do not raise an exception!
+        ///
+        /// @param source   Where to copy data from.
+        /// @param target_x The target x-coordinate where to start copy from.
+        /// @param target_y The target y-coordinate where to start copy from.
+        void
+        copy_from(TextSurface const& source,
+                  size_type target_x,
+                  size_type target_y);
+
+        /// Copies a block from the given source surface to the current target
+        /// surface.
+        ///
+        /// Note that invalid bounds do not raise an exception!
+        ///
+        /// @param source   Where to copy data from.
+        /// @param source_x The source x-coordinate where to copy to.
+        /// @param source_y The source y-coordinate where to copy to.
+        /// @param target_x The target x-coordinate where to start copy from.
+        /// @param target_y The target y-coordinate where to start copy from.
+        /// @param width    The width of the copied block.
+        /// @param height   The height of the copied block.
+        void
+        copy_from(TextSurface const& source,
+                  size_type source_x,
+                  size_type source_y,
+                  size_type target_x,
+                  size_type target_y,
+                  size_type width,
+                  size_type height);
 
         /// Checks whether the given boundary is valid.
         ///

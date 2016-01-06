@@ -71,6 +71,48 @@ namespace Render
         }
     }
 
+    void
+    TextSurface::copy_from(TextSurface const& source)
+    {
+        copy_from(source, 0, 0);
+    }
+
+    void
+    TextSurface::copy_from(TextSurface const& source,
+                           size_type target_x,
+                           size_type target_y)
+    {
+        copy_from(source,
+                  0,
+                  0,
+                  target_x,
+                  target_y,
+                  source.width(),
+                  source.height());
+    }
+
+    void
+    TextSurface::copy_from(TextSurface const& source,
+                           size_type source_x,
+                           size_type source_y,
+                           size_type target_x,
+                           size_type target_y,
+                           size_type width,
+                           size_type height)
+    {
+        auto target_it = m_Surface.begin() + target_x * m_Width + target_y;
+        auto stop = target_it + height * m_Width;
+        auto source_it =
+            source.m_Surface.begin() + source_x * source.m_Width + source_y;
+
+        while (target_it != stop)
+        {
+            std::copy_n(source_it, width, target_it);
+            target_it += m_Width;
+            source_it += source.m_Width;
+        }
+    }
+
     bool
     TextSurface::is_boundary_valid(size_type x, size_type y) const
     {
