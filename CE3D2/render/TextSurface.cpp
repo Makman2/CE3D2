@@ -43,6 +43,12 @@ namespace Render
     }
 
     void
+    TextSurface::clear()
+    {
+        fill(' ');
+    }
+
+    void
     TextSurface::fill(char chr)
     {
         m_Surface.assign(m_Surface.size(), chr);

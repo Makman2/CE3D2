@@ -55,6 +55,10 @@ namespace Render
         char&
         operator ()(size_type x, size_type y);
 
+        /// Clears the surface with spaces.
+        void
+        clear();
+
         /// Fills the complete surface with the given char.
         ///
         /// @param chr The char to fill with.

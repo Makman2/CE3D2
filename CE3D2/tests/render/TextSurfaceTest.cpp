@@ -45,6 +45,22 @@ BOOST_AUTO_TEST_CASE(test_element_access)
     BOOST_CHECK_EQUAL(uut(3, 7), 'm');
 }
 
+BOOST_AUTO_TEST_CASE(test_clear)
+{
+    CE3D2::Render::TextSurface uut(2, 2);
+    uut.fill('y');
+
+    // Check a single element to see whether something was set.
+    BOOST_CHECK_EQUAL(uut(1, 1), 'y');
+
+    uut.clear();
+
+    BOOST_CHECK_EQUAL(uut(0, 0), ' ');
+    BOOST_CHECK_EQUAL(uut(0, 1), ' ');
+    BOOST_CHECK_EQUAL(uut(1, 0), ' ');
+    BOOST_CHECK_EQUAL(uut(1, 1), ' ');
+}
+
 BOOST_AUTO_TEST_CASE(test_partial_fill)
 {
     CE3D2::Render::TextSurface uut(10, 10);
