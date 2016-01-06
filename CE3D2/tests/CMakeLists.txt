@@ -29,4 +29,5 @@ add_ce3d2_test(MatrixTest ${CMAKE_CURRENT_LIST_DIR}/MatrixTest)
 
 add_subdirectory("math")
 add_subdirectory("models")
+add_subdirectory("render")
 add_subdirectory("transformation")

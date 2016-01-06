@@ -18,6 +18,7 @@ set(SRC
     ${CMAKE_CURRENT_LIST_DIR}/Vector)
 add_subdirectory("math")
 add_subdirectory("models")
+add_subdirectory("render")
 add_subdirectory("transformation")
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
