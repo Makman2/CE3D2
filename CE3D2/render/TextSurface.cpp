@@ -41,5 +41,28 @@ namespace Render
     {
         return m_Surface[x * m_Width + y];
     }
+
+    void
+    TextSurface::fill(char chr)
+    {
+        m_Surface.assign(m_Surface.size(), chr);
+    }
+
+    void
+    TextSurface::fill(char chr,
+                      size_type x,
+                      size_type y,
+                      size_type width,
+                      size_type height)
+    {
+        auto it = m_Surface.begin() + x * m_Width + y;
+        auto stop = it + height * m_Width;
+
+        while (it != stop)
+        {
+            std::fill_n(it, width, chr);
+            it += m_Width;
+        }
+    }
 }
 }

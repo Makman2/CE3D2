@@ -55,6 +55,26 @@ namespace Render
         char&
         operator ()(size_type x, size_type y);
 
+        /// Fills the complete surface with the given char.
+        ///
+        /// @param chr The char to fill with.
+        void
+        fill(char chr);
+
+        /// Fills a block of this surface with the given char.
+        ///
+        /// @param chr    The char to fill with.
+        /// @param x      The x-coordinate where to start filling from.
+        /// @param y      The y-coordinate where to start filling from.
+        /// @param width  The width of the block to fill.
+        /// @param height The height of the block to fill.
+        void
+        fill(char chr,
+             size_type x,
+             size_type y,
+             size_type width,
+             size_type height);
+
     private:
         size_type m_Width;
         size_type m_Height;
