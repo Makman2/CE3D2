@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(test_constructor)
 {
     CE3D2::Transformation::TransformationChain uut;
 
-    BOOST_CHECK(uut.get_transformations().empty());
+    BOOST_CHECK(uut.transformations().empty());
 }
 
 BOOST_AUTO_TEST_CASE(test_empty_transform)
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(test_single_transform)
     auto vector = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f);
     auto mul_transform = std::shared_ptr<MultiplyTransformation>(
         new MultiplyTransformation());
-    uut.get_transformations().push_back(mul_transform);
+    uut.transformations().push_back(mul_transform);
 
     uut.transform_vector(vector);
     CE3D2_CHECK_VECTORS_EQUAL(vector, CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(test_double_transform)
     CE3D2::Transformation::TransformationChain uut;
     auto vector = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f, 4.5f);
 
-    auto& transformations = uut.get_transformations();
+    auto& transformations = uut.transformations();
     transformations.push_back(
         std::shared_ptr<MultiplyTransformation>(
             new MultiplyTransformation(2.0f)));

@@ -28,7 +28,7 @@ namespace Transformation
         /// @return A reference to the list holding shared pointers pointing at
         ///         the stored transformations.
         std::vector<std::shared_ptr<Transformation>>&
-        get_transformations();
+        transformations();
 
     private:
         std::vector<std::shared_ptr<Transformation>> m_Transformations;

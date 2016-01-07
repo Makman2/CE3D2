@@ -19,7 +19,7 @@ namespace Transformation
     }
 
     std::vector<std::shared_ptr<Transformation>>&
-    TransformationChain::get_transformations()
+    TransformationChain::transformations()
     {
         return m_Transformations;
     }
