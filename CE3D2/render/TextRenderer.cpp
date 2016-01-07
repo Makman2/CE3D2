@@ -30,5 +30,34 @@ namespace Render
     {
         return m_Models;
     }
+
+    void
+    TextRenderer::render()
+    {
+        if (!m_Target)
+        {
+            throw std::logic_error("No render target set! Use `set_target` to "
+                                   "link a target surface to this renderer.");
+        }
+
+        for (auto const& model: m_Models)
+        {
+            if (model->is_visible())
+            {
+                for (auto const& vector: model->vectors())
+                {
+                    TextSurface::size_type x =
+                        static_cast<TextSurface::size_type>(vector[0]);
+                    TextSurface::size_type y =
+                        static_cast<TextSurface::size_type>(vector[1]);
+
+                    if (m_Target->is_boundary_valid(x, y))
+                    {
+                        (*m_Target)(x, y) = '.';
+                    }
+                }
+            }
+        }
+    }
 }
 }

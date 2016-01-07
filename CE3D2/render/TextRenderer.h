@@ -43,6 +43,15 @@ namespace Render
         std::vector<std::shared_ptr<CE3D2::Models::Model>>&
         models();
 
+        /// Renders all listed models.
+        ///
+        /// The target surface is not cleared before rendering, you need to do
+        /// it yourself using TextSurface.clear!
+        ///
+        /// @throws std::logic_error Thrown when no target is set.
+        void
+        render();
+
     private:
         std::shared_ptr<TextSurface> m_Target;
         std::vector<std::shared_ptr<CE3D2::Models::Model>> m_Models;
