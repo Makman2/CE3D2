@@ -38,21 +38,21 @@
 /// @param b     Second vector to compare.
 /// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
 ///              "REQUIRE".
-#define CE3D2_ASSERT_VECTORS_EQUAL(a, b, LEVEL)       \
-{                                                     \
-    BOOST_##LEVEL##_MESSAGE(                          \
-        a.size() == b.size(),                         \
-        "Sizes of vectors differ, " << a.size()       \
-            << " != " << b.size() << ".");            \
-    for (unsigned int i = 0; i < a.size(); i++)       \
-    {                                                 \
-        BOOST_##LEVEL##_MESSAGE(                      \
-            a[i] == b[i],                             \
-            "Vectors differ in element " << i << " (" \
-                << std::setprecision(8) << a[i]       \
-                << " != " << std::setprecision(8)     \
-                << b[i] << ").");                     \
-    }                                                 \
+#define CE3D2_ASSERT_VECTORS_EQUAL(a, b, LEVEL)             \
+{                                                           \
+    BOOST_##LEVEL##_MESSAGE(                                \
+        a.size() == b.size(),                               \
+        "Sizes of vectors differ, " << a.size()             \
+            << " != " << b.size() << ".");                  \
+    for (CE3D2::Vector::size_type i = 0; i < a.size(); i++) \
+    {                                                       \
+        BOOST_##LEVEL##_MESSAGE(                            \
+            a[i] == b[i],                                   \
+            "Vectors differ in element " << i << " ("       \
+                << std::setprecision(8) << a[i]             \
+                << " != " << std::setprecision(8)           \
+                << b[i] << ").");                           \
+    }                                                       \
 }
 
 
