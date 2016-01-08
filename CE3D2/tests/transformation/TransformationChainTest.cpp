@@ -66,8 +66,7 @@ BOOST_AUTO_TEST_CASE(test_single_transform)
 {
     CE3D2::Transformation::TransformationChain uut;
     auto vector = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f);
-    auto mul_transform = std::shared_ptr<MultiplyTransformation>(
-        new MultiplyTransformation());
+    auto mul_transform = std::make_shared<MultiplyTransformation>();
     uut.transformations().push_back(mul_transform);
 
     uut.transform_vector(vector);
