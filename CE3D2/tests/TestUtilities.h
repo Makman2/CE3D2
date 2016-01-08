@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <boost/test/unit_test.hpp>
 
+#include "CE3D2/Matrix.h"
 #include "CE3D2/Vector.h"
 
 
@@ -98,9 +99,9 @@
         A.size2() == B.size2(),                                                \
         "Column size of matrices differ, " << A.size2() << " != " << B.size2() \
             << ".");                                                           \
-    for (unsigned int r = 0; r < A.size1(); r++)                               \
+    for (CE3D2::Matrix::size_type r = 0; r < A.size1(); r++)                   \
     {                                                                          \
-        for (unsigned int c = 0; c < A.size2(); c++)                           \
+        for (CE3D2::Matrix::size_type c = 0; c < A.size2(); c++)               \
         {                                                                      \
             BOOST_##LEVEL##_MESSAGE(                                           \
                 A(r, c) == B(r, c),                                            \
