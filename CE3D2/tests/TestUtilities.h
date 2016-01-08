@@ -6,6 +6,7 @@
 
 #include "CE3D2/Matrix.h"
 #include "CE3D2/Vector.h"
+#include "CE3D2/render/TextSurface.h"
 
 
 /// Warns for vector equality.
@@ -110,6 +111,64 @@
                     << std::setprecision(8) << (B)(r, c) << ").");     \
         }                                                              \
     }                                                                  \
+}
+
+
+/// Warns for TextSurface equality.
+///
+/// @param A First TextSurface to compare.
+/// @param B Second TextSurface to compare.
+#define CE3D2_WARN_TEXTSURFACES_EQUAL(A, B) \
+    CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, WARN)
+
+
+/// Checks for TextSurface equality.
+///
+/// @param A First TextSurface to compare.
+/// @param B Second TextSurface to compare.
+#define CE3D2_CHECK_TEXTSURFACES_EQUAL(A, B) \
+    CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, CHECK)
+
+
+/// Requires TextSurface equality.
+///
+/// @param A First TextSurface to compare.
+/// @param B Second TextSurface to compare.
+#define CE3D2_REQUIRE_TEXTSURFACES_EQUAL(A, B) \
+    CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, REQUIRE)
+
+
+/// Assert two TextSurface's equal.
+///
+/// You should consider using the specializations CE3D2_WARN_TEXTSURFACES_EQUAL,
+/// CE3D2_CHECK_TEXTSURFACES_EQUAL and CE3D2_REQUIRE_TEXTSURFACES_EQUAL instead.
+///
+/// @param A     First TextSurface to compare.
+/// @param B     Second TextSurface to compare.
+/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
+///              "REQUIRE".
+#define CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, LEVEL)                          \
+{                                                                             \
+    BOOST_##LEVEL##_MESSAGE(                                                  \
+        (A).width() == (B).width(),                                           \
+        "Widths of TextSurface's differ, " << (A).width() << " != "           \
+            << (B).width() << ".");                                           \
+    BOOST_##LEVEL##_MESSAGE(                                                  \
+        (A).height() == (B).height(),                                         \
+        "Heights of TextSurface's differ, " << (A).height() << " != "         \
+            << (B).height() << ".");                                          \
+    for (CE3D2::Render::TextSurface::size_type x = 0; x < (A).width(); x++)   \
+    {                                                                         \
+        for (CE3D2::Render::TextSurface::size_type y = 0;                     \
+             y < (A).height();                                                \
+             y++)                                                             \
+        {                                                                     \
+            BOOST_##LEVEL##_MESSAGE(                                          \
+                (A)(x, y) == (B)(x, y),                                       \
+                "TextSurface's differ in coordinates " << x << "," << y       \
+                    << " ('" << (A)(x, y) << "' != '" << (B)(x, y) << "')."); \
+        }                                                                     \
+    }                                                                         \
 }
 
 
