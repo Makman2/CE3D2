@@ -1,6 +1,7 @@
 #ifndef CE3D2_TESTS_TESTUTILITIES_H
 #define CE3D2_TESTS_TESTUTILITIES_H
 
+#include <algorithm>
 #include <iomanip>
 #include <boost/test/unit_test.hpp>
 
@@ -170,6 +171,75 @@
         }                                                                     \
     }                                                                         \
 }
+
+
+/// Compares the length of two strings.
+///
+/// @param a The first string to compare.
+/// @param b The second string to compare.
+/// @returns If the size of `a` is smaller than the size of `b`.
+bool
+_compare_string_sizes(std::string const& a, std::string const& b)
+{
+    return a.length() < b.length();
+}
+
+
+/// Creates a TextSurface.
+///
+/// @param data A vector of strings where each string represents a single row of
+///             the TextSurface to create. Width of the surface is determined
+///             from the longest string in `data`, height from the number of
+///             elements in it.
+/// @returns    The TextSurface.
+std::shared_ptr<CE3D2::Render::TextSurface>
+_create_textsurface(std::vector<std::string> const& data)
+{
+    auto width = static_cast<CE3D2::Render::TextSurface::size_type>(
+        std::max_element(data.cbegin(),
+                         data.cend(),
+                         _compare_string_sizes)->length());
+    auto height = static_cast<CE3D2::Render::TextSurface::size_type>(
+        data.size());
+
+    auto surface = std::make_shared<CE3D2::Render::TextSurface>(width, height);
+
+    for (std::vector<std::string>::size_type s = 0; s < data.size(); s++)
+    {
+        auto const& current_string = data[s];
+
+        auto y = static_cast<CE3D2::Render::TextSurface::size_type>(s);
+
+        for (std::string::size_type l = 0; l < current_string.length(); l++)
+        {
+            auto x = static_cast<CE3D2::Render::TextSurface::size_type>(l);
+
+            (*surface)(x, y) = current_string[l];
+        }
+    }
+
+    return surface;
+}
+
+
+/// Creates a TextSurface.
+///
+/// @param ... Parameters of strings where each string represents a single row
+///            of the TextSurface to create. Width of the surface is determined
+///            from the longest string in `data`, height from the number of
+///            elements in it.
+///
+///            For example:
+///            CE3D2_CREATE_TEXTSURFACE(" + ", "+++", " + ")
+///            This would create a 3x3 TextSurface with following content:
+///
+///             +
+///            +++
+///             +
+///
+/// @returns   The TextSurface.
+#define CE3D2_CREATE_TEXTSURFACE(...) \
+    _create_textsurface(std::vector<std::string>({__VA_ARGS__}))
 
 
 /// Creates a vector from a list.
