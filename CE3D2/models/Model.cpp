@@ -43,13 +43,13 @@ namespace Models
     }
 
     std::vector<Vector> const&
-    Model::get_vectors() const
+    Model::vectors() const
     {
         return m_Vectors;
     }
 
     std::vector<Vector>&
-    Model::get_vectors()
+    Model::vectors()
     {
         return m_Vectors;
     }

@@ -57,7 +57,7 @@ namespace Models
         /// @returns A reference to the std::vector containing the model
         ///          vectors.
         std::vector<Vector> const&
-        get_vectors() const;
+        vectors() const;
 
         /// Returns a modifiable vector-list that contains the vectors the model
         /// consists of.
@@ -65,7 +65,7 @@ namespace Models
         /// @returns A reference to the std::vector containing the model
         ///          vectors.
         std::vector<Vector>&
-        get_vectors();
+        vectors();
 
         // Inherited documentation.
         virtual void

@@ -40,24 +40,24 @@ BOOST_AUTO_TEST_CASE(test_visibility)
 BOOST_AUTO_TEST_CASE(test_vectors)
 {
     CE3D2::Models::Model uut;
-    auto& vecs = uut.get_vectors();
+    auto& vecs = uut.vectors();
 
-    BOOST_CHECK_EQUAL(uut.get_vectors().size(), 0);
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 0);
     vecs.push_back(CE3D2::ZeroVector(3));
-    BOOST_CHECK_EQUAL(uut.get_vectors().size(), 1);
-    CE3D2_CHECK_VECTORS_EQUAL(uut.get_vectors()[0], CE3D2::ZeroVector(3));
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 1);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[0], CE3D2::ZeroVector(3));
     vecs.push_back(CE3D2::UnitVector(3, 2));
-    BOOST_CHECK_EQUAL(uut.get_vectors().size(), 2);
-    CE3D2_CHECK_VECTORS_EQUAL(uut.get_vectors()[0], CE3D2::ZeroVector(3));
-    CE3D2_CHECK_VECTORS_EQUAL(uut.get_vectors()[1], CE3D2::UnitVector(3, 2));
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 2);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[0], CE3D2::ZeroVector(3));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[1], CE3D2::UnitVector(3, 2));
     vecs.clear();
-    BOOST_CHECK_EQUAL(uut.get_vectors().size(), 0);
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(test_ITransformable)
 {
     CE3D2::Models::Model uut;
-    auto& vecs = uut.get_vectors();
+    auto& vecs = uut.vectors();
 
     vecs.push_back(CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
     vecs.push_back(CE3D2_CREATE_VECTOR(-2.0f, 3.3f, 22.0f));
