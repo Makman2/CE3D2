@@ -39,21 +39,21 @@
 /// @param b     Second vector to compare.
 /// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
 ///              "REQUIRE".
-#define CE3D2_ASSERT_VECTORS_EQUAL(a, b, LEVEL)             \
-{                                                           \
-    BOOST_##LEVEL##_MESSAGE(                                \
-        a.size() == b.size(),                               \
-        "Sizes of vectors differ, " << a.size()             \
-            << " != " << b.size() << ".");                  \
-    for (CE3D2::Vector::size_type i = 0; i < a.size(); i++) \
-    {                                                       \
-        BOOST_##LEVEL##_MESSAGE(                            \
-            a[i] == b[i],                                   \
-            "Vectors differ in element " << i << " ("       \
-                << std::setprecision(8) << a[i]             \
-                << " != " << std::setprecision(8)           \
-                << b[i] << ").");                           \
-    }                                                       \
+#define CE3D2_ASSERT_VECTORS_EQUAL(a, b, LEVEL)               \
+{                                                             \
+    BOOST_##LEVEL##_MESSAGE(                                  \
+        (a).size() == (b).size(),                             \
+        "Sizes of vectors differ, " << (a).size()             \
+            << " != " << (b).size() << ".");                  \
+    for (CE3D2::Vector::size_type i = 0; i < (a).size(); i++) \
+    {                                                         \
+        BOOST_##LEVEL##_MESSAGE(                              \
+            (a)[i] == (b)[i],                                 \
+            "Vectors differ in element " << i << " ("         \
+                << std::setprecision(8) << (a)[i]             \
+                << " != " << std::setprecision(8)             \
+                << (b)[i] << ").");                           \
+    }                                                         \
 }
 
 
@@ -89,27 +89,27 @@
 /// @param B     Second matrix to compare.
 /// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
 ///              "REQUIRE".
-#define CE3D2_ASSERT_MATRICES_EQUAL(A, B, LEVEL)                               \
-{                                                                              \
-    BOOST_##LEVEL##_MESSAGE(                                                   \
-        A.size1() == B.size1(),                                                \
-        "Row size of matrices differ, " << A.size1() << " != " << B.size1()    \
-            << ".");                                                           \
-    BOOST_##LEVEL##_MESSAGE(                                                   \
-        A.size2() == B.size2(),                                                \
-        "Column size of matrices differ, " << A.size2() << " != " << B.size2() \
-            << ".");                                                           \
-    for (CE3D2::Matrix::size_type r = 0; r < A.size1(); r++)                   \
-    {                                                                          \
-        for (CE3D2::Matrix::size_type c = 0; c < A.size2(); c++)               \
-        {                                                                      \
-            BOOST_##LEVEL##_MESSAGE(                                           \
-                A(r, c) == B(r, c),                                            \
-                "Matrices differ in element " << r << "," << c << " ("         \
-                    << std::setprecision(8) << A(r, c) << " != "               \
-                    << std::setprecision(8) << B(r, c) << ").");               \
-        }                                                                      \
-    }                                                                          \
+#define CE3D2_ASSERT_MATRICES_EQUAL(A, B, LEVEL)                       \
+{                                                                      \
+    BOOST_##LEVEL##_MESSAGE(                                           \
+        (A).size1() == (B).size1(),                                    \
+        "Row size of matrices differ, " << (A).size1() << " != "       \
+            << (B).size1() << ".");                                    \
+    BOOST_##LEVEL##_MESSAGE(                                           \
+        (A).size2() == (B).size2(),                                    \
+        "Column size of matrices differ, " << (A).size2() << " != "    \
+            << (B).size2() << ".");                                    \
+    for (CE3D2::Matrix::size_type r = 0; r < (A).size1(); r++)         \
+    {                                                                  \
+        for (CE3D2::Matrix::size_type c = 0; c < (A).size2(); c++)     \
+        {                                                              \
+            BOOST_##LEVEL##_MESSAGE(                                   \
+                (A)(r, c) == (B)(r, c),                                \
+                "Matrices differ in element " << r << "," << c << " (" \
+                    << std::setprecision(8) << (A)(r, c) << " != "     \
+                    << std::setprecision(8) << (B)(r, c) << ").");     \
+        }                                                              \
+    }                                                                  \
 }
 
 
