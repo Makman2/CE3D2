@@ -33,6 +33,19 @@ function create_build_directory {
     fi
 }
 
+# Performs the common build steps for all build targets.
+# Arguments:
+# 1: The build directory.
+# 2: Additional flags to pass to CMake together with CMAKE_FLAGS.
+# 3: The target for the generated makefile (can be left empty).
+function build {
+    create_build_directory $1
+    cd $1
+    cmake $CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $2
+    make $3
+    cd $working_dir
+}
+
 
 function TARGET_help {
     echo "Following targets are available:"
@@ -48,27 +61,15 @@ function TARGET_help {
 }
 
 function TARGET_debug {
-    create_build_directory $CE3D2_DEBUG_BUILD_DIRECTORY
-    cd $CE3D2_DEBUG_BUILD_DIRECTORY
-    cmake $CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $CMAKE_DEBUG_FLAGS
-    make
-    cd $working_dir
+    build $CE3D2_DEBUG_BUILD_DIRECTORY "$CMAKE_DEBUG_FLAGS"
 }
 
 function TARGET_release {
-    create_build_directory $CE3D2_RELEASE_BUILD_DIRECTORY
-    cd $CE3D2_RELEASE_BUILD_DIRECTORY
-    cmake $CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $CMAKE_RELEASE_FLAGS
-    make
-    cd $working_dir
+    build $CE3D2_RELEASE_BUILD_DIRECTORY "$CMAKE_RELEASE_FLAGS"
 }
 
 function TARGET_doc {
-    create_build_directory $CE3D2_DOC_BUILD_DIRECTORY
-    cd $CE3D2_DOC_BUILD_DIRECTORY
-    cmake $CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $CMAKE_DOC_FLAGS
-    make doc
-    cd $working_dir
+    build $CE3D2_DOC_BUILD_DIRECTORY "$CMAKE_DOC_FLAGS" doc
 }
 
 function TARGET_clean {
