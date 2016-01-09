@@ -33,13 +33,13 @@ namespace Render
     char
     TextSurface::operator ()(size_type x, size_type y) const
     {
-        return m_Surface[x * m_Width + y];
+        return m_Surface[x + y * m_Width];
     }
 
     char&
     TextSurface::operator ()(size_type x, size_type y)
     {
-        return m_Surface[x * m_Width + y];
+        return m_Surface[x + y * m_Width];
     }
 
     void
@@ -61,7 +61,7 @@ namespace Render
                       size_type width,
                       size_type height)
     {
-        auto it = m_Surface.begin() + x * m_Width + y;
+        auto it = m_Surface.begin() + x + y * m_Width;
         auto stop = it + height * m_Width;
 
         while (it != stop)
@@ -100,10 +100,10 @@ namespace Render
                            size_type width,
                            size_type height)
     {
-        auto target_it = m_Surface.begin() + target_x * m_Width + target_y;
+        auto target_it = m_Surface.begin() + target_x + target_y * m_Width;
         auto stop = target_it + height * m_Width;
         auto source_it =
-            source.m_Surface.begin() + source_x * source.m_Width + source_y;
+            source.m_Surface.begin() + source_x + source_y * source.m_Width;
 
         while (target_it != stop)
         {
@@ -116,7 +116,7 @@ namespace Render
     bool
     TextSurface::is_boundary_valid(size_type x, size_type y) const
     {
-        return x < m_Height && y < m_Width;
+        return x < m_Width && y < m_Height;
     }
 
     bool
@@ -125,7 +125,7 @@ namespace Render
                                    size_type width,
                                    size_type height) const
     {
-        return x + height <= m_Height && y + width <= m_Width;
+        return x + width <= m_Width && y + height <= m_Height;
     }
 }
 }
