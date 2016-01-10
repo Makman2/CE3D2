@@ -14,12 +14,7 @@ namespace Transformation
     void
     OrthogonalProjection::set_projection_vectors(T const& vectors)
     {
-        m_ProjectionVectors.clear();
-        for (auto const& vector : vectors)
-        {
-            m_ProjectionVectors.push_back(vector);
-        }
-
+        m_ProjectionVectors.assign(vectors.cbegin(), vectors.cend());
         update();
     }
 }
