@@ -5,7 +5,9 @@ A simple 3D engine for the console.
 
 ## About
 
-You ever wanted 3D ASCII graphics inside your terminal? CE3D2 is the solution!
+CE3D2 is a leightweight 3D engine specifically designed for rendering
+ASCII-art. Since it's not using heavy graphic pipelines and utilizes CPU only,
+the vector arithmetic is very flexible.
 
 ## Build
 
