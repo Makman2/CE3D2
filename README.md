@@ -45,6 +45,25 @@ If you only want to install CE3D2, you don't need to build it even via
 > */etc/ld.so.conf* adding */usr/local/lib/*. Refer to the help of your
 > platform.
 
+## Usage
+
+After install you can use CE3D2 normally like any other library:
+
+```cpp
+#include <CE3D2/Vector.h>
+
+int main()
+{
+    CE3D2::Vector vec;
+    // Do fancy vector stuff.
+    return 0;
+}
+```
+
+Don't forget to link against CE3D2 and use C++11 (in `g++` use the flags
+`-lCE3D2` and `-std=c++11`). Also you need Boost installed, since vector and
+matrix arithmetic is performed using it.
+
 ## Documentation
 
 HTML-documentation can be built easily with `./make.sh doc` into `build/doc`. To
