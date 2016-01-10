@@ -38,6 +38,14 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
                 SHARED
                 ${SRC})
 
+    install(TARGETS ${CMAKE_PROJECT_NAME}
+            LIBRARY DESTINATION lib)
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}
+            DESTINATION include
+            FILES_MATCHING
+            REGEX "\.(h|hpp)$"
+            PATTERN "tests" EXCLUDE)
+
     if(TESTS_ENABLED)
         find_package(Boost
                      COMPONENTS unit_test_framework

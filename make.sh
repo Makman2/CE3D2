@@ -57,6 +57,8 @@ function TARGET_help {
                      "'$CE3D2_RELEASE_BUILD_DIRECTORY'."
     echo "doc        Builds the HTML documentation into" \
                      "'$CE3D2_DOC_BUILD_DIRECTORY/html'."
+    echo "install debug|release"
+    echo "           Installs CE3D2 onto your system."
     echo "clean      Clean up build files."
 }
 
@@ -70,6 +72,16 @@ function TARGET_release {
 
 function TARGET_doc {
     build $CE3D2_DOC_BUILD_DIRECTORY "$CMAKE_DOC_FLAGS" doc
+}
+
+function TARGET_install {
+    if [ "$1" == "debug" ]; then
+        build $CE3D2_DEBUG_BUILD_DIRECTORY "$CMAKE_DEBUG_FLAGS" install
+    elif [ "$1" == "release" ]; then
+        build $CE3D2_RELEASE_BUILD_DIRECTORY "$CMAKE_RELEASE_FLAGS" install
+    else
+        echo "Invalid parameter for install target, use 'debug' or 'release'."
+    fi
 }
 
 function TARGET_clean {
@@ -92,6 +104,8 @@ case $1 in
         TARGET_release;;
     "doc")
         TARGET_doc;;
+    "install")
+        TARGET_install $2;;
     "clean")
         TARGET_clean;;
     *)
