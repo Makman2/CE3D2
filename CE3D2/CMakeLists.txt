@@ -43,7 +43,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
     install(DIRECTORY ${PROJECT_SOURCE_DIR}
             DESTINATION include
             FILES_MATCHING
-            REGEX "\.(h|hpp)$"
+            REGEX "\\.(h|hpp)$"
             PATTERN "tests" EXCLUDE)
 
     if(TESTS_ENABLED)
