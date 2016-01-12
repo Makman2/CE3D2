@@ -44,8 +44,8 @@ If you only want to install CE3D2, you don't need to build it even via
 > The library is installed to */usr/local/lib/*. Some platforms don't have this
 > path inside the environment variables so execution of programs using CE3D2
 > result in a load-failure. This can be fixed often by modifying
-> */etc/ld.so.conf* adding */usr/local/lib/*. Refer to the help of your
-> platform.
+> */etc/ld.so.conf* adding */usr/local/lib/* and executing `ldconfig` with
+> elevated privileges. Refer to the help of your platform.
 
 ## Usage
 
