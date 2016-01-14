@@ -54,7 +54,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
     endif()
 
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Documentation")
-    find_package(Doxygen REQUIRED)
+    find_package(Doxygen 1.8.8 REQUIRED)
     if (DOXYGEN_FOUND)
         # Get the latest abbreviated commit hash of the working branch.
         execute_process(COMMAND git log -1 --format=%h
