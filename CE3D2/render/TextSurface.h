@@ -18,6 +18,7 @@ namespace Render
         using surface_type = std::vector<char>;
 
     public:
+        /// The type used for representing sizes or indexes inside this class.
         using size_type = surface_type::size_type;
 
         /// Instantiates a new TextSurface.
@@ -46,6 +47,7 @@ namespace Render
         ///
         /// @param x The x-coordinate.
         /// @param y The y-coordinate.
+        /// @returns The char at given position.
         char
         operator ()(size_type x, size_type y) const;
 
@@ -53,6 +55,7 @@ namespace Render
         ///
         /// @param x The x-coordinate.
         /// @param y The y-coordinate.
+        /// @returns The char at given position.
         char&
         operator ()(size_type x, size_type y);
 
