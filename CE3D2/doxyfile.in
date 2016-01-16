@@ -304,6 +304,11 @@ WARN_NO_PARAMDOC       = YES
 
 INPUT                  = ${CMAKE_SOURCE_DIR}
 
+# USE_MDFILE_AS_MAINPAGE contains the markdown file to use as the main-page for
+# the "related pages" section.
+
+USE_MDFILE_AS_MAINPAGE = ${DOCS_MAINPAGE}
+
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
 # libiconv (or the iconv built into libc) for the transcoding. See the libiconv
