@@ -44,7 +44,8 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
             DESTINATION include
             FILES_MATCHING
             REGEX "\\.(h|hpp)$"
-            PATTERN "tests" EXCLUDE)
+            PATTERN "tests" EXCLUDE
+            PATTERN "doc" EXCLUDE)
 
     if(TESTS_ENABLED)
         find_package(Boost
@@ -56,6 +57,8 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Documentation")
     find_package(Doxygen 1.8.8 REQUIRED)
     if (DOXYGEN_FOUND)
+        add_subdirectory("doc")
+
         # Get the latest abbreviated commit hash of the working branch.
         execute_process(COMMAND git log -1 --format=%h
                         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
