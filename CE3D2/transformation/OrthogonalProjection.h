@@ -14,6 +14,10 @@ namespace Transformation
 {
     /// A transformation describing an orthogonal projection onto an
     /// arbitrary-dimensioned (hyper)plane.
+    ///
+    /// Using \f$ A=(\matrix{v_{1} & v_{2} & \cdots & v_{n}}) \f$ where each
+    /// \f$ v_{k} \f$ is a projection vector, the orthogonal projection matrix
+    /// is computed via \f$ (A^{T} A)^{-1} A^{T} \f$.
     class OrthogonalProjection : public LinearTransformation
     {
     public:
