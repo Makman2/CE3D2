@@ -3,6 +3,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "CE3D2/render/TextSurface.h"
+#include "CE3D2/tests/TestUtilities.h"
 
 
 BOOST_AUTO_TEST_SUITE(TextSurfaceTestSuite)
@@ -11,12 +12,8 @@ BOOST_AUTO_TEST_CASE(test_initialization)
 {
     CE3D2::Render::TextSurface uut(2, 3);
 
-    BOOST_CHECK_EQUAL(uut(0, 0), ' ');
-    BOOST_CHECK_EQUAL(uut(0, 1), ' ');
-    BOOST_CHECK_EQUAL(uut(0, 2), ' ');
-    BOOST_CHECK_EQUAL(uut(1, 0), ' ');
-    BOOST_CHECK_EQUAL(uut(1, 1), ' ');
-    BOOST_CHECK_EQUAL(uut(1, 2), ' ');
+    auto expected = CE3D2_CREATE_TEXTSURFACE("  ", "  ", "  ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(uut, *expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_width_and_height)
@@ -50,47 +47,44 @@ BOOST_AUTO_TEST_CASE(test_clear)
     CE3D2::Render::TextSurface uut(2, 2);
     uut.fill('y');
 
-    BOOST_CHECK_EQUAL(uut(0, 0), 'y');
-    BOOST_CHECK_EQUAL(uut(0, 1), 'y');
-    BOOST_CHECK_EQUAL(uut(1, 0), 'y');
-    BOOST_CHECK_EQUAL(uut(1, 1), 'y');
+    auto expected = CE3D2_CREATE_TEXTSURFACE("yy", "yy");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(uut, *expected);
 
     uut.clear();
 
-    BOOST_CHECK_EQUAL(uut(0, 0), ' ');
-    BOOST_CHECK_EQUAL(uut(0, 1), ' ');
-    BOOST_CHECK_EQUAL(uut(1, 0), ' ');
-    BOOST_CHECK_EQUAL(uut(1, 1), ' ');
+    expected = CE3D2_CREATE_TEXTSURFACE("  ", "  ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(uut, *expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_partial_fill)
 {
     CE3D2::Render::TextSurface uut(10, 10);
 
-    BOOST_CHECK_EQUAL(uut(6, 4), ' ');
-    BOOST_CHECK_EQUAL(uut(7, 5), ' ');
-    BOOST_CHECK_EQUAL(uut(6, 4), ' ');
-    BOOST_CHECK_EQUAL(uut(7, 5), ' ');
+    auto expected = CE3D2_CREATE_TEXTSURFACE("          ",
+                                             "          ",
+                                             "          ",
+                                             "          ",
+                                             "          ",
+                                             "          ",
+                                             "          ",
+                                             "          ",
+                                             "          ",
+                                             "          ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(uut, *expected);
 
     uut.fill('x', 6, 4, 2, 2);
 
-    BOOST_CHECK_EQUAL(uut(6, 4), 'x');
-    BOOST_CHECK_EQUAL(uut(6, 5), 'x');
-    BOOST_CHECK_EQUAL(uut(7, 4), 'x');
-    BOOST_CHECK_EQUAL(uut(7, 5), 'x');
-    // Check all around the filled area.
-    BOOST_CHECK_EQUAL(uut(5, 3), ' ');
-    BOOST_CHECK_EQUAL(uut(5, 4), ' ');
-    BOOST_CHECK_EQUAL(uut(5, 5), ' ');
-    BOOST_CHECK_EQUAL(uut(5, 6), ' ');
-    BOOST_CHECK_EQUAL(uut(6, 6), ' ');
-    BOOST_CHECK_EQUAL(uut(7, 6), ' ');
-    BOOST_CHECK_EQUAL(uut(8, 6), ' ');
-    BOOST_CHECK_EQUAL(uut(8, 5), ' ');
-    BOOST_CHECK_EQUAL(uut(8, 4), ' ');
-    BOOST_CHECK_EQUAL(uut(8, 3), ' ');
-    BOOST_CHECK_EQUAL(uut(7, 3), ' ');
-    BOOST_CHECK_EQUAL(uut(6, 3), ' ');
+    expected = CE3D2_CREATE_TEXTSURFACE("          ",
+                                        "          ",
+                                        "          ",
+                                        "          ",
+                                        "      xx  ",
+                                        "      xx  ",
+                                        "          ",
+                                        "          ",
+                                        "          ",
+                                        "          ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(uut, *expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_complete_fill)
@@ -98,12 +92,8 @@ BOOST_AUTO_TEST_CASE(test_complete_fill)
     CE3D2::Render::TextSurface uut(3, 2);
     uut.fill('z');
 
-    BOOST_CHECK_EQUAL(uut(0, 0), 'z');
-    BOOST_CHECK_EQUAL(uut(0, 1), 'z');
-    BOOST_CHECK_EQUAL(uut(1, 0), 'z');
-    BOOST_CHECK_EQUAL(uut(1, 1), 'z');
-    BOOST_CHECK_EQUAL(uut(2, 0), 'z');
-    BOOST_CHECK_EQUAL(uut(2, 1), 'z');
+    auto expected = CE3D2_CREATE_TEXTSURFACE("zzz", "zzz");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(uut, *expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_copy_from_source)
@@ -118,16 +108,29 @@ BOOST_AUTO_TEST_CASE(test_copy_from_source)
     CE3D2::Render::TextSurface target(9, 9);
     target.copy_from(source, 1, 1, 7, 7, 1, 1);
 
-    BOOST_CHECK_EQUAL(target(7, 7), 'B');
+    auto expected = CE3D2_CREATE_TEXTSURFACE("         ",
+                                             "         ",
+                                             "         ",
+                                             "         ",
+                                             "         ",
+                                             "         ",
+                                             "         ",
+                                             "       B ",
+                                             "         ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(target, *expected);
 
     target.copy_from(source, 0, 0, 2, 4, 3, 2);
 
-    BOOST_CHECK_EQUAL(target(2, 4), 'A');
-    BOOST_CHECK_EQUAL(target(3, 4), 'x');
-    BOOST_CHECK_EQUAL(target(4, 4), 'D');
-    BOOST_CHECK_EQUAL(target(2, 5), 'x');
-    BOOST_CHECK_EQUAL(target(3, 5), 'B');
-    BOOST_CHECK_EQUAL(target(4, 5), 'x');
+    expected = CE3D2_CREATE_TEXTSURFACE("         ",
+                                        "         ",
+                                        "         ",
+                                        "         ",
+                                        "  AxD    ",
+                                        "  xBx    ",
+                                        "         ",
+                                        "       B ",
+                                        "         ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(target, *expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_copy_from_source_to_coords)
@@ -139,22 +142,8 @@ BOOST_AUTO_TEST_CASE(test_copy_from_source_to_coords)
     CE3D2::Render::TextSurface target(4, 4);
     target.copy_from(source, 1, 1);
 
-    BOOST_CHECK_EQUAL(target(0, 0), ' ');
-    BOOST_CHECK_EQUAL(target(0, 1), ' ');
-    BOOST_CHECK_EQUAL(target(0, 2), ' ');
-    BOOST_CHECK_EQUAL(target(0, 3), ' ');
-    BOOST_CHECK_EQUAL(target(1, 0), ' ');
-    BOOST_CHECK_EQUAL(target(1, 1), '0');
-    BOOST_CHECK_EQUAL(target(1, 2), '0');
-    BOOST_CHECK_EQUAL(target(1, 3), ' ');
-    BOOST_CHECK_EQUAL(target(2, 0), ' ');
-    BOOST_CHECK_EQUAL(target(2, 1), '0');
-    BOOST_CHECK_EQUAL(target(2, 2), 'h');
-    BOOST_CHECK_EQUAL(target(2, 3), ' ');
-    BOOST_CHECK_EQUAL(target(3, 0), ' ');
-    BOOST_CHECK_EQUAL(target(3, 1), ' ');
-    BOOST_CHECK_EQUAL(target(3, 2), ' ');
-    BOOST_CHECK_EQUAL(target(3, 3), ' ');
+    auto expected = CE3D2_CREATE_TEXTSURFACE("    ", " 00 ", " 0h ", "    ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(target, *expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_copy_from_source_completely)
