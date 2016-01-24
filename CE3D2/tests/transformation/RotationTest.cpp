@@ -16,8 +16,8 @@ BOOST_AUTO_TEST_CASE(test_constructors)
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector2(), CE3D2::Vector());
     BOOST_CHECK_EQUAL(uut.get_angle(), 0.0f);
 
-    auto v1 = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f);
-    auto v2 = CE3D2_CREATE_VECTOR(2.0f, 4.0f, 0.0f);
+    auto v1 = CE3D2::create_vector(1.0f, 2.0f, 3.0f);
+    auto v2 = CE3D2::create_vector(2.0f, 4.0f, 0.0f);
     uut = CE3D2::Transformation::Rotation(v1, v2);
 
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector1(), v1);
@@ -32,15 +32,15 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 
 BOOST_AUTO_TEST_CASE(test_plane_vectors)
 {
-    auto v1 = CE3D2_CREATE_VECTOR(1.0f, 0.0f, 0.0f);
-    auto v2 = CE3D2_CREATE_VECTOR(0.0f, 1.0f, 0.0f);
+    auto v1 = CE3D2::create_vector(1.0f, 0.0f, 0.0f);
+    auto v2 = CE3D2::create_vector(0.0f, 1.0f, 0.0f);
     CE3D2::Transformation::Rotation uut(v1, v2);
 
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector1(), v1);
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector2(), v2);
 
-    v1 = CE3D2_CREATE_VECTOR(5.5f, 8.8f);
-    v2 = CE3D2_CREATE_VECTOR(0.0f, 0.0f);
+    v1 = CE3D2::create_vector(5.5f, 8.8f);
+    v2 = CE3D2::create_vector(0.0f, 0.0f);
     uut.set_plane_vector1(v1);
     uut.set_plane_vector2(v2);
 
@@ -63,8 +63,8 @@ BOOST_AUTO_TEST_CASE(test_angle)
 
 BOOST_AUTO_TEST_CASE(test_matrix_2D)
 {
-    CE3D2::Transformation::Rotation uut(CE3D2_CREATE_VECTOR(1.0f, 0.0f),
-                                        CE3D2_CREATE_VECTOR(0.0f, 1.0f),
+    CE3D2::Transformation::Rotation uut(CE3D2::create_vector(1.0f, 0.0f),
+                                        CE3D2::create_vector(0.0f, 1.0f),
                                         0.0f);
     CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), CE3D2::IdentityMatrix(2));
 
@@ -107,8 +107,8 @@ BOOST_AUTO_TEST_CASE(test_matrix_2D)
 
 BOOST_AUTO_TEST_CASE(test_matrix_3D)
 {
-    CE3D2::Transformation::Rotation uut(CE3D2_CREATE_VECTOR(0.0f, 0.0f, 1.0f),
-                                        CE3D2_CREATE_VECTOR(0.0f, 1.0f, 0.0f),
+    CE3D2::Transformation::Rotation uut(CE3D2::create_vector(0.0f, 0.0f, 1.0f),
+                                        CE3D2::create_vector(0.0f, 1.0f, 0.0f),
                                         0.0f);
     CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), CE3D2::IdentityMatrix(3));
 
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_3D)
     expected(2, 2) = -0.000000043711388f;
     CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), expected);
 
-    uut.set_plane_vector1(CE3D2_CREATE_VECTOR(4.0f, 0.0f, 0.0f));
+    uut.set_plane_vector1(CE3D2::create_vector(4.0f, 0.0f, 0.0f));
     expected(0, 0) = -0.000000043711388f;
     expected(0, 1) = 1.0f;
     expected(0, 2) = 0.0f;
@@ -137,7 +137,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_3D)
     expected(2, 2) = 1.0f;
     CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), expected);
 
-    uut.set_plane_vector2(CE3D2_CREATE_VECTOR(1.0f, 1.0f, 1.0f));
+    uut.set_plane_vector2(CE3D2::create_vector(1.0f, 1.0f, 1.0f));
     expected(0, 0) = -0.000000043711388f;
     expected(0, 1) = 0.70710677f;
     expected(0, 2) = 0.70710677f;
@@ -153,13 +153,14 @@ BOOST_AUTO_TEST_CASE(test_matrix_3D)
 BOOST_AUTO_TEST_CASE(test_matrix_exceptions)
 {
     // Plane vectors do not have the same size.
-    CE3D2::Transformation::Rotation uut(CE3D2_CREATE_VECTOR(1.0f, 0.0f),
-                                        CE3D2_CREATE_VECTOR(0.0f, 1.0f, 44.0f));
+    CE3D2::Transformation::Rotation uut(
+        CE3D2::create_vector(1.0f, 0.0f),
+        CE3D2::create_vector(0.0f, 1.0f, 44.0f));
     BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument);
 
     // Linearly dependent plane vectors.
-    uut = CE3D2::Transformation::Rotation(CE3D2_CREATE_VECTOR(33.0f, 0.0f),
-                                          CE3D2_CREATE_VECTOR(55.0f, 0.0f));
+    uut = CE3D2::Transformation::Rotation(CE3D2::create_vector(33.0f, 0.0f),
+                                          CE3D2::create_vector(55.0f, 0.0f));
     BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument);
 }
 

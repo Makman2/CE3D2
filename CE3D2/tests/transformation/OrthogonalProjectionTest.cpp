@@ -18,22 +18,22 @@ BOOST_AUTO_TEST_CASE(test_projection_vectors)
 
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 0);
 
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 2.0f, 3.0f));
     uut.set_projection_vectors(projection_vectors);
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 1);
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
-                              CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
+                              CE3D2::create_vector(1.0f, 2.0f, 3.0f));
 
     projection_vectors.push_back(CE3D2::ZeroVector(3));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(-1.0f, 0.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(-1.0f, 0.0f, 0.0f));
     uut.set_projection_vectors(projection_vectors);
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 3);
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
-                              CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
+                              CE3D2::create_vector(1.0f, 2.0f, 3.0f));
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[1],
                               CE3D2::ZeroVector(3));
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[2],
-                              CE3D2_CREATE_VECTOR(-1.0f, 0.0f, 0.0f));
+                              CE3D2::create_vector(-1.0f, 0.0f, 0.0f));
 
     projection_vectors.push_back(CE3D2::UnitVector(2, 1));
     uut.set_projection_vectors(projection_vectors);
@@ -42,17 +42,17 @@ BOOST_AUTO_TEST_CASE(test_projection_vectors)
                               CE3D2::UnitVector(2, 1));
 
     projection_vectors.clear();
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(-5.0f, 2.3f));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(7.0f, 0.2f));
+    projection_vectors.push_back(CE3D2::create_vector(-5.0f, 2.3f));
+    projection_vectors.push_back(CE3D2::create_vector(7.0f, 0.2f));
 
     // Test setting vectors from constructor.
     uut = CE3D2::Transformation::OrthogonalProjection(projection_vectors);
 
     BOOST_CHECK_EQUAL(uut.get_projection_vectors().size(), 2);
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[0],
-                              CE3D2_CREATE_VECTOR(-5.0f, 2.3f));
+                              CE3D2::create_vector(-5.0f, 2.3f));
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_projection_vectors()[1],
-                              CE3D2_CREATE_VECTOR(7.0f, 0.2f));
+                              CE3D2::create_vector(7.0f, 0.2f));
 }
 
 BOOST_AUTO_TEST_CASE(test_matrix)
@@ -71,8 +71,8 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     // Same dimension, but other base vectors to project on.
     projection_vectors.clear();
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 1.0f, 0.0f));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, -1.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 1.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, -1.0f, 0.0f));
     projection_vectors.push_back(CE3D2::UnitVector(3, 2));
 
     uut.set_projection_vectors(projection_vectors);
@@ -92,10 +92,10 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     // Complicated bases in 4D space.
     projection_vectors.clear();
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 0.0f, 0.0f, 1.0f));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 1.0f, 0.0f, 0.0f));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(0.0f, 1.0f, 1.0f, 1.0f));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(0.0f, 0.0f, 1.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 0.0f, 0.0f, 1.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 1.0f, 0.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(0.0f, 1.0f, 1.0f, 1.0f));
+    projection_vectors.push_back(CE3D2::create_vector(0.0f, 0.0f, 1.0f, 0.0f));
 
     uut.set_projection_vectors(projection_vectors);
 
@@ -121,8 +121,8 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     // Project from 3D onto 2D.
     projection_vectors.clear();
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 0.0f, 0.0f));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(0.0f, 2.0f, 2.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 0.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(0.0f, 2.0f, 2.0f));
 
     uut.set_projection_vectors(projection_vectors);
 
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     // Project from 3D onto 1D.
     projection_vectors.clear();
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 2.0f, 0.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 2.0f, 0.0f));
 
     uut.set_projection_vectors(projection_vectors);
 
@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_CASE(test_matrix)
 
     // Project from 2D onto 1D.
     projection_vectors.clear();
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, -3.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, -3.0f));
 
     uut.set_projection_vectors(projection_vectors);
 
@@ -188,7 +188,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_exceptions)
     projection_vectors.push_back(CE3D2::UnitVector(3, 0));
     projection_vectors.push_back(CE3D2::UnitVector(3, 1));
     projection_vectors.push_back(CE3D2::UnitVector(3, 2));
-    projection_vectors.push_back(CE3D2_CREATE_VECTOR(1.0f, 1.0f, 1.0f));
+    projection_vectors.push_back(CE3D2::create_vector(1.0f, 1.0f, 1.0f));
 
     uut.set_projection_vectors(projection_vectors);
 

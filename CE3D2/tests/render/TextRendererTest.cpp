@@ -59,12 +59,12 @@ BOOST_AUTO_TEST_CASE(test_render)
     auto surface = std::make_shared<CE3D2::Render::TextSurface>(10, 5);
 
     auto model1 = std::make_shared<CE3D2::Models::Model>();
-    model1->vectors().push_back(CE3D2_CREATE_VECTOR(1.0f, 1.0f));
-    model1->vectors().push_back(CE3D2_CREATE_VECTOR(4.0f, 5.0f));
-    model1->vectors().push_back(CE3D2_CREATE_VECTOR(22.0f, 3.0f));
-    model1->vectors().push_back(CE3D2_CREATE_VECTOR(5.7f, 0.1f));
-    model1->vectors().push_back(CE3D2_CREATE_VECTOR(-2.0f, 3.3f));
-    model1->vectors().push_back(CE3D2_CREATE_VECTOR(0.0f, 4.99f));
+    model1->vectors().push_back(CE3D2::create_vector(1.0f, 1.0f));
+    model1->vectors().push_back(CE3D2::create_vector(4.0f, 5.0f));
+    model1->vectors().push_back(CE3D2::create_vector(22.0f, 3.0f));
+    model1->vectors().push_back(CE3D2::create_vector(5.7f, 0.1f));
+    model1->vectors().push_back(CE3D2::create_vector(-2.0f, 3.3f));
+    model1->vectors().push_back(CE3D2::create_vector(0.0f, 4.99f));
 
     CE3D2::Render::TextRenderer uut;
     uut.set_target(surface);
@@ -80,10 +80,10 @@ BOOST_AUTO_TEST_CASE(test_render)
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
 
     auto model2 = std::make_shared<CE3D2::Models::Model>("named model");
-    model2->vectors().push_back(CE3D2_CREATE_VECTOR(9.4f, 4.0f));
-    model2->vectors().push_back(CE3D2_CREATE_VECTOR(9.2f, 3.0f));
-    model2->vectors().push_back(CE3D2_CREATE_VECTOR(9.0f, 2.0f));
-    model2->vectors().push_back(CE3D2_CREATE_VECTOR(8.999f, 1.0f));
+    model2->vectors().push_back(CE3D2::create_vector(9.4f, 4.0f));
+    model2->vectors().push_back(CE3D2::create_vector(9.2f, 3.0f));
+    model2->vectors().push_back(CE3D2::create_vector(9.0f, 2.0f));
+    model2->vectors().push_back(CE3D2::create_vector(8.999f, 1.0f));
 
     uut.models().push_back(model2);
     surface->clear();

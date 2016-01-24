@@ -59,18 +59,19 @@ BOOST_AUTO_TEST_CASE(test_ITransformable)
     CE3D2::Models::Model uut;
     auto& vecs = uut.vectors();
 
-    vecs.push_back(CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
-    vecs.push_back(CE3D2_CREATE_VECTOR(-2.0f, 3.3f, 22.0f));
-    vecs.push_back(CE3D2_CREATE_VECTOR(4.0f, 2.5f, 0.0f));
+    vecs.push_back(CE3D2::create_vector(1.0f, 2.0f, 3.0f));
+    vecs.push_back(CE3D2::create_vector(-2.0f, 3.3f, 22.0f));
+    vecs.push_back(CE3D2::create_vector(4.0f, 2.5f, 0.0f));
 
     CE3D2::Transformation::Scale scale_transform(
-        CE3D2_CREATE_VECTOR(2.0f, 2.0f, 2.0f));
+        CE3D2::create_vector(2.0f, 2.0f, 2.0f));
 
     uut.transform(scale_transform);
 
-    CE3D2_CHECK_VECTORS_EQUAL(vecs[0], CE3D2_CREATE_VECTOR(2.0f, 4.0f, 6.0f));
-    CE3D2_CHECK_VECTORS_EQUAL(vecs[1], CE3D2_CREATE_VECTOR(-4.0f, 6.6f, 44.0f));
-    CE3D2_CHECK_VECTORS_EQUAL(vecs[2], CE3D2_CREATE_VECTOR(8.0f, 5.0f, 0.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vecs[0], CE3D2::create_vector(2.0f, 4.0f, 6.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vecs[1],
+                              CE3D2::create_vector(-4.0f, 6.6f, 44.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vecs[2], CE3D2::create_vector(8.0f, 5.0f, 0.0f));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

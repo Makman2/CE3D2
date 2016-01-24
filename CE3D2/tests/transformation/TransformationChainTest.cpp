@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(test_empty_transform)
 {
     CE3D2::Transformation::TransformationChain uut;
 
-    auto vector = CE3D2_CREATE_VECTOR(4.0f, 22.0f, 71.98f);
+    auto vector = CE3D2::create_vector(4.0f, 22.0f, 71.98f);
     auto vector2 = CE3D2::Vector(vector);
 
     uut.transform_vector(vector2);
@@ -65,23 +65,23 @@ BOOST_AUTO_TEST_CASE(test_empty_transform)
 BOOST_AUTO_TEST_CASE(test_single_transform)
 {
     CE3D2::Transformation::TransformationChain uut;
-    auto vector = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f);
+    auto vector = CE3D2::create_vector(1.0f, 2.0f, 3.0f);
     auto mul_transform = std::make_shared<MultiplyTransformation>();
     uut.transformations().push_back(mul_transform);
 
     uut.transform_vector(vector);
-    CE3D2_CHECK_VECTORS_EQUAL(vector, CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vector, CE3D2::create_vector(1.0f, 2.0f, 3.0f));
 
     mul_transform->factor = 2.0f;
 
     uut.transform_vector(vector);
-    CE3D2_CHECK_VECTORS_EQUAL(vector, CE3D2_CREATE_VECTOR(2.0f, 4.0f, 6.0f));
+    CE3D2_CHECK_VECTORS_EQUAL(vector, CE3D2::create_vector(2.0f, 4.0f, 6.0f));
 }
 
 BOOST_AUTO_TEST_CASE(test_double_transform)
 {
     CE3D2::Transformation::TransformationChain uut;
-    auto vector = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f, 4.5f);
+    auto vector = CE3D2::create_vector(1.0f, 2.0f, 3.0f, 4.5f);
 
     auto& transformations = uut.transformations();
     transformations.push_back(
@@ -92,16 +92,16 @@ BOOST_AUTO_TEST_CASE(test_double_transform)
 
     uut.transform_vector(vector);
     CE3D2_CHECK_VECTORS_EQUAL(vector,
-                              CE3D2_CREATE_VECTOR(4.0f, 16.0f, 36.0f, 81.0f));
+                              CE3D2::create_vector(4.0f, 16.0f, 36.0f, 81.0f));
 
     // Swap order.
     std::reverse(transformations.begin(), transformations.end());
 
-    vector = CE3D2_CREATE_VECTOR(1.0f, 2.0f, 3.0f, 4.5f);
+    vector = CE3D2::create_vector(1.0f, 2.0f, 3.0f, 4.5f);
 
     uut.transform_vector(vector);
     CE3D2_CHECK_VECTORS_EQUAL(vector,
-                              CE3D2_CREATE_VECTOR(2.0f, 8.0f, 18.0f, 40.5f));
+                              CE3D2::create_vector(2.0f, 8.0f, 18.0f, 40.5f));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
