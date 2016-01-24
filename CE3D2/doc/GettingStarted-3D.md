@@ -10,15 +10,6 @@ So let's define an actual geometry! We take a cube for this purpose with points
 also on the edges so it looks more like a cube when rendering:
 
 ```cpp
-Vector create_3d_vector(float x, float y, float z)
-{
-    Vector v(3);
-    v[0] = x;
-    v[1] = y;
-    v[2] = z;
-    return v;
-}
-
 // Creates a cube of given size and specific equidistant number of vectors on
 // the edges.
 std::vector<Vector> make_cube(float size = 1.0f, unsigned int edge_density = 0)
@@ -28,24 +19,24 @@ std::vector<Vector> make_cube(float size = 1.0f, unsigned int edge_density = 0)
     float step = size / (1 + edge_density);
     for (float x = 0.0f; x <= size; x += step)
     {
-        vectors.push_back(create_3d_vector(x, 0.0f, 0.0f));
-        vectors.push_back(create_3d_vector(x, size, 0.0f));
-        vectors.push_back(create_3d_vector(x, size, size));
-        vectors.push_back(create_3d_vector(x, 0.0f, size));
+        vectors.push_back(create_vector(x, 0.0f, 0.0f));
+        vectors.push_back(create_vector(x, size, 0.0f));
+        vectors.push_back(create_vector(x, size, size));
+        vectors.push_back(create_vector(x, 0.0f, size));
     }
     for (float y = step; y <= size - step; y += step)
     {
-        vectors.push_back(create_3d_vector(0.0f, y, 0.0f));
-        vectors.push_back(create_3d_vector(size, y, 0.0f));
-        vectors.push_back(create_3d_vector(size, y, size));
-        vectors.push_back(create_3d_vector(0.0f, y, size));
+        vectors.push_back(create_vector(0.0f, y, 0.0f));
+        vectors.push_back(create_vector(size, y, 0.0f));
+        vectors.push_back(create_vector(size, y, size));
+        vectors.push_back(create_vector(0.0f, y, size));
     }
     for (float z = step; z <= size - step; z += step)
     {
-        vectors.push_back(create_3d_vector(0.0f, 0.0f, z));
-        vectors.push_back(create_3d_vector(size, 0.0f, z));
-        vectors.push_back(create_3d_vector(size, size, z));
-        vectors.push_back(create_3d_vector(0.0f, size, z));
+        vectors.push_back(create_vector(0.0f, 0.0f, z));
+        vectors.push_back(create_vector(size, 0.0f, z));
+        vectors.push_back(create_vector(size, size, z));
+        vectors.push_back(create_vector(0.0f, size, z));
     }
 
     return vectors;
@@ -67,11 +58,6 @@ We apply the same workflow like in the 2D-case on our 3D vectors:
 #include <CE3D2/Vector.h>
 
 using namespace CE3D2;
-
-Vector create_3d_vector(float x, float y, float z)
-{
-    // ...
-}
 
 // Creates a cube of given size and specific equidistant number of vectors on
 // the edges.
@@ -155,8 +141,8 @@ int main()
 
     Transformation::OrthogonalProjection ortho_projection;
     std::vector<Vector> projection_vecs;
-    projection_vecs.push_back(create_3d_vector(0.7f, 0.3f, 0.0f));
-    projection_vecs.push_back(create_3d_vector(0.0f, 0.3f, 0.7f));
+    projection_vecs.push_back(create_vector(0.7f, 0.3f, 0.0f));
+    projection_vecs.push_back(create_vector(0.0f, 0.3f, 0.7f));
     ortho_projection.set_projection_vectors(projection_vecs);
 
     ortho_projection.transform(cube->vectors());

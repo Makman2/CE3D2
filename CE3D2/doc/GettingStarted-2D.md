@@ -22,26 +22,15 @@ simple 2D geometry first:
 
 using namespace CE3D2;
 
-// Let's create a little helper function for instantiating vectors, since
-// initializer lists are not supported from CE3D2::Vector. The issue is already
-// addressed in https://github.com/Makman2/CE3D2/issues/52.
-Vector create_2d_vector(float x, float y)
-{
-    Vector v(2);
-    v[0] = x;
-    v[1] = y;
-    return v;
-}
-
 int main()
 {
     Models::Model rectangle;
     auto& vectors = rectangle.vectors();
 
-    vectors.push_back(create_2d_vector(0.0f, 0.0f));
-    vectors.push_back(create_2d_vector(20.0f, 0.0f));
-    vectors.push_back(create_2d_vector(20.0f, 5.0f));
-    vectors.push_back(create_2d_vector(0.0f, 5.0f));
+    vectors.push_back(create_vector(0.0f, 0.0f));
+    vectors.push_back(create_vector(20.0f, 0.0f));
+    vectors.push_back(create_vector(20.0f, 5.0f));
+    vectors.push_back(create_vector(0.0f, 5.0f));
 
     return 0;
 }
@@ -77,7 +66,7 @@ In fact we can already render that, so let's include the actual renderer!
 int main()
 {
     // ...
-    vectors.push_back(create_2d_vector(0.0f, 5.0f));
+    vectors.push_back(create_vector(0.0f, 5.0f));
 
     Render::TextRenderer renderer;
     renderer.set_target(std::make_shared<Render::TextSurface>(40, 10));
@@ -107,10 +96,10 @@ int main()
     // and now use operator `->` (instead of `.`) to dereference it:
     auto& vectors = rectangle->vectors();
 
-    vectors.push_back(create_2d_vector(0.0f, 0.0f));
-    vectors.push_back(create_2d_vector(20.0f, 0.0f));
-    vectors.push_back(create_2d_vector(20.0f, 5.0f));
-    vectors.push_back(create_2d_vector(0.0f, 5.0f));
+    vectors.push_back(create_vector(0.0f, 0.0f));
+    vectors.push_back(create_vector(20.0f, 0.0f));
+    vectors.push_back(create_vector(20.0f, 5.0f));
+    vectors.push_back(create_vector(0.0f, 5.0f));
 
     Render::TextRenderer renderer;
     renderer.set_target(std::make_shared<Render::TextSurface>(40, 10));

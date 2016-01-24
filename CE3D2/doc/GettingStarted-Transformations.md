@@ -113,8 +113,8 @@ int main()
 
     Transformation::OrthogonalProjection ortho_projection;
     std::vector<Vector> projection_vecs;
-    projection_vecs.push_back(create_3d_vector(0.7f, 0.3f, 0.0f));
-    projection_vecs.push_back(create_3d_vector(0.0f, 0.3f, 0.7f));
+    projection_vecs.push_back(create_vector(0.7f, 0.3f, 0.0f));
+    projection_vecs.push_back(create_vector(0.0f, 0.3f, 0.7f));
     ortho_projection.set_projection_vectors(projection_vecs);
 
     // Instantiate a scale transformation.
