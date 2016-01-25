@@ -129,7 +129,7 @@ int main()
     scale.transform(cube->vectors());
 
     renderer.render();
-    print_textsurface(*renderer.get_target());
+    std::cout << *renderer.get_target();
 
     return 0;
 }

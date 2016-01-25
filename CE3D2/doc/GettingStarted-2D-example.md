@@ -25,20 +25,6 @@ and execute it with `./example2d`.
 
 using namespace CE3D2;
 
-// TextSurface does not contain a function that prints out the contents to
-// console. Already addressed in https://github.com/Makman2/CE3D2/issues/51.
-void print_textsurface(Render::TextSurface const& surf)
-{
-    for (unsigned int y = 0; y < surf.height(); y++)
-    {
-        for (unsigned int x = 0; x < surf.width(); x++)
-        {
-            std::cout << surf(x, y);
-        }
-        std::cout << std::endl;
-    }
-}
-
 int main()
 {
     auto rectangle = std::make_shared<Models::Model>();
@@ -54,7 +40,7 @@ int main()
     renderer.models().push_back(rectangle);
 
     renderer.render();
-    print_textsurface(*renderer.get_target());
+    std::cout << *renderer.get_target();
 
     return 0;
 }

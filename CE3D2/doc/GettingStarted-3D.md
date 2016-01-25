@@ -66,18 +66,6 @@ std::vector<Vector> make_cube(float size = 1.0f, unsigned int edge_density = 0)
     // ...
 }
 
-void print_textsurface(Render::TextSurface const& surf)
-{
-    for (unsigned int y = 0; y < surf.height(); y++)
-    {
-        for (unsigned int x = 0; x < surf.width(); x++)
-        {
-            std::cout << surf(x, y);
-        }
-        std::cout << std::endl;
-    }
-}
-
 int main()
 {
     // Let's create the cube!
@@ -90,7 +78,7 @@ int main()
     renderer.models().push_back(cube);
 
     renderer.render();
-    print_textsurface(*renderer.get_target());
+    std::cout << *renderer.get_target();
 
     return 0;
 }
