@@ -69,6 +69,18 @@ namespace Transformation
         update();
     }
 
+    PrecisionType
+    Rotation::get_angle_in_degrees() const
+    {
+        return get_angle() * 180.0f / CE3D2::PI;
+    }
+
+    void
+    Rotation::set_angle_in_degrees(PrecisionType value)
+    {
+        set_angle(value * CE3D2::PI / 180.0f);
+    }
+
     CE3D2::Matrix
     Rotation::on_update() const
     {

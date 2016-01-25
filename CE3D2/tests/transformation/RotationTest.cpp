@@ -61,6 +61,29 @@ BOOST_AUTO_TEST_CASE(test_angle)
     BOOST_CHECK_EQUAL(uut.get_angle(), 77.7f);
 }
 
+BOOST_AUTO_TEST_CASE(test_angle_in_degrees)
+{
+    CE3D2::Transformation::Rotation uut(CE3D2::Vector(),
+                                        CE3D2::Vector(),
+                                        CE3D2::PI);
+
+    BOOST_CHECK_EQUAL(uut.get_angle_in_degrees(), 180.0f);
+
+    uut.set_angle(CE3D2::PI / 2);
+
+    BOOST_CHECK_EQUAL(uut.get_angle_in_degrees(), 90.0f);
+
+    uut.set_angle_in_degrees(270.0f);
+
+    BOOST_CHECK_EQUAL(uut.get_angle_in_degrees(), 270.0f);
+    BOOST_CHECK_EQUAL(uut.get_angle(), CE3D2::PI * 3 / 2);
+
+    uut.set_angle_in_degrees(45.0f);
+
+    BOOST_CHECK_EQUAL(uut.get_angle_in_degrees(), 45.0f);
+    BOOST_CHECK_EQUAL(uut.get_angle(), CE3D2::PI / 4);
+}
+
 BOOST_AUTO_TEST_CASE(test_matrix_2D)
 {
     CE3D2::Transformation::Rotation uut(CE3D2::create_vector(1.0f, 0.0f),

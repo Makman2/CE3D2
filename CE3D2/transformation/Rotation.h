@@ -75,6 +75,18 @@ namespace Transformation
         void
         set_angle(PrecisionType value);
 
+        /// Gets the rotation angle (in degrees).
+        ///
+        /// @returns The angle in degrees.
+        PrecisionType
+        get_angle_in_degrees() const;
+
+        /// Sets the rotation angle (in degrees).
+        ///
+        /// @param value The new angle in degrees.
+        void
+        set_angle_in_degrees(PrecisionType value);
+
     protected:
         // Inherited documentation.
         virtual CE3D2::Matrix
