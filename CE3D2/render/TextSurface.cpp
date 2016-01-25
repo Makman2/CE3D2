@@ -127,5 +127,24 @@ namespace Render
     {
         return x + width <= m_Width && y + height <= m_Height;
     }
+
+    std::ostream&
+    operator <<(std::ostream& os, TextSurface const& surface)
+    {
+        std::string str;
+        for (CE3D2::Render::TextSurface::size_type y = 0;
+             y < surface.height();
+             y++)
+        {
+            for (CE3D2::Render::TextSurface::size_type x = 0;
+                 x < surface.width();
+                 x++)
+            {
+                str += surface(x, y);
+            }
+            str += '\n';
+        }
+        return os << str;
+    }
 }
 }

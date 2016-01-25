@@ -1,6 +1,7 @@
 #ifndef CE3D2_RENDER_TEXTSURFACE_H
 #define CE3D2_RENDER_TEXTSURFACE_H
 
+#include <iostream>
 #include <vector>
 
 
@@ -161,6 +162,14 @@ namespace Render
         size_type m_Height;
         surface_type m_Surface;
     };
+
+    /// Stream operator for `TextSurface` class.
+    ///
+    /// @param os      The output stream.
+    /// @param surface The surface to print to `os`.
+    /// @returns       The output stream with surface streamed into it.
+    std::ostream&
+    operator <<(std::ostream& os, TextSurface const& surface);
 }
 }
 

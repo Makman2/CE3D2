@@ -2,6 +2,8 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
+#include <sstream>
+
 #include "CE3D2/render/TextSurface.h"
 #include "CE3D2/tests/TestUtilities.h"
 
@@ -220,6 +222,20 @@ BOOST_AUTO_TEST_CASE(test_is_boundary_valid_block)
     BOOST_CHECK(!uut.is_boundary_valid(10, 2, 5, 5));
     BOOST_CHECK(!uut.is_boundary_valid(2, 10, 7, 7));
     BOOST_CHECK(!uut.is_boundary_valid(15, 72, 20, 88));
+}
+
+BOOST_AUTO_TEST_CASE(test_stream_operator)
+{
+    std::stringstream output;
+
+    auto surf = CE3D2_CREATE_TEXTSURFACE("ABCDE", "FGEHI", "JKLMN");
+    auto surf2 = CE3D2_CREATE_TEXTSURFACE("PP", "DD");
+
+    // Chaining two surfaces ensures that the return type of the stream operator
+    // is also an output stream.
+    output << *surf << *surf2;
+
+    BOOST_CHECK_EQUAL(output.str(), "ABCDE\nFGEHI\nJKLMN\nPP\nDD\n");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
