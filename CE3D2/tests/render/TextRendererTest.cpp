@@ -8,6 +8,17 @@
 
 BOOST_AUTO_TEST_SUITE(TextRendererTestSuite)
 
+BOOST_AUTO_TEST_CASE(test_rendered_char)
+{
+    CE3D2::Render::TextRenderer uut;
+
+    BOOST_CHECK_EQUAL(uut.get_rendered_char(), '.');
+
+    uut.set_rendered_char('x');
+
+    BOOST_CHECK_EQUAL(uut.get_rendered_char(), 'x');
+}
+
 BOOST_AUTO_TEST_CASE(test_target)
 {
     CE3D2::Render::TextRenderer uut;
@@ -86,14 +97,15 @@ BOOST_AUTO_TEST_CASE(test_render)
     model2->vectors().push_back(CE3D2::create_vector(8.999f, 1.0f));
 
     uut.models().push_back(model2);
+    uut.set_rendered_char('o');
     surface->clear();
     uut.render();
 
-    expected_surface = CE3D2_CREATE_TEXTSURFACE("     .    ",
-                                                " .      . ",
-                                                "         .",
-                                                "         .",
-                                                ".        .");
+    expected_surface = CE3D2_CREATE_TEXTSURFACE("     o    ",
+                                                " o      o ",
+                                                "         o",
+                                                "         o",
+                                                "o        o");
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
 
     model1->set_visibility(false);
@@ -107,10 +119,10 @@ BOOST_AUTO_TEST_CASE(test_render)
     uut.render();
 
     expected_surface = CE3D2_CREATE_TEXTSURFACE("          ",
-                                                "        . ",
-                                                "         .",
-                                                "         .",
-                                                "         .");
+                                                "        o ",
+                                                "         o",
+                                                "         o",
+                                                "         o");
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
 
     model2->set_visibility(false);

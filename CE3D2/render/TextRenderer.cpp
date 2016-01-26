@@ -6,12 +6,25 @@ namespace CE3D2
 namespace Render
 {
     TextRenderer::TextRenderer()
-    : m_Target(nullptr)
+    : m_RenderChar('.')
+    , m_Target(nullptr)
     , m_Models()
     {}
 
     TextRenderer::~TextRenderer()
     {}
+
+    char
+    TextRenderer::get_rendered_char() const
+    {
+        return m_RenderChar;
+    }
+
+    void
+    TextRenderer::set_rendered_char(char value)
+    {
+        m_RenderChar = value;
+    }
 
     std::shared_ptr<TextSurface>
     TextRenderer::get_target() const
@@ -53,7 +66,7 @@ namespace Render
 
                     if (m_Target->is_boundary_valid(x, y))
                     {
-                        (*m_Target)(x, y) = '.';
+                        (*m_Target)(x, y) = m_RenderChar;
                     }
                 }
             }

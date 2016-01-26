@@ -18,10 +18,24 @@ namespace Render
     public:
         /// Instantiates a new TextRenderer.
         ///
+        /// By default `TextRenderer` uses a dot to render points.
+        ///
         /// Contains no target and no models at instantation.
         TextRenderer();
 
         virtual ~TextRenderer();
+
+        /// Returns the char used for rendering points.
+        ///
+        /// @returns The render-char.
+        char
+        get_rendered_char() const;
+
+        /// Sets the char used for rendering points.
+        ///
+        /// @param value The new char.
+        void
+        set_rendered_char(char value);
 
         /// Returns a shared reference to the render target.
         ///
@@ -53,6 +67,7 @@ namespace Render
         render();
 
     private:
+        char m_RenderChar;
         std::shared_ptr<TextSurface> m_Target;
         std::vector<std::shared_ptr<CE3D2::Models::Model>> m_Models;
     };
