@@ -9,6 +9,13 @@ namespace CE3D2
 namespace Transformation
 {
     /// A scaling transformation.
+    ///
+    /// Let \f$ S \f$ be the scale matrix and \f$ s_{ij} \f$ an element of it
+    /// where \f$ i \f$ denotes the line position and \f$ j \f$ the column
+    /// position of \f$ S \f$. Further let \f$ v \f$ be the scaling vector while
+    /// \f$ v_k \f$ denotes the \f$ k \f$-th element of the vector. For every
+    /// \f$ i \neq j \f$ applies \f$ s_{ij} = 0\f$ and for every \f$ i = j\f$
+    /// applies \f$ a_{ii} = a_{jj} = v_i \f$.
     class Scale : public LinearTransformation
     {
     public:

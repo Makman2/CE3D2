@@ -572,6 +572,11 @@ SEARCHENGINE           = YES
 
 GENERATE_LATEX         = NO
 
+# The EXTRA_PACKAGES tag can be used to specify one or more LaTeX package names
+# that should be included in the LaTeX output.
+
+EXTRA_PACKAGES         = amsfonts
+
 #---------------------------------------------------------------------------
 # Configuration options related to the RTF output
 #---------------------------------------------------------------------------

@@ -15,6 +15,21 @@ namespace Transformation
 {
     /// A transformation describing a rotation inside a plane on an
     /// arbitrary-dimensional space.
+    ///
+    /// Rotation matrices in an arbitrary dimensional space are not defined by
+    /// a rotation axis, but by a rotation plane in which the vectors get
+    /// rotated.
+    ///
+    /// Let \f$ \hat{g}_1 \f$ and \f$ \hat{g}_2 \f$ be two vectors of the
+    /// dimension \f$ n \f$ (so \f$ \hat{g}_1, \hat{g}_2 \in \mathbb{R}^n \f$)
+    /// that span the rotation plane. Let further \f$ \alpha \f$ be the rotation
+    /// angle. The rotation matrix \f$ R \f$ is then computed via
+    /// \f$ R = I_n + (\cos(\alpha) - 1) V + \sin(\alpha) W \f$ while
+    /// \f$ V = \hat{g}_1 \otimes \hat{g}_1 + \hat{g}_2 \otimes \hat{g}_2 \f$
+    /// and
+    /// \f$ W = \hat{g}_1 \otimes \hat{g}_2 - \hat{g}_2 \otimes \hat{g}_1 \f$,
+    /// \f$ I_n \f$ is the identity matrix of dimension \f$ n \f$ and
+    /// \f$ \otimes \f$ denotes the outer-product.
     class Rotation : public LinearTransformation
     {
     public:
