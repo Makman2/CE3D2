@@ -56,6 +56,16 @@ namespace Transformation
         update();
     }
 
+    void
+    Rotation::set_plane_vectors(CE3D2::Vector const& v1,
+                                CE3D2::Vector const& v2)
+    {
+        m_PlaneVector1 = v1;
+        m_PlaneVector2 = v2;
+        m_MatricesCached = false;
+        update();
+    }
+
     PrecisionType
     Rotation::get_angle() const
     {

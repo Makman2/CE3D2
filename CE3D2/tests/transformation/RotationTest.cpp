@@ -46,6 +46,13 @@ BOOST_AUTO_TEST_CASE(test_plane_vectors)
 
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector1(), v1);
     CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector2(), v2);
+
+    v1 = CE3D2::create_vector(1.1f, 2.2f, 3.3f);
+    v2 = CE3D2::create_vector(-1.1f, -4.5f, -8.0f);
+    uut.set_plane_vectors(v1, v2);
+
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector1(), v1);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.get_plane_vector2(), v2);
 }
 
 BOOST_AUTO_TEST_CASE(test_angle)
@@ -170,6 +177,21 @@ BOOST_AUTO_TEST_CASE(test_matrix_3D)
     expected(2, 0) = -0.70710677f;
     expected(2, 1) = -0.5f;
     expected(2, 2) = 0.5f;
+    CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), expected);
+
+    // Test with setting both rotation plane vectors at once.
+    uut.set_angle(CE3D2::PI / 2);
+    uut.set_plane_vectors(CE3D2::create_vector(0.0f, 0.0f, 1.0f),
+                          CE3D2::create_vector(0.0f, 1.0f, 0.0f));
+    expected(0, 0) = 1.0f;
+    expected(0, 1) = 0.0f;
+    expected(0, 2) = 0.0f;
+    expected(1, 0) = 0.0f;
+    expected(1, 1) = -0.000000043711388f;
+    expected(1, 2) = -1.0f;
+    expected(2, 0) = 0.0f;
+    expected(2, 1) = 1.0f;
+    expected(2, 2) = -0.000000043711388f;
     CE3D2_CHECK_MATRICES_EQUAL(uut.get_matrix(), expected);
 }
 

@@ -78,6 +78,13 @@ namespace Transformation
         void
         set_plane_vector2(CE3D2::Vector const& value);
 
+        /// Sets the vectors that span the rotation plane.
+        ///
+        /// @param v1 The first vector.
+        /// @param v2 The second vector.
+        void
+        set_plane_vectors(CE3D2::Vector const& v1, CE3D2::Vector const& v2);
+
         /// Gets the rotation angle (in radians).
         ///
         /// @returns The angle in radians.
