@@ -41,18 +41,21 @@ that defines the linear behaviour of the transformation. Imagine you apply many
 transformations in a row and assume they are all linear, means they consist of
 matrices. Let's write this down mathematically:
 
-`output = f(g(input))`
-`=> output = A * (B * input)`
+\f$ output = f(g(input)) \f$
 
-Where `f` and `g` are our linear transformations of the form `M * input`, where
-`M` describes an arbitrary matrix.
+\f$ \Leftrightarrow output = A \cdot (B \cdot input) \f$
+
+Where \f$ f \f$ and \f$ g \f$ are our linear transformations of the form
+\f$ M \cdot input \f$, where \f$ M \f$ describes an arbitrary matrix.
 
 That's what happens when we apply transformations in a row like above. Matrices
 have a very nice property: Associativity!
 
-`output = A * (B * input)`
-`=> output = A * B * input`
-`=> output = (A * B) * input`
+\f$ output = A \cdot (B \cdot input) \f$
+
+\f$ \Leftrightarrow output = A \cdot B \cdot input \f$
+
+\f$ \Leftrightarrow output = (A \cdot B) \cdot input \f$
 
 Nice! This means we can premultiply all matrices before applying them onto a
 vector!
