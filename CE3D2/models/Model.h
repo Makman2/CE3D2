@@ -54,7 +54,7 @@ namespace Models
         /// Returns the vector-list that contains the vectors the model consists
         /// of.
         ///
-        /// @returns A reference to the std::vector containing the model
+        /// @returns A reference to the `std::vector` containing the model
         ///          vectors.
         std::vector<Vector> const&
         vectors() const;
@@ -62,7 +62,7 @@ namespace Models
         /// Returns a modifiable vector-list that contains the vectors the model
         /// consists of.
         ///
-        /// @returns A reference to the std::vector containing the model
+        /// @returns A reference to the `std::vector` containing the model
         ///          vectors.
         std::vector<Vector>&
         vectors();

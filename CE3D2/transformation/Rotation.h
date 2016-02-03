@@ -33,17 +33,17 @@ namespace Transformation
     class Rotation : public LinearTransformation
     {
     public:
-        /// Instantiates a new Rotation without rotation-plane vectors and
+        /// Instantiates a new `Rotation` without rotation-plane vectors and
         /// an angle of 0.
         Rotation();
 
-        /// Instantiates a new Rotation with an angle of 0.
+        /// Instantiates a new `Rotation` with an angle of 0.
         ///
         /// @param v1 The first plane vector.
         /// @param v2 The second plane vector.
         Rotation(CE3D2::Vector const& v1, CE3D2::Vector const& v2);
 
-        /// Instantiates a new Rotation.
+        /// Instantiates a new `Rotation`.
         ///
         /// @param v1    The first plane vector.
         /// @param v2    The second plane vector.

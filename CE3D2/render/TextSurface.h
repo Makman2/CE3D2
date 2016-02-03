@@ -9,11 +9,11 @@ namespace CE3D2
 {
 namespace Render
 {
-    /// A TextSurface represent a two-dimensional surface of char-elements.
+    /// A `TextSurface` represents a two-dimensional surface of char-elements.
     ///
     /// Important: Due to performance reasons object accessors like
     /// `operator ()` or `copy_from()` do not perform boundary checks! You can
-    /// do that manually by using the `is_boundary_valid` functions.
+    /// do that manually by using the `is_boundary_valid()` functions.
     class TextSurface
     {
         using surface_type = std::vector<char>;
@@ -22,7 +22,7 @@ namespace Render
         /// The type used for representing sizes or indexes inside this class.
         using size_type = surface_type::size_type;
 
-        /// Instantiates a new TextSurface.
+        /// Instantiates a new `TextSurface`.
         ///
         /// The surface gets cleared during instantation with spaces.
         ///
@@ -167,7 +167,7 @@ namespace Render
     ///
     /// @param os      The output stream.
     /// @param surface The surface to print to `os`.
-    /// @returns       The output stream with surface streamed into it.
+    /// @returns       The output stream with `surface` streamed into it.
     std::ostream&
     operator <<(std::ostream& os, TextSurface const& surface);
 }

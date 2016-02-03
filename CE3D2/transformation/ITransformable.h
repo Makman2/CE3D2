@@ -14,7 +14,7 @@ namespace Transformation
     public:
         virtual ~ITransformable();
 
-        /// Transforms the object with the given Transformation.
+        /// Transforms the object with the given `Transformation`.
         ///
         /// Override this function to define how your object should get
         /// transformed.

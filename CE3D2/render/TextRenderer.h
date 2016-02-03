@@ -9,14 +9,14 @@ namespace CE3D2
 {
 namespace Render
 {
-    /// Renders models onto a TextSurface.
+    /// Renders models onto a `TextSurface`.
     ///
     /// This class is responsible for actually drawing 3D graphics as ASCII
     /// text.
     class TextRenderer
     {
     public:
-        /// Instantiates a new TextRenderer.
+        /// Instantiates a new `TextRenderer`.
         ///
         /// By default `TextRenderer` uses a dot to render points.
         ///
@@ -45,7 +45,8 @@ namespace Render
 
         /// Sets the render target where the models are rendered to.
         ///
-        /// @param target A shared reference of a TextSurface to use as target.
+        /// @param target A shared reference of a `TextSurface` to use as
+        ///               target.
         void
         set_target(std::shared_ptr<TextSurface> const& target);
 
@@ -60,7 +61,7 @@ namespace Render
         /// Renders all listed models.
         ///
         /// The target surface is not cleared before rendering, you need to do
-        /// it yourself using TextSurface.clear!
+        /// it yourself using `TextSurface.clear()`!
         ///
         /// @throws std::logic_error Thrown when no target is set.
         void

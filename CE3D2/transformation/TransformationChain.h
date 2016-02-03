@@ -12,7 +12,7 @@ namespace Transformation
     class TransformationChain : public Transformation
     {
     public:
-        /// Instantiates a new empty TransformationChain.
+        /// Instantiates a new empty `TransformationChain`.
         TransformationChain();
 
         // Inherited documentation.

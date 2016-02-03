@@ -17,14 +17,14 @@ namespace Transformation
     /// transformation in a row.
     ///
     /// As mentioned linear transformations use matrices in CE3D2. To implement
-    /// your own linear transformation override on_update() which is invoked
+    /// your own linear transformation override `on_update()` which is invoked
     /// when the matrix needs to be calculated.
     class LinearTransformation : public Transformation
     {
     public:
-        /// Instantiates a new LinearTransformation.
+        /// Instantiates a new `LinearTransformation`.
         ///
-        /// A matrix update via on_update() is scheduled at instantation.
+        /// A matrix update via `on_update()` is scheduled at instantation.
         LinearTransformation();
 
         virtual ~LinearTransformation();
@@ -42,18 +42,19 @@ namespace Transformation
     protected:
         /// Schedules an update for the matrix calculation.
         ///
-        /// This method does not update the matrix itself, on_update() does this
-        /// instead.
+        /// This method does not update the matrix itself, `on_update()` does
+        /// this instead.
         ///
         /// Invoke this method on setters that affect the matrix values.
         ///
         /// Note that you don't need to invoke this function at the constructor,
-        /// since on object creation it is automatically scheduled for update.
+        /// since on object creation this instance is automatically scheduled
+        /// for update.
         void
         update();
 
         /// Gets invoked if an update was scheduled and someone wants to fetch
-        /// the matrix (via get_matrix()).
+        /// the matrix (via `get_matrix()`).
         ///
         /// Override this method and construct your transformation matrix.
         ///
