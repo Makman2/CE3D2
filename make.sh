@@ -99,7 +99,7 @@ case $1 in
     "help")
         TARGET_help;;
     "debug")
-	TARGET_debug;;
+        TARGET_debug;;
     "release")
         TARGET_release;;
     "doc")
