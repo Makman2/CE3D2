@@ -27,6 +27,36 @@ namespace Models
 
         virtual ~Model();
 
+        /// Constructs a (2D) unit-square.
+        ///
+        /// @returns A model containing the square.
+        static Model
+        square();
+
+        /// Constructs a (3D) unit-cube.
+        ///
+        /// @returns A model containing the cube.
+        static Model
+        cube();
+
+        /// Constructs a unit-tesseract (a 4D-cube).
+        ///
+        /// @returns A model containing the tesseract.
+        static Model
+        tesseract();
+
+        /// Constructs a unit-hypercube.
+        ///
+        /// @param dimensions             The dimension of the hypercube.
+        /// @throws std::invalid_argument Thrown when dimension is 0 or less or
+        ///                               it's so big that it would exceed the
+        ///                               machine address space (so on x86
+        ///                               systems the limit should be usually 32
+        ///                               and on x64 systems 64).
+        /// @returns                      A model containing the hypercube.
+        static Model
+        hypercube(Vector::size_type dimension);
+
         /// Returns the name of this model. It can be non-unique!
         ///
         /// @returns The name of the model.

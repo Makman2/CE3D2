@@ -74,4 +74,199 @@ BOOST_AUTO_TEST_CASE(test_ITransformable)
     CE3D2_CHECK_VECTORS_EQUAL(vecs[2], CE3D2::create_vector(8.0f, 5.0f, 0.0f));
 }
 
+BOOST_AUTO_TEST_CASE(test_square)
+{
+    auto uut = CE3D2::Models::Model::square();
+
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 4);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[0],
+                              CE3D2::create_vector(0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[1],
+                              CE3D2::create_vector(-0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[2],
+                              CE3D2::create_vector(0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[3],
+                              CE3D2::create_vector(-0.5f, -0.5f));
+}
+
+BOOST_AUTO_TEST_CASE(test_cube)
+{
+    auto uut = CE3D2::Models::Model::cube();
+
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 8);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[0],
+                              CE3D2::create_vector(0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[1],
+                              CE3D2::create_vector(-0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[2],
+                              CE3D2::create_vector(0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[3],
+                              CE3D2::create_vector(-0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[4],
+                              CE3D2::create_vector(0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[5],
+                              CE3D2::create_vector(-0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[6],
+                              CE3D2::create_vector(0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[7],
+                              CE3D2::create_vector(-0.5f, -0.5f, -0.5f));
+}
+
+BOOST_AUTO_TEST_CASE(test_tesseract)
+{
+    auto uut = CE3D2::Models::Model::tesseract();
+
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 16);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[0],
+                              CE3D2::create_vector(0.5f, 0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[1],
+                              CE3D2::create_vector(-0.5f, 0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[2],
+                              CE3D2::create_vector(0.5f, -0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[3],
+                              CE3D2::create_vector(-0.5f, -0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[4],
+                              CE3D2::create_vector(0.5f, 0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[5],
+                              CE3D2::create_vector(-0.5f, 0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[6],
+                              CE3D2::create_vector(0.5f, -0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[7],
+                              CE3D2::create_vector(-0.5f, -0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[8],
+                              CE3D2::create_vector(0.5f, 0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[9],
+                              CE3D2::create_vector(-0.5f, 0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[10],
+                              CE3D2::create_vector(0.5f, -0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[11],
+                              CE3D2::create_vector(-0.5f, -0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[12],
+                              CE3D2::create_vector(0.5f, 0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[13],
+                              CE3D2::create_vector(-0.5f, 0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[14],
+                              CE3D2::create_vector(0.5f, -0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[15],
+                              CE3D2::create_vector(-0.5f, -0.5f, -0.5f, -0.5f));
+}
+
+BOOST_AUTO_TEST_CASE(test_hypercube)
+{
+    // Test exceptions.
+    BOOST_CHECK_THROW(CE3D2::Models::Model::hypercube(0),
+                      std::invalid_argument);
+
+    // Test the machine limit by providing an insane number.
+    BOOST_CHECK_THROW(CE3D2::Models::Model::hypercube(1000000),
+                      std::invalid_argument);
+
+    // Test the 1D case.
+    auto uut = CE3D2::Models::Model::hypercube(1);
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 2);
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[0], CE3D2::create_vector(0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(uut.vectors()[1], CE3D2::create_vector(-0.5f));
+
+    // Test the 5D case.
+    uut = CE3D2::Models::Model::hypercube(5);
+
+    BOOST_CHECK_EQUAL(uut.vectors().size(), 32);
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[0],
+        CE3D2::create_vector(0.5f, 0.5f, 0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[1],
+        CE3D2::create_vector(-0.5f, 0.5f, 0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[2],
+        CE3D2::create_vector(0.5f, -0.5f, 0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[3],
+        CE3D2::create_vector(-0.5f, -0.5f, 0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[4],
+        CE3D2::create_vector(0.5f, 0.5f, -0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[5],
+        CE3D2::create_vector(-0.5f, 0.5f, -0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[6],
+        CE3D2::create_vector(0.5f, -0.5f, -0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[7],
+        CE3D2::create_vector(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[8],
+        CE3D2::create_vector(0.5f, 0.5f, 0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[9],
+        CE3D2::create_vector(-0.5f, 0.5f, 0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[10],
+        CE3D2::create_vector(0.5f, -0.5f, 0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[11],
+        CE3D2::create_vector(-0.5f, -0.5f, 0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[12],
+        CE3D2::create_vector(0.5f, 0.5f, -0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[13],
+        CE3D2::create_vector(-0.5f, 0.5f, -0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[14],
+        CE3D2::create_vector(0.5f, -0.5f, -0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[15],
+        CE3D2::create_vector(-0.5f, -0.5f, -0.5f, -0.5f, 0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[16],
+        CE3D2::create_vector(0.5f, 0.5f, 0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[17],
+        CE3D2::create_vector(-0.5f, 0.5f, 0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[18],
+        CE3D2::create_vector(0.5f, -0.5f, 0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[19],
+        CE3D2::create_vector(-0.5f, -0.5f, 0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[20],
+        CE3D2::create_vector(0.5f, 0.5f, -0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[21],
+        CE3D2::create_vector(-0.5f, 0.5f, -0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[22],
+        CE3D2::create_vector(0.5f, -0.5f, -0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[23],
+        CE3D2::create_vector(-0.5f, -0.5f, -0.5f, 0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[24],
+        CE3D2::create_vector(0.5f, 0.5f, 0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[25],
+        CE3D2::create_vector(-0.5f, 0.5f, 0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[26],
+        CE3D2::create_vector(0.5f, -0.5f, 0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[27],
+        CE3D2::create_vector(-0.5f, -0.5f, 0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[28],
+        CE3D2::create_vector(0.5f, 0.5f, -0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[29],
+        CE3D2::create_vector(-0.5f, 0.5f, -0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[30],
+        CE3D2::create_vector(0.5f, -0.5f, -0.5f, -0.5f, -0.5f));
+    CE3D2_CHECK_VECTORS_EQUAL(
+        uut.vectors()[31],
+        CE3D2::create_vector(-0.5f, -0.5f, -0.5f, -0.5f, -0.5f));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
