@@ -29,8 +29,10 @@ namespace Transformation
 
         virtual ~LinearTransformation();
 
+        // Still allow to override this function if there are performance
+        // advantages when not using the matrix.
         // Inherited documentation.
-        void
+        virtual void
         transform_vector(CE3D2::Vector& vector) const override;
 
         /// Returns the matrix the linear transformation is represented by.
