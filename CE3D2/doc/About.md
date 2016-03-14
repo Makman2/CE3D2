@@ -30,8 +30,8 @@ in nearly every application:
 - `CE3D2::Vector`
 
   The vector class used throughout CE3D2. Special descendants are
-  `CE3D2::UnitVector` and `CE3D2::ZeroVector`. For documentation of them refer
-  to the
+  `CE3D2::UnitVector`, `CE3D2::ZeroVector` and `CE3D2::ScalarVector`. For
+  documentation of them refer to the
   [Boost documentation](http://www.boost.org/doc/libs/1_60_0/libs/numeric/ublas/doc/index.html).
 
 - `CE3D2::Matrix`

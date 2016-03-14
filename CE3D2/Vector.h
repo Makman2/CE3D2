@@ -14,6 +14,8 @@ namespace CE3D2
     using UnitVector = boost::numeric::ublas::unit_vector<PrecisionType>;
     /// Zero-vector type used from CE3D2.
     using ZeroVector = boost::numeric::ublas::zero_vector<PrecisionType>;
+    /// Scalar-vector type used from CE3D2.
+    using ScalarVector = boost::numeric::ublas::scalar_vector<PrecisionType>;
 
     /// Creates a 1-dimensional vector.
     ///

@@ -69,6 +69,24 @@ BOOST_AUTO_TEST_CASE(test_zero_vector)
     BOOST_CHECK_EQUAL(uut[2], 0.0f);
 }
 
+BOOST_AUTO_TEST_CASE(test_scalar_vector)
+{
+    CE3D2::ScalarVector uut(1, -2.0f);
+    BOOST_CHECK_EQUAL(uut.size(), 1);
+    BOOST_CHECK_EQUAL(uut[0], -2.0f);
+
+    uut = CE3D2::ScalarVector(2, 1.0f);
+    BOOST_CHECK_EQUAL(uut.size(), 2);
+    BOOST_CHECK_EQUAL(uut[0], 1.0f);
+    BOOST_CHECK_EQUAL(uut[1], 1.0f);
+
+    uut = CE3D2::ScalarVector(3, 4.4f);
+    BOOST_CHECK_EQUAL(uut.size(), 3);
+    BOOST_CHECK_EQUAL(uut[0], 4.4f);
+    BOOST_CHECK_EQUAL(uut[1], 4.4f);
+    BOOST_CHECK_EQUAL(uut[2], 4.4f);
+}
+
 BOOST_AUTO_TEST_CASE(test_create_vector_1D)
 {
     auto vec = CE3D2::create_vector(5.0f);
