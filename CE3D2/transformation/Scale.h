@@ -45,6 +45,10 @@ namespace Transformation
         void
         set_scale(CE3D2::Vector::size_type index, CE3D2::PrecisionType scale);
 
+        // Inherited documentation.
+        void
+        transform_vector(CE3D2::Vector& vector) const override;
+
     protected:
         // Inherited documentation.
         virtual CE3D2::Matrix

@@ -32,6 +32,12 @@ namespace Transformation
         update();
     }
 
+    void
+    Scale::transform_vector(CE3D2::Vector& vector) const
+    {
+        vector = boost::numeric::ublas::element_prod(vector, m_Scale);
+    }
+
     CE3D2::Matrix
     Scale::on_update() const
     {
