@@ -14,3 +14,5 @@ add_ce3d2_test(TransformationTest
                ${CMAKE_CURRENT_LIST_DIR}/TransformationTest)
 add_ce3d2_test(TransformationChainTest
                ${CMAKE_CURRENT_LIST_DIR}/TransformationChainTest)
+add_ce3d2_test(TranslationTest
+               ${CMAKE_CURRENT_LIST_DIR}/TranslationTest)
