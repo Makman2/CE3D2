@@ -28,6 +28,36 @@ namespace Models
 
         virtual ~LineModel();
 
+        /// Constructs a (2D) unit-square.
+        ///
+        /// @returns A model containing the square.
+        static LineModel
+        square();
+
+        /// Constructs a (3D) unit-cube.
+        ///
+        /// @returns A model containing the cube.
+        static LineModel
+        cube();
+
+        /// Constructs a unit-tesseract (a 4D-cube).
+        ///
+        /// @returns A model containing the tesseract.
+        static LineModel
+        tesseract();
+
+        /// Constructs a unit-hypercube.
+        ///
+        /// @param dimensions             The dimension of the hypercube.
+        /// @throws std::invalid_argument Thrown when dimension is 0 or less or
+        ///                               it's so big that it would exceed the
+        ///                               machine address space (so on x86
+        ///                               systems the limit should be usually 28
+        ///                               and on x64 systems 59).
+        /// @returns                      A model containing the hypercube.
+        static LineModel
+        hypercube(Vector::size_type dimension);
+
         /// Returns a modifiable `StorageType` that contains the pairs that
         /// define the line-connections of the model between the vectors.
         ///
