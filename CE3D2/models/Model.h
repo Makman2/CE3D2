@@ -12,7 +12,7 @@ namespace CE3D2
 {
 namespace Models
 {
-    /// The base class for all models.
+    /// The base model.
     ///
     /// A model groups vectors together and allows to transform them.
     class Model : public CE3D2::Transformation::ITransformable
