@@ -115,6 +115,52 @@
 }
 
 
+/// Warns for `IndexPair` equality.
+///
+/// @param A First `IndexPair` to compare.
+/// @param B Second `IndexPair` to compare.
+#define CE3D2_WARN_INDEX_PAIRS_EQUAL(A, B) \
+    CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, WARN)
+
+
+/// Checks for `IndexPair` equality.
+///
+/// @param A First `IndexPair` to compare.
+/// @param B Second `IndexPair` to compare.
+#define CE3D2_CHECK_INDEX_PAIRS_EQUAL(A, B) \
+    CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, CHECK)
+
+
+/// Requires `IndexPair` equality.
+///
+/// @param A First `IndexPair` to compare.
+/// @param B Second `IndexPair` to compare.
+#define CE3D2_REQUIRE_INDEX_PAIRS_EQUAL(A, B) \
+    CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, REQUIRE)
+
+
+/// Assert two `IndexPair`s equal.
+///
+/// You should consider using the specializations CE3D2_WARN_INDEX_PAIRS_EQUAL,
+/// CE3D2_CHECK_INDEX_PAIRS_EQUAL and CE3D2_REQUIRE_INDEX_PAIRS_EQUAL instead.
+///
+/// @param A     First `IndexPair` to compare.
+/// @param B     Second `IndexPair` to compare.
+/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
+///              "REQUIRE".
+#define CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, LEVEL)                     \
+{                                                                       \
+    BOOST_##LEVEL##_MESSAGE(                                            \
+        (A).first == (B).first,                                         \
+        "First element of IndexPair differs, " << (A).first << " != "   \
+            << (B).first << ".");                                       \
+    BOOST_##LEVEL##_MESSAGE(                                            \
+        (A).second == (B).second,                                       \
+        "Second element of IndexPair differs, " << (A).second << " != " \
+            << (B).second << ".");                                      \
+}
+
+
 /// Warns for TextSurface equality.
 ///
 /// @param A First TextSurface to compare.
