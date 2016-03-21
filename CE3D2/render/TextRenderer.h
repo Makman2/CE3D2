@@ -59,6 +59,15 @@ namespace Render
         std::vector<std::shared_ptr<CE3D2::Models::Model>>&
         models();
 
+        /// Returns a read-only reference to the model list.
+        ///
+        /// Each model inside this list will be rendered with the render-char at
+        /// the specified vectors in it.
+        ///
+        /// @returns A read-only reference to the model list.
+        std::vector<std::shared_ptr<CE3D2::Models::Model>> const&
+        models() const;
+
         /// Renders all listed models.
         ///
         /// The target surface is not cleared before rendering, you need to do

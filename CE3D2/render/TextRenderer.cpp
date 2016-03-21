@@ -44,6 +44,12 @@ namespace Render
         return m_Models;
     }
 
+    std::vector<std::shared_ptr<CE3D2::Models::Model>> const&
+    TextRenderer::models() const
+    {
+        return m_Models;
+    }
+
     void
     TextRenderer::render()
     {
