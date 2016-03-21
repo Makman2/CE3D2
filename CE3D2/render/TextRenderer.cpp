@@ -51,14 +51,8 @@ namespace Render
     }
 
     void
-    TextRenderer::render()
+    TextRenderer::render_points()
     {
-        if (!m_Target)
-        {
-            throw std::logic_error("No render target set! Use `set_target` to "
-                                   "link a target surface to this renderer.");
-        }
-
         for (auto const& model: m_Models)
         {
             if (model->is_visible())
@@ -77,6 +71,18 @@ namespace Render
                 }
             }
         }
+    }
+
+    void
+    TextRenderer::render()
+    {
+        if (!m_Target)
+        {
+            throw std::logic_error("No render target set! Use `set_target` to "
+                                   "link a target surface to this renderer.");
+        }
+
+        render_points();
     }
 }
 }

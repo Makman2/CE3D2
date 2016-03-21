@@ -78,6 +78,8 @@ namespace Render
         render();
 
     private:
+        void render_points();
+
         char m_RenderChar;
         std::shared_ptr<TextSurface> m_Target;
         std::vector<std::shared_ptr<CE3D2::Models::Model>> m_Models;
