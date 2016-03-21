@@ -52,7 +52,8 @@ namespace Render
 
         /// Returns a reference to the model list.
         ///
-        /// Each model inside this list will be rendered.
+        /// Each model inside this list will be rendered with the render-char at
+        /// the specified vectors in it.
         ///
         /// @returns A reference to the model list.
         std::vector<std::shared_ptr<CE3D2::Models::Model>>&
