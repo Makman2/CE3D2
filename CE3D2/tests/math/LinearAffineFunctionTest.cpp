@@ -58,4 +58,32 @@ BOOST_AUTO_TEST_CASE(test_evaluation)
     BOOST_CHECK_EQUAL(uut(1.0f), -1.5f);
 }
 
+BOOST_AUTO_TEST_CASE(test_inverse_evaluation)
+{
+    CE3D2::Math::LinearAffineFunction uut(4.0f, 2.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(-2.0f), -1.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(2.0f), 0.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(10.0f), 2.0f);
+
+    uut = CE3D2::Math::LinearAffineFunction(-0.5f, -1.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(0.0f), -2.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(-1.0f), 0.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(-1.5f), 1.0f);
+}
+
+BOOST_AUTO_TEST_CASE(test_field_manipulation_updates)
+{
+    CE3D2::Math::LinearAffineFunction uut;
+    BOOST_CHECK_EQUAL(uut(1), 1.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(1), 1.0f);
+
+    uut.set_gradient(4.0f);
+    BOOST_CHECK_EQUAL(uut(1), 4.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(4), 1.0f);
+
+    uut.set_yintercept(10.0f);
+    BOOST_CHECK_EQUAL(uut(1), 14.0f);
+    BOOST_CHECK_EQUAL(uut.inverse(14), 1.0f);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

@@ -69,9 +69,17 @@ namespace Math
         /// @returns `gradient * x + y-intercept`.
         PrecisionType operator ()(PrecisionType x) const;
 
+        /// Calculates the x-value of the linear-affine-function at y. This is
+        /// the inverse of `operator ()`.
+        ///
+        /// @returns `(y - y-intercept) / gradient`.
+        PrecisionType inverse(PrecisionType y) const;
+
     private:
         PrecisionType m_Gradient;
         PrecisionType m_YIntercept;
+        PrecisionType m_InverseGradient;
+        PrecisionType m_InverseYIntercept;
     };
 }
 }

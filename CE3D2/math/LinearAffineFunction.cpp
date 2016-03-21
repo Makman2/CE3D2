@@ -25,6 +25,8 @@ namespace Math
                                                PrecisionType yintercept)
     : m_Gradient(gradient)
     , m_YIntercept(yintercept)
+    , m_InverseGradient(1.0f / gradient)
+    , m_InverseYIntercept(yintercept / gradient)
     {}
 
     PrecisionType
@@ -37,6 +39,7 @@ namespace Math
     LinearAffineFunction::set_gradient(PrecisionType value)
     {
         m_Gradient = value;
+        m_InverseGradient = 1.0f / value;
     }
 
     PrecisionType
@@ -49,12 +52,19 @@ namespace Math
     LinearAffineFunction::set_yintercept(PrecisionType value)
     {
         m_YIntercept = value;
+        m_InverseYIntercept = value / m_Gradient;
     }
 
     PrecisionType
     LinearAffineFunction::operator ()(PrecisionType x) const
     {
         return m_Gradient * x + m_YIntercept;
+    }
+
+    PrecisionType
+    LinearAffineFunction::inverse(PrecisionType y) const
+    {
+        return m_InverseGradient * y - m_InverseYIntercept;
     }
 }
 }
