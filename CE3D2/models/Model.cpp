@@ -105,13 +105,13 @@ namespace Models
         m_IsVisible = value;
     }
 
-    std::vector<Vector> const&
+    StorageType<Vector> const&
     Model::vectors() const
     {
         return m_Vectors;
     }
 
-    std::vector<Vector>&
+    StorageType<Vector>&
     Model::vectors()
     {
         return m_Vectors;

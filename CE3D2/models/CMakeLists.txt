@@ -1,3 +1,4 @@
-list(APPEND SRC ${CMAKE_CURRENT_LIST_DIR}/Model)
+list(APPEND SRC ${CMAKE_CURRENT_LIST_DIR}/Model
+                ${CMAKE_CURRENT_LIST_DIR}/StorageType)
 
 set(SRC "${SRC}" PARENT_SCOPE)

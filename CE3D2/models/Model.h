@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "CE3D2/models/StorageType.h"
 #include "CE3D2/transformation/ITransformable.h"
 #include "CE3D2/Vector.h"
 
@@ -84,17 +85,17 @@ namespace Models
         /// Returns the vector-list that contains the vectors the model consists
         /// of.
         ///
-        /// @returns A reference to the `std::vector` containing the model
+        /// @returns A reference to the `StorageType` containing the model
         ///          vectors.
-        std::vector<Vector> const&
+        StorageType<Vector> const&
         vectors() const;
 
         /// Returns a modifiable vector-list that contains the vectors the model
         /// consists of.
         ///
-        /// @returns A reference to the `std::vector` containing the model
+        /// @returns A reference to the `StorageType` containing the model
         ///          vectors.
-        std::vector<Vector>&
+        StorageType<Vector>&
         vectors();
 
         // Inherited documentation.
@@ -104,7 +105,7 @@ namespace Models
 
     private:
         std::string m_Name;
-        std::vector<Vector> m_Vectors;
+        StorageType<Vector> m_Vectors;
         bool m_IsVisible;
     };
 }
