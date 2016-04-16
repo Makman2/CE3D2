@@ -29,6 +29,25 @@ namespace Math
             PrecisionType width,
             PrecisionType height);
 
+        /// Tests whether another box is completely inside this box.
+        ///
+        /// @param box The other box.
+        bool
+        contains(Box const& box) const;
+
+        /// Tests whether a given 2D-coordinate resides inside this box.
+        ///
+        /// @param x The x-coordinate of the point.
+        /// @param y The y-coordinate of the point.
+        bool
+        contains(PrecisionType x, PrecisionType y) const;
+
+        /// Tests whether this box is completely inside another box.
+        ///
+        /// @param box The other box.
+        bool
+        inside(Box const& box) const;
+
         PrecisionType x;
         PrecisionType y;
         PrecisionType width;
