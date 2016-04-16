@@ -2,7 +2,7 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
-#include "CE3D2/math/matrices.h"
+#include "CE3D2/math/matrices/matrices.h"
 #include "CE3D2/Matrix.h"
 #include "CE3D2/tests/TestUtilities.h"
 

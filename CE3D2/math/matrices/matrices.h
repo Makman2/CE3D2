@@ -28,6 +28,6 @@ namespace Matrices
 }
 }
 
-#include "CE3D2/math/matrices.hpp"
+#include "CE3D2/math/matrices/matrices.hpp"
 
 #endif
