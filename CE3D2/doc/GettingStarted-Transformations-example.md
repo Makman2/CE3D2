@@ -81,8 +81,8 @@ int main()
     scaling_vector[1] = 1.0f;
     Transformation::Scale scale(scaling_vector);
 
-    ortho_projection.transform(cube->vectors());
-    scale.transform(cube->vectors());
+    cube->transform(ortho_projection);
+    cube->transform(scale);
 
     renderer.render();
     std::cout << *renderer.get_target();

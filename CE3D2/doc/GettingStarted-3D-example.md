@@ -75,7 +75,7 @@ int main()
     projection_vecs.push_back(create_vector(0.0f, 0.3f, 0.7f));
     ortho_projection.set_projection_vectors(projection_vecs);
 
-    ortho_projection.transform(cube->vectors());
+    cube->transform(ortho_projection);
 
     renderer.render();
     std::cout << *renderer.get_target();

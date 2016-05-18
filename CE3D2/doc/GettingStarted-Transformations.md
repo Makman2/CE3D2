@@ -27,8 +27,8 @@ CE3D2::Models::Model geometry;
 
 // ...
 
-scale_transform.transform(geometry.vectors());
-orthogonal_projection.transform(geometry.vectors());
+geometry->transform(scale_transform);
+geometry->transform(orthogonal_projection);
 ```
 
 An important derivative of the `CE3D2::Transformation::Transformation` class
@@ -127,9 +127,9 @@ int main()
     scaling_vector[1] = 1.0f;
     Transformation::Scale scale(scaling_vector);
 
-    ortho_projection.transform(cube->vectors());
+    cube->transform(ortho_projection);
     // Apply scale.
-    scale.transform(cube->vectors());
+    cube->transform(scale);
 
     renderer.render();
     std::cout << *renderer.get_target();
