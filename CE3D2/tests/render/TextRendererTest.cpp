@@ -4,6 +4,9 @@
 
 #include "CE3D2/render/TextRenderer.h"
 #include "CE3D2/tests/TestUtilities.h"
+#include "CE3D2/transformation/OrthogonalProjection.h"
+#include "CE3D2/transformation/Scale.h"
+#include "CE3D2/transformation/Translation.h"
 
 
 BOOST_AUTO_TEST_SUITE(TextRendererTestSuite)
@@ -152,6 +155,60 @@ BOOST_AUTO_TEST_CASE(test_render)
                                                 "          ",
                                                 "          ",
                                                 "          ");
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
+}
+
+BOOST_AUTO_TEST_CASE(test_line_render)
+{
+    // As the result is subjective, we fix a certain result so we can track/test
+    // changes to the algorithm affecting line-rendering. Also we can unreveal
+    // bugs, especially segmentation faults.
+
+    auto cube = std::make_shared<CE3D2::Models::LineModel>(
+        CE3D2::Models::LineModel::cube());
+    cube->transform(CE3D2::Transformation::Scale(
+        CE3D2::ScalarVector(3, 10.0f)));
+
+    CE3D2::Transformation::OrthogonalProjection ortho_projection;
+    std::vector<CE3D2::Vector> projection_vecs;
+    projection_vecs.push_back(CE3D2::create_vector(0.7f, 0.3f, 0.0f));
+    projection_vecs.push_back(CE3D2::create_vector(0.0f, 0.3f, 0.7f));
+    ortho_projection.set_projection_vectors(projection_vecs);
+
+    cube->transform(ortho_projection);
+    cube->transform(CE3D2::Transformation::Translation(
+        CE3D2::create_vector(10.0f, 10.0f)));
+
+    CE3D2::Render::TextRenderer renderer;
+    auto surface = std::make_shared<CE3D2::Render::TextSurface>(22, 21);
+
+    renderer.set_target(surface);
+    renderer.line_models().push_back(cube);
+    renderer.render();
+
+    auto expected_surface = CE3D2_CREATE_TEXTSURFACE(
+        "                      ",
+        "           ____|      ",
+        "    ______/    |\\     ",
+        "   /           | \\    ",
+        "  | \\          /  \\   ",
+        "  |  \\        |   _\\  ",
+        "  |   \\     __|__/ |  ",
+        "  |    \\___/  |    |  ",
+        "  |    |      |    |  ",
+        "  |    |      |    |  ",
+        "  /    |      /    |  ",
+        " |     /     |     /  ",
+        " |    |      |    |   ",
+        " |    |    __\\    |   ",
+        " |   _|___/   \\   |   ",
+        " \\__/ |        \\  |   ",
+        "  \\   |         \\ |   ",
+        "   \\  /          \\|   ",
+        "    \\|      ______    ",
+        "     |_____/          ",
+        "                      ");
+
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
 }
 

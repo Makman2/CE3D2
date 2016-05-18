@@ -106,6 +106,7 @@ namespace Render
 
     private:
         void render_points();
+        void render_lines();
 
         char m_RenderChar;
         std::shared_ptr<TextSurface> m_Target;
