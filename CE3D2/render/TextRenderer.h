@@ -1,6 +1,7 @@
 #ifndef CE3D2_RENDER_TEXTRENDERER_H
 #define CE3D2_RENDER_TEXTRENDERER_H
 
+#include "CE3D2/models/LineModel.h"
 #include "CE3D2/models/Model.h"
 #include "CE3D2/render/TextSurface.h"
 
@@ -68,6 +69,32 @@ namespace Render
         std::vector<std::shared_ptr<CE3D2::Models::Model>> const&
         models() const;
 
+        /// Returns a reference to the line-model list.
+        ///
+        /// Each model inside this list will be rendered using the chars `_`,
+        /// `\\`, `|` and `/` connecting the specified index pairs.
+        ///
+        /// Line-models have higher priority than normal models, means the line
+        /// connection characters override the dot-characters on the provided
+        /// `TextSurface` target!
+        ///
+        /// @returns A reference to the line-model list.
+        std::vector<std::shared_ptr<CE3D2::Models::LineModel>>&
+        line_models();
+
+        /// Returns a read-only reference to the line-model list.
+        ///
+        /// Each model inside this list will be rendered using the chars `_`,
+        /// `\\`, `|` and `/` connecting the specified index pairs.
+        ///
+        /// Line-models have higher priority than normal models, means the line
+        /// connection characters override the dot-characters on the provided
+        /// `TextSurface` target!
+        ///
+        /// @returns A read-only reference to the line-model list.
+        std::vector<std::shared_ptr<CE3D2::Models::LineModel>> const&
+        line_models() const;
+
         /// Renders all listed models.
         ///
         /// The target surface is not cleared before rendering, you need to do
@@ -83,6 +110,7 @@ namespace Render
         char m_RenderChar;
         std::shared_ptr<TextSurface> m_Target;
         std::vector<std::shared_ptr<CE3D2::Models::Model>> m_Models;
+        std::vector<std::shared_ptr<CE3D2::Models::LineModel>> m_LineModels;
     };
 }
 }

@@ -59,6 +59,24 @@ BOOST_AUTO_TEST_CASE(test_models)
     BOOST_CHECK_EQUAL(uut.models()[0]->get_name(), "new_name");
 }
 
+BOOST_AUTO_TEST_CASE(test_line_models)
+{
+    CE3D2::Render::TextRenderer uut;
+    std::shared_ptr<CE3D2::Models::LineModel> model(
+        new CE3D2::Models::LineModel("myModel"));
+
+    BOOST_CHECK(uut.line_models().empty());
+
+    uut.line_models().push_back(model);
+
+    BOOST_CHECK_EQUAL(uut.line_models().size(), 1);
+    BOOST_CHECK_EQUAL(uut.line_models()[0]->get_name(), "myModel");
+
+    model->set_name("new_name");
+
+    BOOST_CHECK_EQUAL(uut.line_models()[0]->get_name(), "new_name");
+}
+
 BOOST_AUTO_TEST_CASE(test_render_without_target)
 {
     CE3D2::Render::TextRenderer uut;

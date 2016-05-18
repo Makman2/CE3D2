@@ -50,6 +50,18 @@ namespace Render
         return m_Models;
     }
 
+    std::vector<std::shared_ptr<CE3D2::Models::LineModel>>&
+    TextRenderer::line_models()
+    {
+        return m_LineModels;
+    }
+
+    std::vector<std::shared_ptr<CE3D2::Models::LineModel>> const&
+    TextRenderer::line_models() const
+    {
+        return m_LineModels;
+    }
+
     void
     TextRenderer::render_points()
     {
