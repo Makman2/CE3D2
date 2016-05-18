@@ -1,7 +1,7 @@
 /// Contains the CE3D2 framework.
 namespace CE3D2
 {
-    /// Contains mathematical helper functions.
+    /// Contains mathematical helper functions and objects.
     namespace Math
     {
         /// Contains mathematical helper functions for matrices.
