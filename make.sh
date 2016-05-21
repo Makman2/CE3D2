@@ -58,6 +58,11 @@ function TARGET_help {
                      "'$CE3D2_DOCS_BUILD_DIRECTORY/html'."
     echo "install debug|release"
     echo "           Installs CE3D2 onto your system."
+    echo "pack       Packs builds into archives. Supported arguments are "
+    echo "           'debug' (for putting the debug build together with the "
+    echo "           source into a tar.gz), 'release' (the same with release), "
+    echo "           'docs' (for the documentation), 'source' (for the source "
+    echo "           files only) and 'all' (pack every available target)."
     echo "clean      Clean up build files."
 }
 
