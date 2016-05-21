@@ -7,12 +7,6 @@ CE3D2_DOCS_BUILD_DIRECTORY=build/docs
 CE3D2_DEBUG_BUILD_DIRECTORY=build/debug
 CE3D2_RELEASE_BUILD_DIRECTORY=build/release
 
-
-working_dir=$(pwd)
-CE3D2_SOURCE_DIRECTORY="$working_dir/$CE3D2_SOURCE_DIRECTORY"
-CE3D2_DEBUG_BUILD_DIRECTORY="$working_dir/$CE3D2_DEBUG_BUILD_DIRECTORY"
-CE3D2_RELEASE_BUILD_DIRECTORY="$working_dir/$CE3D2_RELEASE_BUILD_DIRECTORY"
-
 CMAKE_FLAGS=""
 CMAKE_DEBUG_FLAGS="-DCMAKE_BUILD_TYPE=Debug -DTESTS_ENABLED=ON"
 CMAKE_RELEASE_FLAGS="-DCMAKE_BUILD_TYPE=Release"
@@ -40,9 +34,13 @@ function create_build_directory {
 # 3: The target for the generated makefile (can be left empty).
 function build {
     create_build_directory $1
+    working_dir=$(pwd)
+
     cd $1
-    cmake $CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $2
+
+    cmake $working_dir/$CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $2
     make $3
+
     cd $working_dir
 }
 
