@@ -3,7 +3,7 @@ set -e
 
 # Customization variables.
 CE3D2_SOURCE_DIRECTORY=CE3D2
-CE3D2_DOC_BUILD_DIRECTORY=build/doc
+CE3D2_DOCS_BUILD_DIRECTORY=build/docs
 CE3D2_DEBUG_BUILD_DIRECTORY=build/debug
 CE3D2_RELEASE_BUILD_DIRECTORY=build/release
 
@@ -16,7 +16,7 @@ CE3D2_RELEASE_BUILD_DIRECTORY="$working_dir/$CE3D2_RELEASE_BUILD_DIRECTORY"
 CMAKE_FLAGS=""
 CMAKE_DEBUG_FLAGS="-DCMAKE_BUILD_TYPE=Debug -DTESTS_ENABLED=ON"
 CMAKE_RELEASE_FLAGS="-DCMAKE_BUILD_TYPE=Release"
-CMAKE_DOC_FLAGS="-DCMAKE_BUILD_TYPE=Documentation"
+CMAKE_DOCS_FLAGS="-DCMAKE_BUILD_TYPE=Documentation"
 
 # Executes the given task while displaying the task description.
 function task {
@@ -55,8 +55,8 @@ function TARGET_help {
     echo "debug      Build CE3D2 (debug) into '$CE3D2_DEBUG_BUILD_DIRECTORY'."
     echo "release    Build CE3D2 (release) into" \
                      "'$CE3D2_RELEASE_BUILD_DIRECTORY'."
-    echo "doc        Builds the HTML documentation into" \
-                     "'$CE3D2_DOC_BUILD_DIRECTORY/html'."
+    echo "docs       Builds the HTML documentation into" \
+                     "'$CE3D2_DOCS_BUILD_DIRECTORY/html'."
     echo "install debug|release"
     echo "           Installs CE3D2 onto your system."
     echo "clean      Clean up build files."
@@ -70,8 +70,8 @@ function TARGET_release {
     build $CE3D2_RELEASE_BUILD_DIRECTORY "$CMAKE_RELEASE_FLAGS"
 }
 
-function TARGET_doc {
-    build $CE3D2_DOC_BUILD_DIRECTORY "$CMAKE_DOC_FLAGS" doc
+function TARGET_docs {
+    build $CE3D2_DOCS_BUILD_DIRECTORY "$CMAKE_DOCS_FLAGS" doc
 }
 
 function TARGET_install {
@@ -90,7 +90,7 @@ function TARGET_clean {
     task "Deleting release build..." \
         rm -rf $CE3D2_RELEASE_BUILD_DIRECTORY
     task "Deleting documentation..." \
-        rm -rf $CE3D2_DOC_BUILD_DIRECTORY
+        rm -rf $CE3D2_DOCS_BUILD_DIRECTORY
 }
 
 
@@ -102,8 +102,8 @@ case $1 in
         TARGET_debug;;
     "release")
         TARGET_release;;
-    "doc")
-        TARGET_doc;;
+    "docs")
+        TARGET_docs;;
     "install")
         TARGET_install $2;;
     "clean")
