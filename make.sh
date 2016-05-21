@@ -92,6 +92,49 @@ function TARGET_clean {
         rm -rf $CE3D2_DOCS_BUILD_DIRECTORY
 }
 
+function TARGET_pack {
+    CMAKE_LISTS_CONTENTS="$(cat $CE3D2_SOURCE_DIRECTORY/CMakeLists.txt)"
+    regex="set\(CE3D2_VERSION_MAJOR ([0-9]+)\)"
+    [[ $CMAKE_LISTS_CONTENTS =~ $regex ]] && \
+        CE3D2_VERSION_MAJOR=${BASH_REMATCH[1]}
+    regex="set\(CE3D2_VERSION_MINOR ([0-9]+)\)"
+    [[ $CMAKE_LISTS_CONTENTS =~ $regex ]] && \
+        CE3D2_VERSION_MINOR=${BASH_REMATCH[1]}
+    regex="set\(CE3D2_VERSION_MICRO ([0-9]+|dev)\)"
+    [[ $CMAKE_LISTS_CONTENTS =~ $regex ]] && \
+        CE3D2_VERSION_MICRO=${BASH_REMATCH[1]}
+
+    GIT_TRACKED_FILES=`git ls-tree -r HEAD --name-only | tr '\n' ' '`
+
+    if [ "$1" == "debug" ]; then
+        PACKFILES="$GIT_TRACKED_FILES $CE3D2_DEBUG_BUILD_DIRECTORY"
+        PLATFORM="x86_64"
+    elif [ "$1" == "release" ]; then
+        PACKFILES="$GIT_TRACKED_FILES $CE3D2_RELEASE_BUILD_DIRECTORY"
+        PLATFORM="x86_64"
+    elif [ "$1" == "docs" ]; then
+        PACKFILES="--directory=$CE3D2_DOCS_BUILD_DIRECTORY html/"
+        PLATFORM=""
+    elif [ "$1" == "source" ]; then
+        PACKFILES="$GIT_TRACKED_FILES"
+        PLATFORM=""
+    else
+        echo "Invalid parameter for pack target, use 'debug', 'release', "
+        echo "'docs', 'source' or 'all'."
+        return
+    fi
+
+    if [ -n "$PLATFORM" ]; then
+        PLATFORM="-$PLATFORM"
+    fi
+
+    ARCHIVE_NAME="CE3D2-$CE3D2_VERSION_MAJOR$CE3D2_VERSION_MINOR"
+    ARCHIVE_NAME+="$CE3D2_VERSION_MICRO$PLATFORM-$1.tgz"
+
+    tar -cvzf $ARCHIVE_NAME $PACKFILES
+    mv $ARCHIVE_NAME $CE3D2_BUILD_DIRECTORY/$ARCHIVE_NAME
+}
+
 
 # Redirect to target functions.
 case $1 in
@@ -105,6 +148,16 @@ case $1 in
         TARGET_docs;;
     "install")
         TARGET_install $2;;
+    "pack")
+        if [ "$2" == "all" ]; then
+            TARGET_pack "debug"
+            TARGET_pack "release"
+            TARGET_pack "docs"
+            TARGET_pack "source"
+        else
+            TARGET_pack $2
+        fi
+        ;;
     "clean")
         TARGET_clean;;
     *)
