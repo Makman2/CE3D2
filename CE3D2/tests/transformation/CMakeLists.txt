@@ -4,6 +4,8 @@ add_ce3d2_test(LinearTransformationTest
                ${CMAKE_CURRENT_LIST_DIR}/LinearTransformationTest)
 add_ce3d2_test(MatrixTransformationTest
                ${CMAKE_CURRENT_LIST_DIR}/MatrixTransformationTest)
+add_ce3d2_test(MirrorTest
+               ${CMAKE_CURRENT_LIST_DIR}/MirrorTest)
 add_ce3d2_test(OrthogonalProjectionTest
                ${CMAKE_CURRENT_LIST_DIR}/OrthogonalProjectionTest)
 add_ce3d2_test(RotationTest
