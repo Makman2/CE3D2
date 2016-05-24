@@ -68,8 +68,8 @@ matrix arithmetic is performed using it.
 
 ## Documentation
 
-HTML-documentation can be built easily with `./make.sh doc` into `build/doc`. To
-display the documentation webpage, invoke your favorite browser with
+HTML-documentation can be built easily with `./make.sh docs` into `build/docs`.
+To display the documentation webpage, invoke your favorite browser with
 `build/doc/html/index.html`.
 
 CE3D2 uses doxygen (version 1.8.8 and above required) to generate documentation.
