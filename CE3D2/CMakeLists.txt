@@ -21,8 +21,8 @@ add_subdirectory("models")
 add_subdirectory("render")
 add_subdirectory("transformation")
 
-if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
-   ${CMAKE_BUILD_TYPE} STREQUAL "Release")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
+   CMAKE_BUILD_TYPE STREQUAL "Release")
 
     include_directories("${PROJECT_SOURCE_DIR}/..")
 
@@ -54,7 +54,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR
         add_subdirectory("tests")
     endif()
 
-elseif(${CMAKE_BUILD_TYPE} STREQUAL "Documentation")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Documentation")
     find_package(Doxygen 1.8.8 REQUIRED)
     if (DOXYGEN_FOUND)
         add_subdirectory("doc")
