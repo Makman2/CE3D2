@@ -29,3 +29,6 @@
 
 # build directory
 build
+
+# Vagrant
+.vagrant/
