@@ -8,6 +8,8 @@ add_ce3d2_test(MirrorTest
                ${CMAKE_CURRENT_LIST_DIR}/MirrorTest)
 add_ce3d2_test(OrthogonalProjectionTest
                ${CMAKE_CURRENT_LIST_DIR}/OrthogonalProjectionTest)
+add_ce3d2_test(PermutationVectorTest
+               ${CMAKE_CURRENT_LIST_DIR}/PermutationVectorTest)
 add_ce3d2_test(RotationTest
                ${CMAKE_CURRENT_LIST_DIR}/RotationTest)
 add_ce3d2_test(ScaleTest
