@@ -86,3 +86,16 @@ target: `./make.sh install debug`
 
 If you want to see all "build targets" of the make-script, type
 `./make.sh help`.
+
+## Vagrant
+
+CE3D2 supports [Vagrant](https://www.vagrantup.com/)! Just type
+
+```
+vagrant up --provider=virtualbox
+```
+
+and the machine spawns up! The only dependency required is
+[VirtualBox](https://www.virtualbox.org/). After the machine has started, you
+can ssh into the machine with `vagrant ssh` and switch to the project directory
+with `cd /vagrant`.
