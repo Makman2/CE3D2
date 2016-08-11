@@ -73,7 +73,7 @@ To display the documentation webpage, invoke your favorite browser with
 `build/doc/html/index.html`.
 
 CE3D2 uses doxygen (version 1.8.8 and above required) to generate documentation.
-If you want to see the actual rendered formulas, you also need latex.
+If you want to see the actual rendered formulas, you also need LaTeX.
 
 ## Debugging
 
