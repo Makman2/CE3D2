@@ -563,6 +563,10 @@ HTML_DYNAMIC_SECTIONS  = NO
 
 SEARCHENGINE           = YES
 
+# Whether to use MathJax for rendering formulas instead of LaTeX.
+
+USE_MATHJAX            = YES
+
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
