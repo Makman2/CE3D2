@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(test_line_models)
 BOOST_AUTO_TEST_CASE(test_render_without_target)
 {
     CE3D2::Render::TextRenderer uut;
-    BOOST_CHECK_THROW(uut.render(), std::logic_error)
+    BOOST_CHECK_THROW(uut.render(), std::logic_error);
 }
 
 BOOST_AUTO_TEST_CASE(test_render)

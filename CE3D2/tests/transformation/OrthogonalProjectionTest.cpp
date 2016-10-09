@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_exceptions)
 
     uut.set_projection_vectors(projection_vectors);
 
-    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument)
+    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument);
 
     // Size of vectors varies.
     projection_vectors.push_back(CE3D2::UnitVector(3, 0));
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_exceptions)
 
     uut.set_projection_vectors(projection_vectors);
 
-    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument)
+    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument);
 
     // More vectors than dimensions.
     projection_vectors.clear();
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_exceptions)
 
     uut.set_projection_vectors(projection_vectors);
 
-    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument)
+    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument);
 
     // Linear dependent projection vectors.
     projection_vectors.clear();
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_CASE(test_matrix_exceptions)
 
     uut.set_projection_vectors(projection_vectors);
 
-    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument)
+    BOOST_CHECK_THROW(uut.get_matrix(), std::invalid_argument);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
