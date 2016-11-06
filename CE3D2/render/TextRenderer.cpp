@@ -1,7 +1,5 @@
 #include "CE3D2/render/TextRenderer.h"
 
-#include <algorithm>
-
 #include "CE3D2/math/LinearAffineFunction.h"
 #include "CE3D2/math/math.h"
 
