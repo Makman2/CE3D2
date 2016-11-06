@@ -294,4 +294,53 @@ BOOST_AUTO_TEST_CASE(test_line_render3)
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
 }
 
+BOOST_AUTO_TEST_CASE(test_line_render4)
+{
+    // This was a bug where rendering hanged up.
+
+    auto cube = std::make_shared<CE3D2::Models::LineModel>(
+        CE3D2::Models::LineModel::cube());
+    CE3D2::Transformation::Scale scaling(CE3D2::ScalarVector(3, 20.0f));
+    cube->transform(scaling);
+
+    CE3D2::Transformation::OrthogonalProjection ortho_projection;
+    std::vector<CE3D2::Vector> projection_vecs;
+    projection_vecs.push_back(CE3D2::create_vector(0.7f, 0.3f, 0.0f));
+    projection_vecs.push_back(CE3D2::create_vector(0.0f, 0.3f, 0.7f));
+    ortho_projection.set_projection_vectors(projection_vecs);
+
+    cube->transform(ortho_projection);
+
+    CE3D2::Render::TextRenderer renderer;
+    auto surface = std::make_shared<CE3D2::Render::TextSurface>(40, 20);
+
+    renderer.set_target(surface);
+    renderer.line_models().push_back(cube);
+    renderer.render();
+
+    auto expected_surface = CE3D2_CREATE_TEXTSURFACE(
+        "       |         |                      ",
+        "       |         |                      ",
+        "       /         |                      ",
+        "      |          |                      ",
+        "      |          /                      ",
+        "   ___|         |                       ",
+        "__/   \\         |                       ",
+        "       \\        |                       ",
+        "        \\       |                       ",
+        "         \\      |                       ",
+        "          \\     |                       ",
+        "           \\    /                       ",
+        "            \\  |                        ",
+        "             \\ |                        ",
+        "            __\\|                        ",
+        "     ______/                            ",
+        "____/                                   ",
+        "                                        ",
+        "                                        ",
+        "                                        ");
+
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

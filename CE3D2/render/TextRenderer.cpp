@@ -133,10 +133,15 @@ namespace Render
                         auto y_sorted = std::minmax(v1[1], v2[1]);
                         auto y_start = static_cast<TextSurface::size_type>(
                             std::max(viewbox.y, y_sorted.first));
+                        // Need to max with 0.0f as a negative value here
+                        // results in an overflow, as TextSurface::size_type
+                        // is unsigned.
                         auto y_end = static_cast<TextSurface::size_type>(
-                            std::min(
-                                viewbox.y + viewbox.height,
-                                y_sorted.second));
+                            std::max(
+                                0.0f,
+                                std::min(
+                                    viewbox.y + viewbox.height,
+                                    y_sorted.second)));
 
                         for (auto y = y_start; y < y_end; y++)
                         {
@@ -178,10 +183,15 @@ namespace Render
                             static_cast<TextSurface::size_type>(std::max(
                                 std::round(y_line_bounds.first),
                                 y_viewbox_bounds.first));
+                        // Need to max with 0.0f as a negative value here
+                        // results in an overflow, as TextSurface::size_type
+                        // is unsigned.
                         auto y_bounds_end =
-                            static_cast<TextSurface::size_type>(std::min(
-                                std::round(y_line_bounds.second),
-                                y_viewbox_bounds.second)));
+                            static_cast<TextSurface::size_type>(std::max(
+                                0.0f,
+                                std::min(
+                                    std::round(y_line_bounds.second),
+                                    y_viewbox_bounds.second)));
 
                         auto x_prev = static_cast<TextSurface::size_type>(
                             std::round(line.inverse(y_bounds_start)));
@@ -233,9 +243,15 @@ namespace Render
                             static_cast<TextSurface::size_type>(std::max(
                                 std::round(x_line_bounds.first),
                                 x_viewbox_bounds.first));
+                        // Need to max with 0.0f as a negative value here
+                        // results in an overflow, as TextSurface::size_type
+                        // is unsigned.
                         auto x_bounds_end =
-                                std::round(x_line_bounds.second),
-                                x_viewbox_bounds.second)));
+                            static_cast<TextSurface::size_type>(std::max(
+                                0.0f,
+                                std::min(
+                                    std::round(x_line_bounds.second),
+                                    x_viewbox_bounds.second)));
 
                         // Due to integer rounding we could achieve a negative
                         // function value for our line, resulting in an overflow
