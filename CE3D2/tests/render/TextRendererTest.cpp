@@ -280,7 +280,6 @@ BOOST_AUTO_TEST_CASE(test_line_render3)
 
     renderer.set_target(surface);
     renderer.line_models().push_back(line);
-    //renderer.line_models().push_back(line);
     renderer.render();
 
     auto expected_surface = CE3D2_CREATE_TEXTSURFACE(
