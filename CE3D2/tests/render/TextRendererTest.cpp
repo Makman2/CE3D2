@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(test_render)
 BOOST_AUTO_TEST_CASE(test_line_render)
 {
     // As the result is subjective, we fix a certain result so we can track/test
-    // changes to the algorithm affecting line-rendering. Also we can unreveal
+    // changes to the algorithm affecting line-rendering. Also we can reveal
     // bugs, especially segmentation faults.
 
     auto cube = std::make_shared<CE3D2::Models::LineModel>(
