@@ -130,7 +130,7 @@ namespace Render
 
                     if (v1[0] == v2[0])
                     {
-                        auto y_sorted = std::minmax({v1[1], v2[1]});
+                        auto y_sorted = std::minmax(v1[1], v2[1]);
                         auto y_start = static_cast<TextSurface::size_type>(
                             std::max(viewbox.y, y_sorted.first));
                         auto y_end = static_cast<TextSurface::size_type>(
@@ -167,21 +167,21 @@ namespace Render
                         // Line has more height than width.
 
                         auto y_viewbox_bounds = std::minmax(
-                            {viewbox_intersections[0].second,
-                             viewbox_intersections[1].second});
+                            viewbox_intersections[0].second,
+                            viewbox_intersections[1].second);
 
-                        auto y_line_bounds = std::minmax({v1[1], v2[1]});
+                        auto y_line_bounds = std::minmax(v1[1], v2[1]);
 
                         // The first element contains the upper bound, and the
                         // second element the lower bound.
                         auto y_bounds_start =
                             static_cast<TextSurface::size_type>(std::max(
-                                {std::round(y_line_bounds.first),
-                                 y_viewbox_bounds.first}));
+                                std::round(y_line_bounds.first),
+                                y_viewbox_bounds.first));
                         auto y_bounds_end =
                             static_cast<TextSurface::size_type>(std::min(
-                                {std::round(y_line_bounds.second),
-                                 y_viewbox_bounds.second}));
+                                std::round(y_line_bounds.second),
+                                y_viewbox_bounds.second)));
 
                         auto x_prev = static_cast<TextSurface::size_type>(
                             std::round(line.inverse(y_bounds_start)));
@@ -222,21 +222,20 @@ namespace Render
                         // height.
 
                         auto x_viewbox_bounds = std::minmax(
-                            {viewbox_intersections[0].first,
-                             viewbox_intersections[1].first});
+                            viewbox_intersections[0].first,
+                            viewbox_intersections[1].first);
 
-                        auto x_line_bounds = std::minmax({v1[0], v2[0]});
+                        auto x_line_bounds = std::minmax(v1[0], v2[0]);
 
                         // The first element contains the upper bound, and the
                         // second element the lower bound.
                         auto x_bounds_start =
                             static_cast<TextSurface::size_type>(std::max(
-                                {std::round(x_line_bounds.first),
-                                 x_viewbox_bounds.first}));
+                                std::round(x_line_bounds.first),
+                                x_viewbox_bounds.first));
                         auto x_bounds_end =
-                            static_cast<TextSurface::size_type>(std::min(
-                                {std::round(x_line_bounds.second),
-                                 x_viewbox_bounds.second}));
+                                std::round(x_line_bounds.second),
+                                x_viewbox_bounds.second)));
 
                         // Due to integer rounding we could achieve a negative
                         // function value for our line, resulting in an overflow
