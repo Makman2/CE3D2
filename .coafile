@@ -3,6 +3,7 @@ DEFAULT.enabled = false
 CHECK.enabled = true
 
 [DEFAULT]
+language = cpp
 files = CE3D2/**/*.cpp, CE3D2/**/*.h
 
 [CHECK]
