@@ -216,7 +216,7 @@ namespace Render
                     }
                     else
                     {
-                        // Line has more width than hight or width is equal to
+                        // Line has more width than height or width is equal to
                         // height.
 
                         auto x_viewbox_bounds = std::minmax(
