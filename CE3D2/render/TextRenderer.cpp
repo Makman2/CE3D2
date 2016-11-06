@@ -94,8 +94,8 @@ namespace Render
     TextRenderer::render_lines()
     {
         CE3D2::Math::Box const viewbox(
-            static_cast<CE3D2::PrecisionType>(get_target()->width()) - 1,
-            static_cast<CE3D2::PrecisionType>(get_target()->height()) - 1);
+            static_cast<CE3D2::PrecisionType>(get_target()->width()),
+            static_cast<CE3D2::PrecisionType>(get_target()->height()));
 
         for (auto const& model: m_LineModels)
         {
@@ -134,13 +134,13 @@ namespace Render
                     {
                         auto y_sorted = std::minmax({v1[1], v2[1]});
                         auto y_start = static_cast<TextSurface::size_type>(
-                            std::max(0.0f, y_sorted.first));
-                        auto y_end = std::min(
-                            get_target()->height() - 1,
-                            static_cast<TextSurface::size_type>(
-                                std::max(0.0f, y_sorted.second)));
+                            std::max(viewbox.y, y_sorted.first));
+                        auto y_end = static_cast<TextSurface::size_type>(
+                            std::min(
+                                viewbox.y + viewbox.height,
+                                y_sorted.second));
 
-                        for (auto y = y_start; y <= y_end; y++)
+                        for (auto y = y_start; y < y_end; y++)
                         {
                             (*m_Target)(v1[0], y) = '|';
                         }
@@ -178,23 +178,21 @@ namespace Render
                         // second element the lower bound.
                         auto y_bounds_start =
                             static_cast<TextSurface::size_type>(std::max(
-                                {y_line_bounds.first, y_viewbox_bounds.first}));
+                                {std::round(y_line_bounds.first),
+                                 y_viewbox_bounds.first}));
                         auto y_bounds_end =
                             static_cast<TextSurface::size_type>(std::min(
-                                {std::max(0.0f, y_line_bounds.second),
+                                {std::round(y_line_bounds.second),
                                  y_viewbox_bounds.second}));
 
                         auto x_prev = static_cast<TextSurface::size_type>(
-                            std::round(std::max(0.0f,
-                                                line.inverse(y_bounds_start))));
+                            std::round(line.inverse(y_bounds_start)));
 
-                        for (auto y = y_bounds_start + 1;
-                             y <= y_bounds_end;
-                             y++)
+                        for (auto y = y_bounds_start; y < y_bounds_end; y++)
                         {
                             auto x_next = static_cast<TextSurface::size_type>(
                                 std::round(line.inverse(
-                                    static_cast<PrecisionType>(y))));
+                                    static_cast<PrecisionType>(y + 1))));
 
                             char chr;
                             if (x_prev == x_next)
@@ -209,7 +207,13 @@ namespace Render
                             {
                                 chr = '\\';
                             }
-                            (*m_Target)(x_prev, y) = chr;
+
+                            // Rounding issues cause x_prev to go still out of
+                            // bounds sometimes.
+                            if (x_prev < viewbox.x + viewbox.width)
+                            {
+                                (*m_Target)(x_prev, y) = chr;
+                            }
 
                             x_prev = x_next;
                         }
@@ -229,10 +233,11 @@ namespace Render
                         // second element the lower bound.
                         auto x_bounds_start =
                             static_cast<TextSurface::size_type>(std::max(
-                                {x_line_bounds.first, x_viewbox_bounds.first}));
+                                {std::round(x_line_bounds.first),
+                                 x_viewbox_bounds.first}));
                         auto x_bounds_end =
                             static_cast<TextSurface::size_type>(std::min(
-                                {std::max(0.0f, x_line_bounds.second),
+                                {std::round(x_line_bounds.second),
                                  x_viewbox_bounds.second}));
 
                         // Due to integer rounding we could achieve a negative
@@ -240,34 +245,36 @@ namespace Render
                         // for our target unsigned integral type and so causing
                         // a segmentation fault.
                         auto y_prev = static_cast<TextSurface::size_type>(
-                            std::round(std::max(0.0f, line(x_bounds_start))));
+                            std::round(line(x_bounds_start)));
 
-                        for (auto x = x_bounds_start + 1;
-                             x <= x_bounds_end;
-                             x++)
+                        for (auto x = x_bounds_start; x < x_bounds_end; x++)
                         {
                             auto y_next = static_cast<TextSurface::size_type>(
                                 std::round(line(
-                                    static_cast<PrecisionType>(x))));
+                                    static_cast<PrecisionType>(x + 1))));
+
+                            char chr;
+                            TextSurface::size_type surface_y;
 
                             if (y_prev == y_next)
                             {
-                                (*m_Target)(x, y_prev) = '_';
+                                chr = '_';
+                                surface_y = y_prev - 1;
                             }
                             else if (y_prev < y_next)
                             {
-                                // As the backlash goes from north-west to
-                                // south-east and needs to append neatlessly to
-                                // the other characters, for example
-                                // __                   __\    <-- not wanted
-                                //   \__   instead of      __
-                                //
-                                // we set it a char-position below.
-                                (*m_Target)(x, y_next) = '\\';
+                                chr = '\\';
+                                surface_y = y_prev;
                             }
                             else
                             {
-                                (*m_Target)(x, y_prev) = '/';
+                                chr = '/';
+                                surface_y = y_next;
+                            }
+
+                            if (surface_y < viewbox.y + viewbox.height)
+                            {
+                                (*m_Target)(x, surface_y) = chr;
                             }
 
                             y_prev = y_next;

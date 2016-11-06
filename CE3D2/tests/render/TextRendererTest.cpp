@@ -180,33 +180,32 @@ BOOST_AUTO_TEST_CASE(test_line_render)
         CE3D2::create_vector(10.0f, 10.0f)));
 
     CE3D2::Render::TextRenderer renderer;
-    auto surface = std::make_shared<CE3D2::Render::TextSurface>(22, 21);
+    auto surface = std::make_shared<CE3D2::Render::TextSurface>(22, 20);
 
     renderer.set_target(surface);
     renderer.line_models().push_back(cube);
     renderer.render();
 
     auto expected_surface = CE3D2_CREATE_TEXTSURFACE(
-        "                      ",
-        "           ____|      ",
-        "    ______/    |\\     ",
-        "   /           | \\    ",
-        "  | \\          /  \\   ",
-        "  |  \\        |   _\\  ",
-        "  |   \\     __|__/ |  ",
-        "  |    \\___/  |    |  ",
+        "          _____       ",
+        "   ______/     |      ",
+        "               |\\     ",
+        "  |\\           / \\    ",
+        "  | \\         |  _\\   ",
+        "  |  \\     ___|_/  |  ",
+        "  |   \\___/   |    |  ",
         "  |    |      |    |  ",
         "  |    |      |    |  ",
         "  /    |      /    |  ",
         " |     /     |     /  ",
         " |    |      |    |   ",
-        " |    |    __\\    |   ",
-        " |   _|___/   \\   |   ",
-        " \\__/ |        \\  |   ",
-        "  \\   |         \\ |   ",
-        "   \\  /          \\|   ",
-        "    \\|      ______    ",
-        "     |_____/          ",
+        " |    |   ___|    |   ",
+        " |  __|__/   \\    |   ",
+        " |_/  |       \\   |   ",
+        " \\    |        \\  |   ",
+        "  \\   /         \\ |   ",
+        "   \\ |     ______     ",
+        "    \\|____/           ",
         "                      ");
 
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
