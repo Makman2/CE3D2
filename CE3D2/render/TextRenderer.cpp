@@ -164,7 +164,7 @@ namespace Render
                         continue;
                     }
 
-                    if (abs(line.get_gradient()) > 1)
+                    if (fabs(line.get_gradient()) > 1.0f)
                     {
                         // Line has more height than width.
 
