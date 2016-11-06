@@ -264,4 +264,34 @@ BOOST_AUTO_TEST_CASE(test_line_render2)
     CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
 }
 
+BOOST_AUTO_TEST_CASE(test_line_render3)
+{
+    auto line = std::make_shared<CE3D2::Models::LineModel>();
+    auto& vectors = line->vectors();
+    vectors.push_back(CE3D2::create_vector(1.0f, 1.0f));
+    vectors.push_back(CE3D2::create_vector(36.0f, 12.0f));
+    auto& edges = line->connections();
+    edges.push_back(CE3D2::Models::IndexPair(0, 1));
+
+    CE3D2::Render::TextRenderer renderer;
+    // The surface is smaller on purpose to check whether vertices that
+    // are out of bounds still render correctly.
+    auto surface = std::make_shared<CE3D2::Render::TextSurface>(15, 6);
+
+    renderer.set_target(surface);
+    renderer.line_models().push_back(line);
+    //renderer.line_models().push_back(line);
+    renderer.render();
+
+    auto expected_surface = CE3D2_CREATE_TEXTSURFACE(
+        " _             ",
+        "  \\__          ",
+        "     \\__       ",
+        "        \\___   ",
+        "            \\__",
+        "               ");
+
+    CE3D2_CHECK_TEXTSURFACES_EQUAL(*surface, *expected_surface);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
