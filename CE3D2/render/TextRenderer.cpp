@@ -94,7 +94,7 @@ namespace Render
     TextRenderer::render_lines()
     {
         CE3D2::Math::Box const viewbox(
-            0, 0, get_target()->width() - 1, get_target()->height() - 1);
+            get_target()->width() - 1, get_target()->height() - 1);
 
         for (auto const& model: m_LineModels)
         {
