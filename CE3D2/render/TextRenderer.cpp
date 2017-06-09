@@ -99,7 +99,7 @@ namespace Render
         {
             if (model->is_visible())
             {
-                for (auto const& indexpair: model->connections())
+                for (auto const& indexpair: model->edges())
                 {
                     auto const& v1 = model->vectors()[indexpair.first];
                     auto const& v2 = model->vectors()[indexpair.second];
