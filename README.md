@@ -1,6 +1,6 @@
 # CE3D2
 
-![Inspired By Lasse](https://img.shields.io/badge/inspired%20by-lasse-brightgreen.svg)
+[![Inspired By Lasse](https://img.shields.io/badge/inspired%20by-lasse-brightgreen.svg)](https://github.com/sils)
 
 **C**onsole **E**ngine **3D** 2.
 A simple 3D engine for the console.
