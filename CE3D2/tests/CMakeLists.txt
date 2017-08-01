@@ -2,10 +2,10 @@ set(CE3D2_TEST_ROOT ${CMAKE_CURRENT_LIST_DIR})
 
 # Adds a new test target
 function(add_ce3d2_test target)
-    # TestUtilities are embedded automatically into every test.
-    list(APPEND ARGN ${CE3D2_TEST_ROOT}/TestUtilities)
-
-    add_executable(${target} ${ARGN})
+    add_executable(${target}
+                   # TestUtilities are embedded automatically into every test.
+                   ${CE3D2_TEST_ROOT}/TestUtilities
+                   ${ARGN})
 
     target_link_libraries(${target}
                           ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
@@ -21,6 +21,36 @@ function(add_ce3d2_test target)
         COMMENT "Running ${target}..."
         VERBATIM)
 
+    # Copy test files if existent.
+    foreach(file ${ARGN})
+        get_filename_component(test_file_directory ${file} DIRECTORY)
+        get_filename_component(test_data_directory ${file} NAME_WE)
+        set(test_data_directory "${test_data_directory}Files")
+
+        set(test_data_path "${test_file_directory}/${test_data_directory}")
+        if(EXISTS ${test_data_path})
+            file(GLOB test_files "${test_data_path}/*")
+
+            foreach(test_file ${test_files})
+                get_filename_component(name ${test_file} NAME)
+
+                add_custom_command(OUTPUT ${test_data_directory}/${name}
+                                   COMMAND mkdir -p ${test_data_directory} && cp ${test_file} ${test_data_directory}/${name}
+                                   DEPENDS ${test_file}
+                                   COMMENT "Copying test file ${test_data_directory}/${name}..."
+                                   VERBATIM)
+
+                list(APPEND test_file_targets ${test_data_directory}/${name})
+            endforeach()
+
+            set(test_files_dependency_target "${target}Files")
+
+            add_custom_target(${test_files_dependency_target}
+                              DEPENDS ${test_file_targets})
+
+            add_dependencies(${target} ${test_files_dependency_target})
+        endif()
+    endforeach()
 endfunction()
 
 # Tests in this directory.
