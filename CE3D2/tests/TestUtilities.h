@@ -10,6 +10,48 @@
 #include "CE3D2/render/TextSurface.h"
 
 
+/// Warns that an exception has been thrown with the given message.
+///
+/// @param code           The code that shall throw an exception.
+/// @param exception_type The exception-type that is thrown.
+/// @param message        The exception message.
+#define CE3D2_WARN_EXCEPTION(code, exception_type, message) \
+    CE3D2_ASSERT_EXCEPTION(code, exception_type, message, WARN)
+
+
+/// Checks that an exception has been thrown with the given message.
+///
+/// @param code           The code that shall throw an exception.
+/// @param exception_type The exception-type that is thrown.
+/// @param message        The exception message.
+#define CE3D2_CHECK_EXCEPTION(code, exception_type, message) \
+    CE3D2_ASSERT_EXCEPTION(code, exception_type, message, CHECK)
+
+
+/// Requires that an exception has been thrown with the given message.
+///
+/// @param code           The code that shall throw an exception.
+/// @param exception_type The exception-type that is thrown.
+/// @param message        The exception message.
+#define CE3D2_REQUIRE_EXCEPTION(code, exception_type, message) \
+    CE3D2_ASSERT_EXCEPTION(code, exception_type, message, REQUIRE)
+
+
+/// Asserts that an exception has been thrown with the given message.
+///
+/// @param code           The code that shall throw an exception.
+/// @param exception_type The exception-type that is thrown.
+/// @param message        The exception message.
+/// @param LEVEL          The assertion level. Valid values are "WARN", "CHECK"
+///                       or "REQUIRE".
+#define CE3D2_ASSERT_EXCEPTION(code, exception_type, message, LEVEL) \
+    BOOST_##LEVEL##_EXCEPTION(                                       \
+        code,                                                        \
+        exception_type,                                              \
+        [](exception_type const& ex)                                 \
+            {return std::string(ex.what()) == (message);})
+
+
 /// Warns for vector equality.
 ///
 /// @param a First vector to compare.
