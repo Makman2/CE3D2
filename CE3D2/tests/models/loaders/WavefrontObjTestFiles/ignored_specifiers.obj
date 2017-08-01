@@ -1,0 +1,9 @@
+mtllib Cube.mtl
+o Cube
+v 1.000000 -1.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vt 0.5 1
+vp 0.3 3.2 2.1
+g Cube_Cube_Material
+usemtl Material
+s off

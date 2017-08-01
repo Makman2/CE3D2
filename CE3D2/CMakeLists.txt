@@ -28,7 +28,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
     include_directories("${PROJECT_SOURCE_DIR}/..")
 
     find_package(Boost
-                 COMPONENTS system
+                 COMPONENTS system filesystem
                  REQUIRED)
 
     set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
