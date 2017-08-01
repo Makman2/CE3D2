@@ -1,7 +1,5 @@
 #include "CE3D2/models/Model.h"
 
-#include <sstream>
-
 
 namespace CE3D2
 {
