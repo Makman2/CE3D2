@@ -329,4 +329,74 @@ _create_textsurface(std::vector<std::string> const& data)
 #define CE3D2_CREATE_TEXTSURFACE(...) \
     _create_textsurface(std::vector<std::string>({__VA_ARGS__}))
 
+
+/// Asserts that two models are equal.
+///
+/// @param a     First Model to compare.
+/// @param b     Second Model to compare.
+/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
+///              "REQUIRE".
+#define CE3D2_ASSERT_MODELS_EQUAL(a, b, LEVEL)                           \
+{                                                                        \
+    BOOST_##LEVEL##_EQUAL((a).get_name(), (b).get_name());               \
+    BOOST_##LEVEL##_EQUAL((a).is_visible(), (b).is_visible());           \
+                                                                         \
+    auto const& vectors_a = (a).vectors();                               \
+    auto const& vectors_b = (b).vectors();                               \
+    BOOST_##LEVEL##_EQUAL(vectors_a.size(), vectors_b.size());           \
+    for (CE3D2::Models::StorageType<CE3D2::Vector>::size_type k = 0;     \
+         k < vectors_a.size();                                           \
+         k++)                                                            \
+    {                                                                    \
+        CE3D2_ASSERT_VECTORS_EQUAL(vectors_a[k], vectors_b[k], LEVEL);   \
+    }                                                                    \
+                                                                         \
+    auto const& connections_a = (a).connections();                       \
+    auto const& connections_b = (b).connections();                       \
+                                                                         \
+    BOOST_##LEVEL##_EQUAL(connections_a.size(), connections_b.size());   \
+    for (CE3D2::Models::StorageType<CE3D2::Models::IndexPair>::size_type \
+             k = 0;                                                      \
+         k < connections_a.size();                                       \
+         k++)                                                            \
+    {                                                                    \
+        auto const& connection_a = connections_a[k];                     \
+        auto const& connection_b = connections_b[k];                     \
+                                                                         \
+        bool connection_is_equal =                                       \
+            connection_a.first == connection_b.first &&                  \
+            connection_a.second == connection_b.second;                  \
+                                                                         \
+        BOOST_##LEVEL##_MESSAGE(connection_is_equal,                     \
+            "Connection differs in element " << k << " ("                \
+            << connection_a.first << ", " << connection_a.second         \
+            << " != " <<                                                 \
+            connection_b.first << ", " << connection_b.second << ").");  \
+    }                                                                    \
+}
+
+
+/// Warns if two models are not equal.
+///
+/// @param a First Model to compare.
+/// @param b Second Model to compare.
+#define CE3D2_WARN_MODELS_EQUAL(A, B) \
+    CE3D2_ASSERT_MODELS_EQUAL(A, B, WARN)
+
+
+/// Checks two models being equal.
+///
+/// @param a First Model to compare.
+/// @param b Second Model to compare.
+#define CE3D2_CHECK_MODELS_EQUAL(A, B) \
+    CE3D2_ASSERT_MODELS_EQUAL(A, B, CHECK)
+
+
+/// Requires two models being equal.
+///
+/// @param a First Model to compare.
+/// @param b Second Model to compare.
+#define CE3D2_REQUIRE_MODELS_EQUAL(A, B) \
+    CE3D2_ASSERT_MODELS_EQUAL(A, B, REQUIRE)
+
 #endif
