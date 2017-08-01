@@ -19,6 +19,7 @@ set(SRC
 add_subdirectory("math")
 add_subdirectory("models")
 add_subdirectory("render")
+add_subdirectory("strings")
 add_subdirectory("transformation")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
