@@ -38,6 +38,11 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
                 SHARED
                 ${SRC})
 
+    if(Boost_FOUND)
+        include_directories(${Boost_INCLUDE_DIRS})
+        target_link_libraries(${CMAKE_PROJECT_NAME} ${Boost_LIBRARIES})
+    endif()
+
     install(TARGETS ${CMAKE_PROJECT_NAME}
             LIBRARY DESTINATION lib)
     install(DIRECTORY ${PROJECT_SOURCE_DIR}
