@@ -1,0 +1,3 @@
+list(APPEND SRC ${CMAKE_CURRENT_LIST_DIR}/FileFormatException)
+
+set(SRC "${SRC}" PARENT_SCOPE)
