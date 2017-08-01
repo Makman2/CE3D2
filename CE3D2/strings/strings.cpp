@@ -21,5 +21,19 @@ namespace Strings
 
         return value;
     }
+
+    int
+    to_int(std::string const& str)
+    {
+        size_t read_count;
+        int value = std::stoi(str, &read_count);
+
+        if (read_count != str.length())
+        {
+            throw std::invalid_argument("Can't convert string to int: " + str);
+        }
+
+        return value;
+    }
 }
 }

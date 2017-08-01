@@ -21,6 +21,20 @@ namespace Strings
     ///     The float value.
     float
     to_float(std::string const& str);
+
+    /// Converts a string to a float value.
+    ///
+    /// This function is effectively the same as std::stoi(), with the
+    /// exception that this function checks additionally whether the complete
+    /// string was consumed for parsing. If not the whole string was used, an
+    /// std::invalid_argument error is thrown.
+    ///
+    /// @param str
+    ///     The string to convert.
+    /// @return
+    ///     The integer value.
+    int
+    to_int(std::string const& str);
 }
 }
 
