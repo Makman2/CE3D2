@@ -1,1 +1,2 @@
 add_ce3d2_test(FileFormatExceptionTest ${CMAKE_CURRENT_LIST_DIR}/FileFormatExceptionTest.cpp)
+add_ce3d2_test(InvalidFileExceptionTest ${CMAKE_CURRENT_LIST_DIR}/InvalidFileExceptionTest.cpp)
