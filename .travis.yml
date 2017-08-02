@@ -12,6 +12,7 @@ before_install:
 
 script:
     - ./make.sh debug
+    - ./make.sh release
     # Install debug build. Also necessary to compile examples.
     - sudo ./make.sh install debug
     # Compile examples.
