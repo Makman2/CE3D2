@@ -12,3 +12,7 @@ before_install:
 
 script:
     - ./make.sh debug
+    # Install debug build. Also necessary to compile examples.
+    - sudo ./make.sh install debug
+    # Compile examples.
+    - echo "Compiling examples..."; set -e; for dir in examples/*/; do (cd "$dir" && ./make.sh && echo "- ${dir%*/} compiled successfully."); done
