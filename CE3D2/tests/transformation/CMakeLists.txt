@@ -1,24 +1,12 @@
-add_ce3d2_test(ITransformableTest
-               ${CMAKE_CURRENT_LIST_DIR}/ITransformableTest)
-add_ce3d2_test(LinearTransformationTest
-               ${CMAKE_CURRENT_LIST_DIR}/LinearTransformationTest)
-add_ce3d2_test(MatrixTransformationTest
-               ${CMAKE_CURRENT_LIST_DIR}/MatrixTransformationTest)
-add_ce3d2_test(MirrorTest
-               ${CMAKE_CURRENT_LIST_DIR}/MirrorTest)
-add_ce3d2_test(OrthogonalProjectionTest
-               ${CMAKE_CURRENT_LIST_DIR}/OrthogonalProjectionTest)
-add_ce3d2_test(PermutationTest
-               ${CMAKE_CURRENT_LIST_DIR}/PermutationTest)
-add_ce3d2_test(PermutationVectorTest
-               ${CMAKE_CURRENT_LIST_DIR}/PermutationVectorTest)
-add_ce3d2_test(RotationTest
-               ${CMAKE_CURRENT_LIST_DIR}/RotationTest)
-add_ce3d2_test(ScaleTest
-               ${CMAKE_CURRENT_LIST_DIR}/ScaleTest)
-add_ce3d2_test(TransformationTest
-               ${CMAKE_CURRENT_LIST_DIR}/TransformationTest)
-add_ce3d2_test(TransformationChainTest
-               ${CMAKE_CURRENT_LIST_DIR}/TransformationChainTest)
-add_ce3d2_test(TranslationTest
-               ${CMAKE_CURRENT_LIST_DIR}/TranslationTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/ITransformableTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/LinearTransformationTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/MatrixTransformationTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/MirrorTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/OrthogonalProjectionTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/PermutationTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/PermutationVectorTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/RotationTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/ScaleTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/TransformationTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/TransformationChainTest)
+add_ce3d2_test(${CMAKE_CURRENT_LIST_DIR}/TranslationTest)
