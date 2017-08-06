@@ -270,7 +270,7 @@ BOOST_AUTO_TEST_CASE(test_line_render3)
     auto& vectors = line->vectors();
     vectors.push_back(CE3D2::create_vector(1.0f, 1.0f));
     vectors.push_back(CE3D2::create_vector(36.0f, 12.0f));
-    auto& edges = line->connections();
+    auto& edges = line->edges();
     edges.push_back(CE3D2::Models::IndexPair(0, 1));
 
     CE3D2::Render::TextRenderer renderer;

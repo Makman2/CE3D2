@@ -27,7 +27,7 @@ int main()
 
 The line model contains additional information what vectors are connected
 together with a line. This information is stored inside
-`LineModel::connections()` using index pairs of the vectors in
+`LineModel::edges()` using index pairs of the vectors in
 `LineModel::vectors()`. The indices in the pairs refer to the (zero-based)
 position inside `LineModel::vectors()`.
 

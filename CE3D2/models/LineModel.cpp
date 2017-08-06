@@ -9,17 +9,17 @@ namespace Models
 {
     LineModel::LineModel()
     : Model()
-    , m_Connections()
+    , m_Edges()
     {}
 
     LineModel::LineModel(std::string name)
     : Model(name)
-    , m_Connections()
+    , m_Edges()
     {}
 
     LineModel::LineModel(Model const& copy)
     : Model(copy)
-    , m_Connections()
+    , m_Edges()
     {}
 
     LineModel::~LineModel()
@@ -47,7 +47,7 @@ namespace Models
     LineModel::hypercube(Vector::size_type dimension)
     {
         using container_size_type = std::remove_reference<decltype(
-            std::declval<LineModel>().connections())>::type::size_type;
+            std::declval<LineModel>().edges())>::type::size_type;
 
         // Precompute the size needed to store the index-pairs.
         container_size_type index_count =
@@ -68,36 +68,36 @@ namespace Models
         // The `dimension == 0` case is automatically covered from
         // `Model::hypercube()`.
         auto model = LineModel(Model::hypercube(dimension));
-        auto& connections = model.connections();
+        auto& edges = model.edges();
 
         // The pre-size calculation formula below doesn't work for
         // `dimension == 1` (because of the bitshift optimizations for 2^x
         // exponential calculations).
         if (dimension == 1)
         {
-            connections.push_back(IndexPair(0, 1));
+            edges.push_back(IndexPair(0, 1));
             return model;
         }
 
-        connections.reserve(index_count);
+        edges.reserve(index_count);
 
         // Since only `dimension == 2` reaches this code, we can already push
         // back `IndexPair`s we are able to precalculate.
-        connections.push_back(IndexPair(0, 1));
-        connections.push_back(IndexPair(2, 3));
-        connections.push_back(IndexPair(0, 2));
-        connections.push_back(IndexPair(1, 3));
+        edges.push_back(IndexPair(0, 1));
+        edges.push_back(IndexPair(2, 3));
+        edges.push_back(IndexPair(0, 2));
+        edges.push_back(IndexPair(1, 3));
 
         for (container_size_type i = 2; i < dimension; i++)
         {
             // Index duplication phase.
             // Duplicates all existing index-pairs and offsets them by 2^i.
             auto offset = static_cast<container_size_type>(2) << (i - 1);
-            auto current_size = connections.size();
+            auto current_size = edges.size();
             for (container_size_type n = 0; n < current_size; n++)
             {
-                auto const& indexpair = connections[n];
-                connections.push_back(IndexPair(indexpair.first + offset,
+                auto const& indexpair = edges[n];
+                edges.push_back(IndexPair(indexpair.first + offset,
                                                 indexpair.second + offset));
             }
 
@@ -105,7 +105,7 @@ namespace Models
             // Connect the previously created and duplicated index-pairs.
             for (container_size_type j = 0; j < offset; j++)
             {
-                connections.push_back(IndexPair(j, j + offset));
+                edges.push_back(IndexPair(j, j + offset));
             }
         }
 
@@ -113,15 +113,15 @@ namespace Models
     }
 
     StorageType<IndexPair> const&
-    LineModel::connections() const
+    LineModel::edges() const
     {
-        return m_Connections;
+        return m_Edges;
     }
 
     StorageType<IndexPair>&
-    LineModel::connections()
+    LineModel::edges()
     {
-        return m_Connections;
+        return m_Edges;
     }
 }
 }

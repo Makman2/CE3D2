@@ -64,7 +64,7 @@ namespace Models
         /// @returns A reference to the `StorageType` containing the
         ///          connection-index-pairs.
         StorageType<IndexPair>&
-        connections();
+        edges();
 
         /// Returns a read-only `StorageType` that contains the pairs that
         /// define the line-connections of the model between the vectors.
@@ -72,10 +72,10 @@ namespace Models
         /// @returns A `const` reference to the `StorageType` containing the
         ///          connection-index-pairs.
         StorageType<IndexPair> const&
-        connections() const;
+        edges() const;
 
     private:
-        StorageType<IndexPair> m_Connections;
+        StorageType<IndexPair> m_Edges;
     };
 }
 }
