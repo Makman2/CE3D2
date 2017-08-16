@@ -11,8 +11,8 @@ namespace Math
     {
         std::vector<std::pair<PrecisionType, PrecisionType>> intersections;
 
-        // Calculate intersections with the border-lines of the box and pick the
-        // points that are inside the box.
+        // Calculate intersections with the continued border-lines of the box
+        // and pick the points that are on the box's border.
 
         // FIXME
         // There may be precision problems when the line hits corners, so this
