@@ -46,28 +46,28 @@ int run(ApplicationParameters parameters)
     if (parameters.model_to_display == "octagon")
     {
         asset_filename = "octagon.obj";
-        model_scale = 3.0;
+        model_scale = 3.0f;
         projection_vector1 = create_vector(0.7f, 0.3f, 0.0f);
         projection_vector2 = create_vector(0.0f, 0.3f, 0.7f);
     }
     else if(parameters.model_to_display == "pyramid")
     {
         asset_filename = "pyramid.obj";
-        model_scale = 6.5;
+        model_scale = 6.5f;
         projection_vector1 = create_vector(0.7f, 0.0f, 0.3f);
         projection_vector2 = create_vector(0.3f, -0.7f, -0.7f);
     }
     else if(parameters.model_to_display == "icosphere")
     {
         asset_filename = "icosphere.obj";
-        model_scale = 5.0;
+        model_scale = 5.0f;
         projection_vector1 = create_vector(0.6f, 0.0f, 0.4f);
         projection_vector2 = create_vector(0.4f, -0.2f, -0.6f);
     }
     else if(parameters.model_to_display == "torus")
     {
         asset_filename = "torus.obj";
-        model_scale = 12.0;
+        model_scale = 12.0f;
         projection_vector1 = create_vector(0.7f, 0.3f, 0.0f);
         projection_vector2 = create_vector(0.0f, 0.3f, 0.7f);
     }
