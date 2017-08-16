@@ -6,6 +6,7 @@ function(add_ce3d2_test test_file)
     get_filename_component(test_name ${test_file} NAME_WE)
 
     add_executable(${test_name}
+                   EXCLUDE_FROM_ALL
                    # TestUtilities are embedded automatically into every test.
                    ${CE3D2_TEST_ROOT}/TestUtilities
                    ${test_file})
@@ -17,12 +18,18 @@ function(add_ce3d2_test test_file)
     add_test(${test_name} ${test_name})
 
     add_custom_command(
-        TARGET ${test_name}
-        POST_BUILD
+        OUTPUT ${test_name}_execution_stamp
+        DEPENDS ${test_name}
         COMMAND ${test_name} --log_level=error --report_level=no
+        COMMAND touch ${test_name}_execution_stamp
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Running ${test_name}..."
         VERBATIM)
+
+    add_custom_target(
+        ${test_name}_run
+        ALL
+        DEPENDS ${test_name}_execution_stamp)
 
     # Copy test files if existent.
     get_filename_component(test_file_directory ${test_file} DIRECTORY)
