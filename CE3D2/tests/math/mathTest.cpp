@@ -78,6 +78,98 @@ BOOST_AUTO_TEST_CASE(test_line_intersection_with_box)
     BOOST_CHECK_EQUAL(result[0].second, 2.0f);
     BOOST_CHECK_EQUAL(result[1].first, 3.0f);
     BOOST_CHECK_EQUAL(result[1].second, 1.0f);
+
+    // Hits two corners, upper-left and bottom-right + bottom-left and
+    // top-right.
+    box = CE3D2::Math::Box(0.0f, 0.0f, 1.0f, 1.0f);
+
+    line = CE3D2::Math::LinearAffineFunction(1.0f, 0.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 1.0f);
+
+    line = CE3D2::Math::LinearAffineFunction(-1.0f, 1.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 0.0f);
+
+    // Starts at bottom-left corner and hits top edge.
+    line = CE3D2::Math::LinearAffineFunction(2.0f, 0.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 0.5f);
+    BOOST_CHECK_EQUAL(result[1].second, 1.0f);
+
+    // Starts at bottom-left corner and hits right edge.
+    line = CE3D2::Math::LinearAffineFunction(0.5f, 0.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 0.5f);
+
+    // Starts at top-left corner and hits right edge.
+    line = CE3D2::Math::LinearAffineFunction(-0.5f, 1.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 0.5f);
+
+    // Starts at top-left corner and hits bottom edge.
+    line = CE3D2::Math::LinearAffineFunction(-2.0f, 1.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.5f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 1.0f);
+
+    // Starts at top-right corner and hits bottom edge.
+    line = CE3D2::Math::LinearAffineFunction(2.0f, -1.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.5f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 1.0f);
+
+    // Starts at top-right corner and hits left edge.
+    line = CE3D2::Math::LinearAffineFunction(0.5f, 0.5f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.5f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 1.0f);
+
+    // Starts at bottom-right corner and hits left edge.
+    line = CE3D2::Math::LinearAffineFunction(-0.5f, 0.5f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 0.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.5f);
+    BOOST_CHECK_EQUAL(result[1].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[1].second, 0.0f);
+
+    // Starts at bottom-right corner and hits top edge.
+    line = CE3D2::Math::LinearAffineFunction(-2.0f, 2.0f);
+    result = CE3D2::Math::line_intersection_with_box(line, box);
+    BOOST_CHECK_EQUAL(result.size(), 2);
+    BOOST_CHECK_EQUAL(result[0].first, 1.0f);
+    BOOST_CHECK_EQUAL(result[0].second, 0.0f);
+    BOOST_CHECK_EQUAL(result[1].first, 0.5f);
+    BOOST_CHECK_EQUAL(result[1].second, 1.0f);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
