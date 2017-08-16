@@ -78,6 +78,10 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Documentation")
 
         configure_file(${CMAKE_SOURCE_DIR}/doxyfile.in
                        ${CMAKE_BINARY_DIR}/doxyfile)
+        configure_file(${CMAKE_SOURCE_DIR}/DoxygenLayout.xml
+                       ${CMAKE_BINARY_DIR}/
+                       COPYONLY)
+
         add_custom_target(doc
                           COMMAND
                               ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxyfile
