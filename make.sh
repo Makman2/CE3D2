@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
+function errecho {
+    >&2 echo $@
+}
+
 # Customization variables.
 CE3D2_SOURCE_DIRECTORY=CE3D2
 CE3D2_BUILD_DIRECTORY=build
 CE3D2_DOCS_BUILD_DIRECTORY=$CE3D2_BUILD_DIRECTORY/docs
 CE3D2_DEBUG_BUILD_DIRECTORY=$CE3D2_BUILD_DIRECTORY/debug
 CE3D2_RELEASE_BUILD_DIRECTORY=$CE3D2_BUILD_DIRECTORY/release
+CE3D2_PUBLISH_DIRECTORY=$CE3D2_BUILD_DIRECTORY/publish
 
 CMAKE_FLAGS=""
 CMAKE_DEBUG_FLAGS="-DCMAKE_BUILD_TYPE=Debug -DTESTS_ENABLED=ON"
@@ -58,11 +63,12 @@ function TARGET_help {
                      "'$CE3D2_DOCS_BUILD_DIRECTORY/html'."
     echo "install debug|release"
     echo "           Installs CE3D2 onto your system."
-    echo "pack       Packs builds into archives. Supported arguments are "
-    echo "           'debug' (for putting the debug build together with the "
-    echo "           source into a tar.gz), 'release' (the same with release), "
-    echo "           'docs' (for the documentation), 'source' (for the source "
-    echo "           files only) and 'all' (pack every available target)."
+    echo "publish    Publishes CE3D2 binaries. This command creates also"
+    echo "           necessary branches and commits to advance the versions"
+    echo "           correctly. If a custom version (MAJOR.MINOR) is provided"
+    echo "           as argument, this will be the next dev-version incremented"
+    echo "           to. If no argument is given, the minor-version will be"
+    echo "           incremented by one as the next dev-version."
     echo "clean      Clean up build files."
 }
 
@@ -97,7 +103,8 @@ function TARGET_clean {
         rm -rf $CE3D2_DOCS_BUILD_DIRECTORY
 }
 
-function TARGET_pack {
+function TARGET_publish {
+    # Read the current CE3D2 version using the main CMakeLists.txt
     CMAKE_LISTS_CONTENTS="$(cat $CE3D2_SOURCE_DIRECTORY/CMakeLists.txt)"
     regex="set\(CE3D2_VERSION_MAJOR ([0-9]+)\)"
     [[ $CMAKE_LISTS_CONTENTS =~ $regex ]] && \
@@ -109,37 +116,112 @@ function TARGET_pack {
     [[ $CMAKE_LISTS_CONTENTS =~ $regex ]] && \
         CE3D2_VERSION_MICRO=${BASH_REMATCH[1]}
 
-    GIT_TRACKED_FILES=`git ls-tree -r HEAD --name-only | tr '\n' ' '`
+    CE3D2_VERSION="$CE3D2_VERSION_MAJOR.$CE3D2_VERSION_MINOR.$CE3D2_VERSION_MICRO"
 
-    if [ "$1" == "debug" ]; then
-        PACKFILES="$GIT_TRACKED_FILES $CE3D2_DEBUG_BUILD_DIRECTORY"
-        PLATFORM="x86_64"
-    elif [ "$1" == "release" ]; then
-        PACKFILES="$GIT_TRACKED_FILES $CE3D2_RELEASE_BUILD_DIRECTORY"
-        PLATFORM="x86_64"
-    elif [ "$1" == "docs" ]; then
-        PACKFILES="--directory=$CE3D2_DOCS_BUILD_DIRECTORY html/"
-        PLATFORM=""
-    elif [ "$1" == "source" ]; then
-        PACKFILES="$GIT_TRACKED_FILES"
-        PLATFORM=""
+    if [ "$CE3D2_VERSION_MICRO" != "dev" ]; then
+        errecho "CE3D2's version is currently a release version ($CE3D2_VERSION)!"
+        errecho "Please change CE3D2_VERSION_MICRO back to 'dev' inside"
+        errecho "CMakeLists.txt before publishing again."
+        return 1
+    fi
+
+    # Save away current branch name to switch back again to in the end.
+    branch_name=$(git symbolic-ref -q HEAD)
+    branch_name=${branch_name##refs/heads/}
+    branch_name=${branch_name:-HEAD}
+
+    function replace {
+        grep -q "$1" "$3"
+        sed --in-place --expression "s/$1/$2/g" $3
+    }
+
+    # Start release modifications on a new branch. Stash away existing changes.
+    number_of_stashes=`git stash list | wc -l`
+    git stash
+    if [ "$number_of_stashes" -eq "$(git stash list | wc -l)" ]; then
+        stash_pop_needed="no"
     else
-        echo "Invalid parameter for pack target, use 'debug', 'release', "
-        echo "'docs', 'source' or 'all'."
-        return
+        stash_pop_needed="yes"
     fi
 
-    if [ -n "$PLATFORM" ]; then
-        PLATFORM="-$PLATFORM"
+    branch_name_release="release-$CE3D2_VERSION_MAJOR.$CE3D2_VERSION_MINOR"
+    git checkout -b $branch_name_release
+
+    # Modify versions and other information in source.
+    replace "set(CE3D2_VERSION_MICRO dev)" "set(CE3D2_VERSION_MICRO 0)" CE3D2/CMakeLists.txt
+    replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION}\"" CE3D2/doxyfile.in
+
+    # Stage all modified files and commit. Ignore all untracked files.
+    git commit -a -m "Release $CE3D2_VERSION_MAJOR.$CE3D2_VERSION_MINOR"
+
+    # Build all necessary targets for publishing.
+    TARGET_release
+    TARGET_debug
+    TARGET_docs
+
+    # Build archives.
+    mkdir -p $CE3D2_PUBLISH_DIRECTORY
+
+    function generate-archive-name {
+        echo "CE3D2-$CE3D2_VERSION_MAJOR-$CE3D2_VERSION_MINOR-x86_64-$1"
+    }
+
+    function build-archive {
+        local tempdir=`mktemp --directory`
+        local archive_name=`generate-archive-name $1`
+
+        mkdir -p $tempdir/$archive_name
+        cp -r "${@:2}" $tempdir/$archive_name
+        tar -czvf $CE3D2_PUBLISH_DIRECTORY/$archive_name.tar.gz -C $tempdir $archive_name
+
+        rm -rf $tempdir
+    }
+
+    build-archive release LICENSE $CE3D2_RELEASE_BUILD_DIRECTORY/libCE3D2.so
+    build-archive debug LICENSE $CE3D2_DEBUG_BUILD_DIRECTORY/libCE3D2.so
+    build-archive docs LICENSE $CE3D2_DOCS_BUILD_DIRECTORY/html/*
+
+    # Increment to next dev-version. Do that on a new branch.
+    if [ -z "$1" ]; then
+        CE3D2_NEXT_VERSION_MAJOR="$CE3D2_VERSION_MAJOR"
+        CE3D2_NEXT_VERSION_MINOR=$((CE3D2_VERSION_MINOR+1))
+    else
+        regex="([0-9]+)\.([0-9]+)"
+        [[ $1 =~ $regex ]] && \
+            CE3D2_NEXT_VERSION_MAJOR=${BASH_REMATCH[1]} && \
+            CE3D2_NEXT_VERSION_MINOR=${BASH_REMATCH[2]}
     fi
 
-    ARCHIVE_NAME="CE3D2-$CE3D2_VERSION_MAJOR$CE3D2_VERSION_MINOR"
-    ARCHIVE_NAME+="$CE3D2_VERSION_MICRO$PLATFORM-$1.tgz"
+    branch_name_post_release="release-$CE3D2_NEXT_VERSION_MAJOR.$CE3D2_NEXT_VERSION_MINOR.dev"
+    git checkout -b $branch_name_post_release
 
-    tar -cvzf $ARCHIVE_NAME $PACKFILES
-    mv $ARCHIVE_NAME $CE3D2_BUILD_DIRECTORY/$ARCHIVE_NAME
+    replace "set(CE3D2_VERSION_MAJOR [0-9]\+)" "set(CE3D2_VERSION_MAJOR $CE3D2_NEXT_VERSION_MAJOR)" CE3D2/CMakeLists.txt
+    replace "set(CE3D2_VERSION_MINOR [0-9]\+)" "set(CE3D2_VERSION_MINOR $CE3D2_NEXT_VERSION_MINOR)" CE3D2/CMakeLists.txt
+    replace "set(CE3D2_VERSION_MICRO 0)" "set(CE3D2_VERSION_MICRO dev)" CE3D2/CMakeLists.txt
+    replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION}\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" CE3D2/doxyfile.in
+
+    git commit -a -m "Increment version to $CE3D2_NEXT_VERSION_MAJOR.$CE3D2_NEXT_VERSION_MINOR.dev"
+
+    git checkout $branch_name
+    if [ "$stash_pop_needed" = "yes" ]; then
+        git stash pop
+    fi
+
+    echo
+    echo "Created following branches:"
+    echo "- $branch_name_release"
+    echo "- $branch_name_post_release"
+    echo
+    echo "To do a proper release now, take following steps:"
+    echo "1. Create a Pull-Request for $branch_name_release on GitHub."
+    echo "2. Merge the Pull-Request."
+    echo "3. Create a release tag on GitHub for the master branch. Attach following files:"
+    echo "   - $CE3D2_PUBLISH_DIRECTORY/$(generate-archive-name release).tar.gz"
+    echo "   - $CE3D2_PUBLISH_DIRECTORY/$(generate-archive-name debug).tar.gz"
+    echo "   - $CE3D2_PUBLISH_DIRECTORY/$(generate-archive-name docs).tar.gz"
+    echo "4. Create a Pull-Request for $branch_name_post_release."
+    echo "5. Merge the Pull-Request."
 }
-
 
 # Redirect to target functions.
 case $1 in
@@ -153,16 +235,8 @@ case $1 in
         TARGET_docs;;
     "install")
         TARGET_install $2;;
-    "pack")
-        if [ "$2" == "all" ]; then
-            TARGET_pack "debug"
-            TARGET_pack "release"
-            TARGET_pack "docs"
-            TARGET_pack "source"
-        else
-            TARGET_pack $2
-        fi
-        ;;
+    "publish")
+        TARGET_publish $2;;
     "clean")
         TARGET_clean;;
     *)
