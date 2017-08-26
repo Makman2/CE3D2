@@ -17,20 +17,6 @@ function(add_ce3d2_test test_file)
 
     add_test(${test_name} ${test_name})
 
-    add_custom_command(
-        OUTPUT ${test_name}_execution_stamp
-        DEPENDS ${test_name}
-        COMMAND ${test_name} --log_level=error --report_level=no
-        COMMAND touch ${test_name}_execution_stamp
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Running ${test_name}..."
-        VERBATIM)
-
-    add_custom_target(
-        ${test_name}_run
-        ALL
-        DEPENDS ${test_name}_execution_stamp)
-
     # Copy test files if existent.
     get_filename_component(test_file_directory ${test_file} DIRECTORY)
     set(test_data_directory "${test_name}Files")
@@ -48,16 +34,23 @@ function(add_ce3d2_test test_file)
                                COMMENT "Copying test file ${test_data_directory}/${name}..."
                                VERBATIM)
 
-            list(APPEND test_file_targets ${test_data_directory}/${name})
+            list(APPEND test_file_targets ${CMAKE_CURRENT_BINARY_DIR}/${test_data_directory}/${name})
         endforeach()
-
-        set(test_files_dependency_target "${test_name}Files")
-
-        add_custom_target(${test_files_dependency_target}
-                          DEPENDS ${test_file_targets})
-
-        add_dependencies(${test_name} ${test_files_dependency_target})
     endif()
+
+    add_custom_command(
+        OUTPUT ${test_name}_execution_stamp
+        DEPENDS ${test_name} ${test_file_targets}
+        COMMAND ${test_name} --log_level=error --report_level=no
+        COMMAND touch ${test_name}_execution_stamp
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Running ${test_name}..."
+        VERBATIM)
+
+    add_custom_target(
+        ${test_name}_run
+        ALL
+        DEPENDS ${test_name}_execution_stamp)
 endfunction()
 
 # Tests in this directory.
