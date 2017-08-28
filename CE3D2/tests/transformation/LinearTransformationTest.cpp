@@ -42,30 +42,38 @@ BOOST_AUTO_TEST_SUITE(LinearTransformationTestSuite)
 BOOST_AUTO_TEST_CASE(test_matrix)
 {
     auto uut = TestLinearTransformation();
+    BOOST_CHECK(!uut.is_updated());
 
     CE3D2::Vector testvector = CE3D2::create_vector(2.0f, 2.0f);
     CE3D2::Vector compare_vector = CE3D2::create_vector(4.0f, 4.0f);
     uut.transform_vector(testvector);
+    BOOST_CHECK(uut.is_updated());
 
     CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 
     uut.set_scale(0.0f);
+    BOOST_CHECK(!uut.is_updated());
     testvector = CE3D2::create_vector(2.0f, 2.0f);
     compare_vector = CE3D2::create_vector(0.0f, 0.0f);
     uut.transform_vector(testvector);
+    BOOST_CHECK(uut.is_updated());
 
     CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 
     uut.set_scale(2.5f);
+    BOOST_CHECK(!uut.is_updated());
     testvector = CE3D2::create_vector(4.0f, 2.0f);
     compare_vector = CE3D2::create_vector(15.0f, 15.0f);
     uut.transform_vector(testvector);
+    BOOST_CHECK(uut.is_updated());
 
     CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 
+    BOOST_CHECK(uut.is_updated());
     testvector = CE3D2::create_vector(3.0f, 1.0f);
     compare_vector = CE3D2::create_vector(10.0f, 10.0f);
     uut.transform_vector(testvector);
+    BOOST_CHECK(uut.is_updated());
 
     CE3D2_CHECK_VECTORS_EQUAL(testvector, compare_vector);
 }

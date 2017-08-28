@@ -41,6 +41,12 @@ namespace Transformation
         CE3D2::Matrix const&
         get_matrix() const;
 
+        /// Specifies whether the underlying matrix is up-to-date or not.
+        ///
+        /// @returns `true` if up-to-date, `false` if not.
+        bool
+        is_updated() const;
+
     protected:
         /// Schedules an update for the matrix calculation.
         ///

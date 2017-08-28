@@ -33,6 +33,14 @@ namespace Transformation
         return m_Matrix;
     }
 
+    /// Specifies whether the underlying matrix is up-to-date or not.
+    ///
+    /// @returns `true` if up-to-date, `false` if not.
+    bool
+    LinearTransformation::is_updated() const {
+        return !m_UpdateScheduled;
+    }
+
     void
     LinearTransformation::update()
     {
