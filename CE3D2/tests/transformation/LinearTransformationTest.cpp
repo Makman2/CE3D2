@@ -17,7 +17,7 @@ public:
     virtual CE3D2::Matrix
     on_update() const override
     {
-        CE3D2::Matrix matrix = CE3D2::Matrix(2, 2);
+        CE3D2::Matrix matrix(2, 2);
         matrix(0, 0) = m_Scale;
         matrix(0, 1) = m_Scale;
         matrix(1, 0) = m_Scale;
