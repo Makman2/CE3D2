@@ -16,10 +16,6 @@ find_package(Boost
              COMPONENTS system filesystem
              REQUIRED)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-
 add_library(${CMAKE_PROJECT_NAME}
             SHARED
             ${SRC})
