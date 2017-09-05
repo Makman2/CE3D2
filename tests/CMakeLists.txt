@@ -1,5 +1,9 @@
 set(CE3D2_TEST_ROOT ${CMAKE_CURRENT_LIST_DIR})
 
+find_package(Boost
+             COMPONENTS unit_test_framework
+             REQUIRED)
+
 # Adds a new test target. Only a single test file is supported.
 # TestUtilities.h is automatically linked.
 function(add_ce3d2_test test_file)
