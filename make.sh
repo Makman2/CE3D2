@@ -6,7 +6,6 @@ function errecho {
 }
 
 # Customization variables.
-CE3D2_SOURCE_DIRECTORY=CE3D2
 CE3D2_BUILD_DIRECTORY=build
 CE3D2_DOCS_BUILD_DIRECTORY=$CE3D2_BUILD_DIRECTORY/docs
 CE3D2_DEBUG_BUILD_DIRECTORY=$CE3D2_BUILD_DIRECTORY/debug
@@ -44,7 +43,7 @@ function build {
 
     cd $1
 
-    cmake $working_dir/$CE3D2_SOURCE_DIRECTORY $CMAKE_FLAGS $2
+    cmake $working_dir $CMAKE_FLAGS $2
     make $3
 
     cd $working_dir
@@ -107,7 +106,7 @@ function TARGET_clean {
 
 function TARGET_publish {
     # Read the current CE3D2 version using the main CMakeLists.txt
-    CMAKE_LISTS_CONTENTS="$(cat $CE3D2_SOURCE_DIRECTORY/CMakeLists.txt)"
+    CMAKE_LISTS_CONTENTS="$(cat CMakeLists.txt)"
     regex="set\(CE3D2_VERSION_MAJOR ([0-9]+)\)"
     [[ $CMAKE_LISTS_CONTENTS =~ $regex ]] && \
         CE3D2_VERSION_MAJOR=${BASH_REMATCH[1]}
@@ -150,7 +149,7 @@ function TARGET_publish {
     git checkout -b $branch_name_release
 
     # Modify versions and other information in source.
-    replace "set(CE3D2_VERSION_MICRO dev)" "set(CE3D2_VERSION_MICRO 0)" CE3D2/CMakeLists.txt
+    replace "set(CE3D2_VERSION_MICRO dev)" "set(CE3D2_VERSION_MICRO 0)" CMakeLists.txt
     replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION}\"" CE3D2/doxyfile.in
 
     # Stage all modified files and commit. Ignore all untracked files.
@@ -179,8 +178,8 @@ function TARGET_publish {
         rm -rf $tempdir
     }
 
-    build-archive release LICENSE $CE3D2_RELEASE_BUILD_DIRECTORY/libCE3D2.so
-    build-archive debug LICENSE $CE3D2_DEBUG_BUILD_DIRECTORY/libCE3D2.so
+    build-archive release LICENSE $CE3D2_RELEASE_BUILD_DIRECTORY/CE3D2/libCE3D2.so
+    build-archive debug LICENSE $CE3D2_DEBUG_BUILD_DIRECTORY/CE3D2/libCE3D2.so
     build-archive docs LICENSE $CE3D2_DOCS_BUILD_DIRECTORY/html/*
 
     # Increment to next dev-version. Do that on a new branch.
@@ -197,9 +196,9 @@ function TARGET_publish {
     branch_name_post_release="release-$CE3D2_NEXT_VERSION_MAJOR.$CE3D2_NEXT_VERSION_MINOR.dev"
     git checkout -b $branch_name_post_release
 
-    replace "set(CE3D2_VERSION_MAJOR [0-9]\+)" "set(CE3D2_VERSION_MAJOR $CE3D2_NEXT_VERSION_MAJOR)" CE3D2/CMakeLists.txt
-    replace "set(CE3D2_VERSION_MINOR [0-9]\+)" "set(CE3D2_VERSION_MINOR $CE3D2_NEXT_VERSION_MINOR)" CE3D2/CMakeLists.txt
-    replace "set(CE3D2_VERSION_MICRO 0)" "set(CE3D2_VERSION_MICRO dev)" CE3D2/CMakeLists.txt
+    replace "set(CE3D2_VERSION_MAJOR [0-9]\+)" "set(CE3D2_VERSION_MAJOR $CE3D2_NEXT_VERSION_MAJOR)" CMakeLists.txt
+    replace "set(CE3D2_VERSION_MINOR [0-9]\+)" "set(CE3D2_VERSION_MINOR $CE3D2_NEXT_VERSION_MINOR)" CMakeLists.txt
+    replace "set(CE3D2_VERSION_MICRO 0)" "set(CE3D2_VERSION_MICRO dev)" CMakeLists.txt
     replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION}\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" CE3D2/doxyfile.in
 
     git commit -a -m "Increment version to $CE3D2_NEXT_VERSION_MAJOR.$CE3D2_NEXT_VERSION_MINOR.dev"

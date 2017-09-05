@@ -1,17 +1,5 @@
 cmake_minimum_required(VERSION 2.4)
 
-project(CE3D2)
-
-set(CE3D2_VERSION_MAJOR 2)
-set(CE3D2_VERSION_MINOR 2)
-set(CE3D2_VERSION_MICRO dev)
-set(CE3D2_VERSION
-    ${CE3D2_VERSION_MAJOR}.${CE3D2_VERSION_MINOR}.${CE3D2_VERSION_MICRO})
-set(PROJECT_VERSION_MAJOR ${CE3D2_VERSION_MAJOR})
-set(PROJECT_VERSION_MINOR ${CE3D2_VERSION_MINOR})
-set(PROJECT_VERSION_MICRO ${CE3D2_VERSION_MICRO})
-set(PROJECT_VERSION ${CE3D2_VERSION})
-
 set(SRC
     ${CMAKE_CURRENT_LIST_DIR}/Matrix
     ${CMAKE_CURRENT_LIST_DIR}/Precision
@@ -22,73 +10,37 @@ add_subdirectory("render")
 add_subdirectory("strings")
 add_subdirectory("transformation")
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
-   CMAKE_BUILD_TYPE STREQUAL "Release")
+include_directories("${PROJECT_SOURCE_DIR}")
 
-    include_directories("${PROJECT_SOURCE_DIR}/..")
+find_package(Boost
+             COMPONENTS system filesystem
+             REQUIRED)
 
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+
+add_library(${CMAKE_PROJECT_NAME}
+            SHARED
+            ${SRC})
+
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(${CMAKE_PROJECT_NAME} ${Boost_LIBRARIES})
+endif()
+
+install(TARGETS ${CMAKE_PROJECT_NAME}
+        LIBRARY DESTINATION lib)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/CE3D2
+        DESTINATION include
+        FILES_MATCHING
+        REGEX "\\.(h|hpp)$"
+        PATTERN "tests" EXCLUDE
+        PATTERN "doc" EXCLUDE)
+
+if(TESTS_ENABLED)
     find_package(Boost
-                 COMPONENTS system filesystem
+                 COMPONENTS unit_test_framework
                  REQUIRED)
-
-    set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-
-    add_library(${CMAKE_PROJECT_NAME}
-                SHARED
-                ${SRC})
-
-    if(Boost_FOUND)
-        include_directories(${Boost_INCLUDE_DIRS})
-        target_link_libraries(${CMAKE_PROJECT_NAME} ${Boost_LIBRARIES})
-    endif()
-
-    install(TARGETS ${CMAKE_PROJECT_NAME}
-            LIBRARY DESTINATION lib)
-    install(DIRECTORY ${PROJECT_SOURCE_DIR}
-            DESTINATION include
-            FILES_MATCHING
-            REGEX "\\.(h|hpp)$"
-            PATTERN "tests" EXCLUDE
-            PATTERN "doc" EXCLUDE)
-
-    if(TESTS_ENABLED)
-        find_package(Boost
-                     COMPONENTS unit_test_framework
-                     REQUIRED)
-        add_subdirectory("tests")
-    endif()
-
-elseif(CMAKE_BUILD_TYPE STREQUAL "Documentation")
-    find_package(Doxygen 1.8.8 REQUIRED)
-    if (DOXYGEN_FOUND)
-        add_subdirectory("doc")
-
-        # Get the latest abbreviated commit hash of the working branch.
-        execute_process(COMMAND git log -1 --format=%h
-                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-                        OUTPUT_VARIABLE GIT_HEAD
-                        OUTPUT_STRIP_TRAILING_WHITESPACE)
-        # Get the current working branch
-        execute_process(COMMAND git rev-parse --abbrev-ref HEAD
-                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-                        OUTPUT_VARIABLE GIT_BRANCH
-                        OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-        configure_file(${CMAKE_SOURCE_DIR}/doxyfile.in
-                       ${CMAKE_BINARY_DIR}/doxyfile)
-        configure_file(${CMAKE_SOURCE_DIR}/DoxygenLayout.xml
-                       ${CMAKE_BINARY_DIR}/
-                       COPYONLY)
-
-        add_custom_target(doc
-                          COMMAND
-                              ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxyfile
-                          DEPENDS ${CMAKE_SOURCE_DIR}/doxyfile.in
-                          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-                          COMMENT "Generating documentation with doxygen"
-                          VERBATIM
-                          SOURCES ${SRC})
-    endif()
+    add_subdirectory("tests")
 endif()

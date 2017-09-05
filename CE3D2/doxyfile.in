@@ -36,7 +36,7 @@ PROJECT_BRIEF          = "A simple 3D engine for the console."
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = ${CMAKE_CURRENT_LIST_DIR}/../CE3D.png
+PROJECT_LOGO           = ${CMAKE_SOURCE_DIR}/CE3D.png
 
 # A custom layout file to use for the generated documentation.
 
@@ -306,7 +306,7 @@ WARN_NO_PARAMDOC       = YES
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ${CMAKE_SOURCE_DIR}
+INPUT                  = ${CMAKE_SOURCE_DIR}/CE3D2
 
 # USE_MDFILE_AS_MAINPAGE contains the markdown file to use as the main-page for
 # the "related pages" section.
@@ -351,7 +351,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = ${CMAKE_SOURCE_DIR}/tests
+EXCLUDE                = ${CMAKE_SOURCE_DIR}/CE3D2/tests
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
