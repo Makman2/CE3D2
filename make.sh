@@ -80,7 +80,7 @@ function TARGET_release {
 }
 
 function TARGET_docs {
-    build $CE3D2_DOCS_BUILD_DIRECTORY "$CMAKE_DOCS_FLAGS" doc
+    build $CE3D2_DOCS_BUILD_DIRECTORY "$CMAKE_DOCS_FLAGS" docs
 }
 
 function TARGET_install {

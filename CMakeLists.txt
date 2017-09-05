@@ -28,7 +28,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
 elseif(CMAKE_BUILD_TYPE STREQUAL "Documentation")
     find_package(Doxygen 1.8.8 REQUIRED)
     if (DOXYGEN_FOUND)
-        add_subdirectory("CE3D2/doc")
+        add_subdirectory("CE3D2/docs")
 
         # Get the latest abbreviated commit hash of the working branch.
         execute_process(COMMAND git log -1 --format=%h
@@ -47,7 +47,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Documentation")
                        ${CMAKE_BINARY_DIR}/
                        COPYONLY)
 
-        add_custom_target(doc
+        add_custom_target(docs
                           COMMAND
                               ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxyfile
                           DEPENDS ${CMAKE_SOURCE_DIR}/CE3D2/doxyfile.in
