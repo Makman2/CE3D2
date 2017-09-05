@@ -101,6 +101,8 @@ function TARGET_clean {
         rm -rf $CE3D2_RELEASE_BUILD_DIRECTORY
     task "Deleting documentation..." \
         rm -rf $CE3D2_DOCS_BUILD_DIRECTORY
+    task "Deleting published artifacts..." \
+        rm -rf $CE3D2_PUBLISH_DIRECTORY
 }
 
 function TARGET_publish {
