@@ -3,7 +3,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "CE3D2/models/LineModel.h"
-#include "CE3D2/tests/TestUtilities.h"
+#include "TestUtilities.h"
 
 
 BOOST_AUTO_TEST_SUITE(LineModelTestSuite)

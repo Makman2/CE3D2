@@ -11,6 +11,8 @@ function(add_ce3d2_test test_file)
                    ${CE3D2_TEST_ROOT}/TestUtilities
                    ${test_file})
 
+    target_include_directories(${test_name} PRIVATE ${CE3D2_TEST_ROOT} ${PROJECT_SOURCE_DIR})
+
     target_link_libraries(${test_name}
                           ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
                           CE3D2)

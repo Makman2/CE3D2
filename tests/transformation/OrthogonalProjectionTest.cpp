@@ -4,9 +4,9 @@
 
 #include <vector>
 
-#include "CE3D2/tests/TestUtilities.h"
 #include "CE3D2/transformation/OrthogonalProjection.h"
 #include "CE3D2/Vector.h"
+#include "TestUtilities.h"
 
 
 BOOST_AUTO_TEST_SUITE(OrthogonalProjectionTestSuite)

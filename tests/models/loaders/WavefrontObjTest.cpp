@@ -2,10 +2,10 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
-#include "CE3D2/tests/TestUtilities.h"
 #include "CE3D2/models/loaders/FileFormatException.h"
 #include "CE3D2/models/loaders/InvalidFileException.h"
 #include "CE3D2/models/loaders/WavefrontObj.h"
+#include "TestUtilities.h"
 
 #include <boost/filesystem.hpp>
 

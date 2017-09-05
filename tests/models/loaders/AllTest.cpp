@@ -3,7 +3,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "CE3D2/models/loaders/All.h"
-#include "CE3D2/tests/TestUtilities.h"
+#include "TestUtilities.h"
 
 #include <boost/filesystem.hpp>
 

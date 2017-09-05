@@ -21,6 +21,13 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR
 
     add_subdirectory("CE3D2")
 
+    if(TESTS_ENABLED)
+        find_package(Boost
+                     COMPONENTS unit_test_framework
+                     REQUIRED)
+        add_subdirectory("tests")
+    endif()
+
 elseif(CMAKE_BUILD_TYPE STREQUAL "Documentation")
     find_package(Doxygen 1.8.8 REQUIRED)
     if (DOXYGEN_FOUND)

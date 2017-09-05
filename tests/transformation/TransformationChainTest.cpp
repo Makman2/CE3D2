@@ -4,8 +4,8 @@
 
 #include <algorithm>
 
-#include "CE3D2/tests/TestUtilities.h"
 #include "CE3D2/transformation/TransformationChain.h"
+#include "TestUtilities.h"
 
 
 class MultiplyTransformation : public CE3D2::Transformation::Transformation

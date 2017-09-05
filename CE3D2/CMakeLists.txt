@@ -33,10 +33,3 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/CE3D2
         REGEX "\\.(h|hpp)$"
         PATTERN "tests" EXCLUDE
         PATTERN "doc" EXCLUDE)
-
-if(TESTS_ENABLED)
-    find_package(Boost
-                 COMPONENTS unit_test_framework
-                 REQUIRED)
-    add_subdirectory("tests")
-endif()

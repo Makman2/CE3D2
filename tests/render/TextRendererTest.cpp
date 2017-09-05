@@ -3,10 +3,10 @@
 #include <boost/test/unit_test.hpp>
 
 #include "CE3D2/render/TextRenderer.h"
-#include "CE3D2/tests/TestUtilities.h"
 #include "CE3D2/transformation/OrthogonalProjection.h"
 #include "CE3D2/transformation/Scale.h"
 #include "CE3D2/transformation/Translation.h"
+#include "TestUtilities.h"
 
 
 BOOST_AUTO_TEST_SUITE(TextRendererTestSuite)

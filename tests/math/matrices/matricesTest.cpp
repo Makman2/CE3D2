@@ -4,7 +4,7 @@
 
 #include "CE3D2/math/matrices/matrices.h"
 #include "CE3D2/Matrix.h"
-#include "CE3D2/tests/TestUtilities.h"
+#include "TestUtilities.h"
 
 
 BOOST_AUTO_TEST_SUITE(matricesTestSuite)
