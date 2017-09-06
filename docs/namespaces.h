@@ -11,7 +11,11 @@ namespace CE3D2
 
     /// Contains classes for grouping vectors together into meshes.
     namespace Models
-    {}
+    {
+        /// Contains functions for asset loading related to models.
+        namespace Loaders
+        {}
+    }
 
     /// Contains facilities for rendering vectors.
     namespace Render
