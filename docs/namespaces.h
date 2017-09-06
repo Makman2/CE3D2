@@ -21,6 +21,10 @@ namespace CE3D2
     namespace Render
     {}
 
+    /// Contains various helper functions for strings.
+    namespace Strings
+    {}
+
     /// Contains the transformation system and common transformations.
     namespace Transformation
     {}
