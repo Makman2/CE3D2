@@ -10,7 +10,6 @@ if (DOXYGEN_FOUND)
                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
                     OUTPUT_VARIABLE GIT_BRANCH
                     OUTPUT_STRIP_TRAILING_WHITESPACE)
-    set(DOCS_MAINPAGE ${CMAKE_CURRENT_LIST_DIR}/About.md)
 
     configure_file(${CMAKE_CURRENT_LIST_DIR}/doxyfile.in
                    ${CMAKE_BINARY_DIR}/doxyfile)
