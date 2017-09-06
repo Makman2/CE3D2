@@ -1,4 +1,4 @@
-find_package(Doxygen 1.8.8 REQUIRED)
+find_package(Doxygen 1.8.6 REQUIRED)
 if (DOXYGEN_FOUND)
     # Get the latest abbreviated commit hash of the working branch.
     execute_process(COMMAND git log -1 --format=%h
