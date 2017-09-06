@@ -68,7 +68,8 @@ function TARGET_help {
     echo "           as argument, this will be the next dev-version incremented"
     echo "           to. If no argument is given, the minor-version will be"
     echo "           incremented by one as the next dev-version."
-    echo "clean      Clean up build files."
+    echo "clean      Clean up build files. You can specify explicitly with"
+    echo "           multiple arguments which targets shall be cleaned up."
 }
 
 function TARGET_debug {
@@ -94,14 +95,33 @@ function TARGET_install {
 }
 
 function TARGET_clean {
-    task "Deleting debug build..." \
-        rm -rf $CE3D2_DEBUG_BUILD_DIRECTORY
-    task "Deleting release build..." \
-        rm -rf $CE3D2_RELEASE_BUILD_DIRECTORY
-    task "Deleting documentation..." \
-        rm -rf $CE3D2_DOCS_BUILD_DIRECTORY
-    task "Deleting published artifacts..." \
-        rm -rf $CE3D2_PUBLISH_DIRECTORY
+    function clean_debug {
+        task "Deleting debug build..." \
+            rm -rf $CE3D2_DEBUG_BUILD_DIRECTORY
+    }
+    function clean_release {
+        task "Deleting release build..." \
+            rm -rf $CE3D2_RELEASE_BUILD_DIRECTORY
+    }
+    function clean_docs {
+        task "Deleting documentation..." \
+            rm -rf $CE3D2_DOCS_BUILD_DIRECTORY
+    }
+    function clean_publish {
+        task "Deleting published artifacts..." \
+            rm -rf $CE3D2_PUBLISH_DIRECTORY
+    }
+
+    if [ $# -eq 0 ]; then
+        clean_debug
+        clean_release
+        clean_docs
+        clean_publish
+    else
+        for target in "$@"; do
+            clean_$target
+        done
+    fi
 }
 
 function TARGET_publish {
@@ -239,7 +259,7 @@ case $1 in
     "publish")
         TARGET_publish $2;;
     "clean")
-        TARGET_clean;;
+        TARGET_clean "${@:2}";;
     *)
         echo "Invalid target specified."
         TARGET_help;;
