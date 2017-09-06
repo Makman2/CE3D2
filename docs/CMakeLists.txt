@@ -12,16 +12,16 @@ if (DOXYGEN_FOUND)
                     OUTPUT_STRIP_TRAILING_WHITESPACE)
     set(DOCS_MAINPAGE ${CMAKE_CURRENT_LIST_DIR}/About.md)
 
-    configure_file(${CMAKE_SOURCE_DIR}/docs/doxyfile.in
+    configure_file(${CMAKE_CURRENT_LIST_DIR}/doxyfile.in
                    ${CMAKE_BINARY_DIR}/doxyfile)
-    configure_file(${CMAKE_SOURCE_DIR}/docs/DoxygenLayout.xml
+    configure_file(${CMAKE_CURRENT_LIST_DIR}/DoxygenLayout.xml
                    ${CMAKE_BINARY_DIR}/
                    COPYONLY)
 
     add_custom_target(docs
                       COMMAND
                           ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxyfile
-                      DEPENDS ${CMAKE_SOURCE_DIR}/docs/doxyfile.in
+                      DEPENDS ${CMAKE_CURRENT_LIST_DIR}/doxyfile.in
                       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                       COMMENT "Generating documentation with doxygen"
                       VERBATIM
