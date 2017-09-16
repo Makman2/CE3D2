@@ -20,15 +20,20 @@ namespace Math
         /// Creates a new `LinearAffineFunction` with the given gradient and
         /// an y-intercept of 0.
         ///
-        /// @param gradient The gradient.
+        /// @param gradient
+        ///     The gradient.
         LinearAffineFunction(PrecisionType gradient);
 
         /// Creates a new `LinearAffineFunction` from two given coordinates.
         ///
-        /// @param x1 The x-coordinate of the first point.
-        /// @param y1 The y-coordinate of the first point.
-        /// @param x2 The x-coordinate of the second point.
-        /// @param y2 The y-coordinate of the second point.
+        /// @param x1
+        ///     The x-coordinate of the first point.
+        /// @param y1
+        ///     The y-coordinate of the first point.
+        /// @param x2
+        ///     The x-coordinate of the second point.
+        /// @param y2
+        ///     The y-coordinate of the second point.
         LinearAffineFunction(PrecisionType x1,
                              PrecisionType y1,
                              PrecisionType x2,
@@ -36,43 +41,51 @@ namespace Math
 
         /// Creates a new `LinearAffineFunction`.
         ///
-        /// @param gradient   The gradient.
-        /// @param yintercept The y-intercept.
+        /// @param gradient
+        ///     The gradient.
+        /// @param yintercept
+        ///     The y-intercept.
         LinearAffineFunction(PrecisionType gradient, PrecisionType yintercept);
 
         /// Returns the gradient.
         ///
-        /// @returns The gradient.
+        /// @returns
+        ///     The gradient.
         PrecisionType
         get_gradient() const;
 
         /// Sets the gradient.
         ///
-        /// @param value The new gradient.
+        /// @param value
+        ///     The new gradient.
         void
         set_gradient(PrecisionType value);
 
         /// Returns the y-intercept.
         ///
-        /// @returns The y-intercept.
+        /// @returns
+        ///     The y-intercept.
         PrecisionType
         get_yintercept() const;
 
         /// Sets the y-intercept.
         ///
-        /// @param value The new y-intercept.
+        /// @param value
+        ///     The new y-intercept.
         void
         set_yintercept(PrecisionType value);
 
         /// Calculates the y-value of the linear-affine-function at x.
         ///
-        /// @returns `gradient * x + y-intercept`.
+        /// @returns
+        ///     `gradient * x + y-intercept`.
         PrecisionType operator ()(PrecisionType x) const;
 
         /// Calculates the x-value of the linear-affine-function at y. This is
         /// the inverse of `operator ()`.
         ///
-        /// @returns `(y - y-intercept) / gradient`.
+        /// @returns
+        ///     `(y - y-intercept) / gradient`.
         PrecisionType inverse(PrecisionType y) const;
 
     private:

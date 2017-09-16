@@ -14,14 +14,16 @@ namespace Transformation
     public:
         /// Instantiates a new matrix transformation.
         ///
-        /// @param matrix The initial matrix.
+        /// @param matrix
+        ///     The initial matrix.
         MatrixTransformation(CE3D2::Matrix const& matrix);
 
         virtual ~MatrixTransformation();
 
         /// Sets the transformation matrix.
         ///
-        /// @param matrix The new transformation matrix.
+        /// @param matrix
+        ///     The new transformation matrix.
         void
         set_matrix(CE3D2::Matrix const& matrix);
 

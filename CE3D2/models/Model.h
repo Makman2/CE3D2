@@ -23,78 +23,87 @@ namespace Models
         Model();
         /// Instantiates a new model with the given name.
         ///
-        /// @param name The name of the model.
+        /// @param name
+        ///     The name of the model.
         Model(std::string name);
 
         virtual ~Model();
 
         /// Constructs a (2D) unit-square.
         ///
-        /// @returns A model containing the square.
+        /// @returns
+        ///     A model containing the square.
         static Model
         square();
 
         /// Constructs a (3D) unit-cube.
         ///
-        /// @returns A model containing the cube.
+        /// @returns
+        ///     A model containing the cube.
         static Model
         cube();
 
         /// Constructs a unit-tesseract (a 4D-cube).
         ///
-        /// @returns A model containing the tesseract.
+        /// @returns
+        ///     A model containing the tesseract.
         static Model
         tesseract();
 
         /// Constructs a unit-hypercube.
         ///
-        /// @param dimensions             The dimension of the hypercube.
-        /// @throws std::invalid_argument Thrown when dimension is 0 or less or
-        ///                               it's so big that it would exceed the
-        ///                               machine address space (so on x86
-        ///                               systems the limit should be usually 32
-        ///                               and on x64 systems 64).
-        /// @returns                      A model containing the hypercube.
+        /// @param dimensions
+        ///     The dimension of the hypercube.
+        /// @throws std::invalid_argument
+        ///     Thrown when dimension is 0 or less or it's so big that it
+        ///     would exceed the machine address space (so on x86 systems the
+        ///     limit should be usually 32 and on x64 systems 64).
+        /// @returns
+        ///     A model containing the hypercube.
         static Model
         hypercube(Vector::size_type dimension);
 
         /// Returns the name of this model. It can be non-unique!
         ///
-        /// @returns The name of the model.
+        /// @returns
+        ///     The name of the model.
         std::string const&
         get_name() const;
 
         /// Sets the name of this model. It can be non-unique!
         ///
-        /// @param value The new name of the model.
+        /// @param value
+        ///     The new name of the model.
         void
         set_name(std::string value);
 
         /// Returns whether the model is visible or not.
         ///
-        /// @returns true if visible, false if not.
+        /// @returns
+        ///     true if visible, false if not.
         bool
         is_visible() const;
 
         /// Sets whether the model should be visible.
         ///
-        /// @param value true if visible, false if not.
+        /// @param value
+        ///     true if visible, false if not.
         void
         set_visibility(bool value);
 
         /// Returns the vector-list that contains the vectors the model consists
         /// of.
         ///
-        /// @returns A reference to the `StorageType` containing the model
-        ///          vectors.
+        /// @returns
+        ///     A reference to the `StorageType` containing the model vectors.
         StorageType<Vector> const&
         vectors() const;
 
         /// Returns a modifiable vector-list that contains the vectors the model
         /// consists of.
         ///
-        /// @returns A reference to the `StorageType` containing the model
-        ///          vectors.
+        /// @returns
+        ///     A reference to the `StorageType` containing the model vectors.
         StorageType<Vector>&
         vectors();
 

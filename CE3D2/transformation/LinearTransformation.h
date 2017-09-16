@@ -37,7 +37,8 @@ namespace Transformation
 
         /// Returns the matrix the linear transformation is represented by.
         ///
-        /// @returns The matrix of the linear transformation.
+        /// @returns
+        ///     The matrix of the linear transformation.
         CE3D2::Matrix const&
         get_matrix() const;
 
@@ -60,7 +61,8 @@ namespace Transformation
         ///
         /// Override this method and construct your transformation matrix.
         ///
-        /// @returns The updated matrix.
+        /// @returns
+        ///     The updated matrix.
         virtual CE3D2::Matrix
         on_update() const = 0;
 

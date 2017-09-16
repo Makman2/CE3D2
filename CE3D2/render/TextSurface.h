@@ -26,37 +26,47 @@ namespace Render
         ///
         /// The surface gets cleared during instantation with spaces.
         ///
-        /// @param width  The width of the surface.
-        /// @param height The height of the surface.
+        /// @param width
+        ///     The width of the surface.
+        /// @param height
+        ///     The height of the surface.
         TextSurface(size_type width, size_type height);
 
         virtual ~TextSurface();
 
         /// Gets the width of this surface.
         ///
-        /// @returns The width in pixels.
+        /// @returns
+        ///     The width in pixels.
         size_type
         width() const;
 
         /// Gets the height of this surface.
         ///
-        /// @returns The height in pixels.
+        /// @returns
+        ///     The height in pixels.
         size_type
         height() const;
 
         /// Accesses a surface pixel (read-only).
         ///
-        /// @param x The x-coordinate.
-        /// @param y The y-coordinate.
-        /// @returns The char at given position.
+        /// @param x
+        ///     The x-coordinate.
+        /// @param y
+        ///     The y-coordinate.
+        /// @returns
+        ///     The char at given position.
         char
         operator ()(size_type x, size_type y) const;
 
         /// Accesses a surface pixel.
         ///
-        /// @param x The x-coordinate.
-        /// @param y The y-coordinate.
-        /// @returns The char at given position.
+        /// @param x
+        ///     The x-coordinate.
+        /// @param y
+        ///     The y-coordinate.
+        /// @returns
+        ///     The char at given position.
         char&
         operator ()(size_type x, size_type y);
 
@@ -66,17 +76,23 @@ namespace Render
 
         /// Fills the complete surface with the given char.
         ///
-        /// @param chr The char to fill with.
+        /// @param chr
+        ///     The char to fill with.
         void
         fill(char chr);
 
         /// Fills a block of this surface with the given char.
         ///
-        /// @param chr    The char to fill with.
-        /// @param x      The x-coordinate where to start filling from.
-        /// @param y      The y-coordinate where to start filling from.
-        /// @param width  The width of the block to fill.
-        /// @param height The height of the block to fill.
+        /// @param chr
+        ///     The char to fill with.
+        /// @param x
+        ///     The x-coordinate where to start filling from.
+        /// @param y
+        ///     The y-coordinate where to start filling from.
+        /// @param width
+        ///     The width of the block to fill.
+        /// @param height
+        ///     The height of the block to fill.
         void
         fill(char chr,
              size_type x,
@@ -90,7 +106,8 @@ namespace Render
         ///
         /// Note that invalid bounds do not raise an exception!
         ///
-        /// @param source Where to copy data from.
+        /// @param source
+        ///     Where to copy data from.
         void
         copy_from(TextSurface const& source);
 
@@ -101,9 +118,12 @@ namespace Render
         ///
         /// Note that invalid bounds do not raise an exception!
         ///
-        /// @param source   Where to copy data from.
-        /// @param target_x The target x-coordinate where to start copy from.
-        /// @param target_y The target y-coordinate where to start copy from.
+        /// @param source
+        ///     Where to copy data from.
+        /// @param target_x
+        ///     The target x-coordinate where to start copy from.
+        /// @param target_y
+        ///     The target y-coordinate where to start copy from.
         void
         copy_from(TextSurface const& source,
                   size_type target_x,
@@ -114,13 +134,20 @@ namespace Render
         ///
         /// Note that invalid bounds do not raise an exception!
         ///
-        /// @param source   Where to copy data from.
-        /// @param source_x The source x-coordinate where to copy to.
-        /// @param source_y The source y-coordinate where to copy to.
-        /// @param target_x The target x-coordinate where to start copy from.
-        /// @param target_y The target y-coordinate where to start copy from.
-        /// @param width    The width of the copied block.
-        /// @param height   The height of the copied block.
+        /// @param source
+        ///     Where to copy data from.
+        /// @param source_x
+        ///     The source x-coordinate where to copy to.
+        /// @param source_y
+        ///     The source y-coordinate where to copy to.
+        /// @param target_x
+        ///     The target x-coordinate where to start copy from.
+        /// @param target_y
+        ///     The target y-coordinate where to start copy from.
+        /// @param width
+        ///     The width of the copied block.
+        /// @param height
+        ///     The height of the copied block.
         void
         copy_from(TextSurface const& source,
                   size_type source_x,
@@ -135,9 +162,12 @@ namespace Render
         /// You can invoke this function before using the `operator ()` on this
         /// object to check for boundary validity.
         ///
-        /// @param x The x-coordinate to check.
-        /// @param y The y-coordinate to check.
-        /// @returns `true` if boundary is valid, `false` if not.
+        /// @param x
+        ///     The x-coordinate to check.
+        /// @param y
+        ///     The y-coordinate to check.
+        /// @returns
+        ///     `true` if boundary is valid, `false` if not.
         bool
         is_boundary_valid(size_type x, size_type y) const;
 
@@ -146,11 +176,16 @@ namespace Render
         /// You can invoke this function before using e.g. `fill()` on this
         /// object to check for boundary validity.
         ///
-        /// @param x      The x-coordinate of the block to check.
-        /// @param y      The y-coordinate of the block to check.
-        /// @param width  The width of the block to check.
-        /// @param height The height of the block to check.
-        /// @returns      `true` if boundary is valid, `false` if not.
+        /// @param x
+        ///     The x-coordinate of the block to check.
+        /// @param y
+        ///     The y-coordinate of the block to check.
+        /// @param width
+        ///     The width of the block to check.
+        /// @param height
+        ///     The height of the block to check.
+        /// @returns
+        ///     `true` if boundary is valid, `false` if not.
         bool
         is_boundary_valid(size_type x,
                           size_type y,
@@ -165,9 +200,12 @@ namespace Render
 
     /// Stream operator for `TextSurface` class.
     ///
-    /// @param os      The output stream.
-    /// @param surface The surface to print to `os`.
-    /// @returns       The output stream with `surface` streamed into it.
+    /// @param os
+    ///     The output stream.
+    /// @param surface
+    ///     The surface to print to `os`.
+    /// @returns
+    ///     The output stream with `surface` streamed into it.
     std::ostream&
     operator <<(std::ostream& os, TextSurface const& surface);
 }

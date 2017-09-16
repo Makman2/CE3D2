@@ -12,38 +12,50 @@
 
 /// Warns that an exception has been thrown with the given message.
 ///
-/// @param code           The code that shall throw an exception.
-/// @param exception_type The exception-type that is thrown.
-/// @param message        The exception message.
+/// @param code
+///     The code that shall throw an exception.
+/// @param exception_type
+///     The exception-type that is thrown.
+/// @param message
+///     The exception message.
 #define CE3D2_WARN_EXCEPTION(code, exception_type, message) \
     CE3D2_ASSERT_EXCEPTION(code, exception_type, message, WARN)
 
 
 /// Checks that an exception has been thrown with the given message.
 ///
-/// @param code           The code that shall throw an exception.
-/// @param exception_type The exception-type that is thrown.
-/// @param message        The exception message.
+/// @param code
+///     The code that shall throw an exception.
+/// @param exception_type
+///     The exception-type that is thrown.
+/// @param message
+///     The exception message.
 #define CE3D2_CHECK_EXCEPTION(code, exception_type, message) \
     CE3D2_ASSERT_EXCEPTION(code, exception_type, message, CHECK)
 
 
 /// Requires that an exception has been thrown with the given message.
 ///
-/// @param code           The code that shall throw an exception.
-/// @param exception_type The exception-type that is thrown.
-/// @param message        The exception message.
+/// @param code
+///     The code that shall throw an exception.
+/// @param exception_type
+///     The exception-type that is thrown.
+/// @param message
+///     The exception message.
 #define CE3D2_REQUIRE_EXCEPTION(code, exception_type, message) \
     CE3D2_ASSERT_EXCEPTION(code, exception_type, message, REQUIRE)
 
 
 /// Asserts that an exception has been thrown with the given message.
 ///
-/// @param code           The code that shall throw an exception.
-/// @param exception_type The exception-type that is thrown.
-/// @param message        The exception message.
-/// @param LEVEL          The assertion level. Valid values are "WARN", "CHECK"
-///                       or "REQUIRE".
+/// @param code
+///     The code that shall throw an exception.
+/// @param exception_type
+///     The exception-type that is thrown.
+/// @param message
+///     The exception message.
+/// @param LEVEL
+///     The assertion level. Valid values are "WARN", "CHECK" or "REQUIRE".
 #define CE3D2_ASSERT_EXCEPTION(code, exception_type, message, LEVEL) \
     BOOST_##LEVEL##_EXCEPTION(                                       \
         code,                                                        \
@@ -54,22 +66,28 @@
 
 /// Warns for vector equality.
 ///
-/// @param a First vector to compare.
-/// @param b Second vector to compare.
+/// @param a
+///     First vector to compare.
+/// @param b
+///     Second vector to compare.
 #define CE3D2_WARN_VECTORS_EQUAL(a, b) CE3D2_ASSERT_VECTORS_EQUAL(a, b, WARN)
 
 
 /// Checks for vector equality.
 ///
-/// @param a First vector to compare.
-/// @param b Second vector to compare.
+/// @param a
+///     First vector to compare.
+/// @param b
+///     Second vector to compare.
 #define CE3D2_CHECK_VECTORS_EQUAL(a, b) CE3D2_ASSERT_VECTORS_EQUAL(a, b, CHECK)
 
 
 /// Requires vector equality.
 ///
-/// @param a First vector to compare.
-/// @param b Second vector to compare.
+/// @param a
+///     First vector to compare.
+/// @param b
+///     Second vector to compare.
 #define CE3D2_REQUIRE_VECTORS_EQUAL(a, b) \
     CE3D2_ASSERT_VECTORS_EQUAL(a, b, REQUIRE)
 
@@ -79,10 +97,12 @@
 /// You should consider using the specializations CE3D2_WARN_VECTORS_EQUAL,
 /// CE3D2_CHECK_VECTORS_EQUAL and CE3D2_REQUIRE_VECTORS_EQUAL instead.
 ///
-/// @param a     First vector to compare.
-/// @param b     Second vector to compare.
-/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
-///              "REQUIRE".
+/// @param a
+///     First vector to compare.
+/// @param b
+///     Second vector to compare.
+/// @param LEVEL
+///     The assertion level. Valid values are "WARN", "CHECK" or "REQUIRE".
 #define CE3D2_ASSERT_VECTORS_EQUAL(a, b, LEVEL)               \
 {                                                             \
     BOOST_##LEVEL##_MESSAGE(                                  \
@@ -103,23 +123,29 @@
 
 /// Warns for matrix equality.
 ///
-/// @param A First matrix to compare.
-/// @param B Second matrix to compare.
+/// @param A
+///     First matrix to compare.
+/// @param B
+///     Second matrix to compare.
 #define CE3D2_WARN_MATRICES_EQUAL(A, B) CE3D2_ASSERT_MATRICES_EQUAL(A, B, WARN)
 
 
 /// Checks for matrix equality.
 ///
-/// @param A First matrix to compare.
-/// @param B Second matrix to compare.
+/// @param A
+///     First matrix to compare.
+/// @param B
+///     Second matrix to compare.
 #define CE3D2_CHECK_MATRICES_EQUAL(A, B) \
     CE3D2_ASSERT_MATRICES_EQUAL(A, B, CHECK)
 
 
 /// Requires matrix equality.
 ///
-/// @param A First matrix to compare.
-/// @param B Second matrix to compare.
+/// @param A
+///     First matrix to compare.
+/// @param B
+///     Second matrix to compare.
 #define CE3D2_REQUIRE_MATRICES_EQUAL(A, B) \
     CE3D2_ASSERT_MATRICES_EQUAL(A, B, REQUIRE)
 
@@ -129,10 +155,12 @@
 /// You should consider using the specializations CE3D2_WARN_MATRICES_EQUAL,
 /// CE3D2_CHECK_MATRICES_EQUAL and CE3D2_REQUIRE_MATRICES_EQUAL instead.
 ///
-/// @param A     First matrix to compare.
-/// @param B     Second matrix to compare.
-/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
-///              "REQUIRE".
+/// @param A
+///     First matrix to compare.
+/// @param B
+///     Second matrix to compare.
+/// @param LEVEL
+///     The assertion level. Valid values are "WARN", "CHECK" or "REQUIRE".
 #define CE3D2_ASSERT_MATRICES_EQUAL(A, B, LEVEL)                       \
 {                                                                      \
     BOOST_##LEVEL##_MESSAGE(                                           \
@@ -159,24 +187,30 @@
 
 /// Warns for `IndexPair` equality.
 ///
-/// @param A First `IndexPair` to compare.
-/// @param B Second `IndexPair` to compare.
+/// @param A
+///     First `IndexPair` to compare.
+/// @param B
+///     Second `IndexPair` to compare.
 #define CE3D2_WARN_INDEX_PAIRS_EQUAL(A, B) \
     CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, WARN)
 
 
 /// Checks for `IndexPair` equality.
 ///
-/// @param A First `IndexPair` to compare.
-/// @param B Second `IndexPair` to compare.
+/// @param A
+///     First `IndexPair` to compare.
+/// @param B
+///     Second `IndexPair` to compare.
 #define CE3D2_CHECK_INDEX_PAIRS_EQUAL(A, B) \
     CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, CHECK)
 
 
 /// Requires `IndexPair` equality.
 ///
-/// @param A First `IndexPair` to compare.
-/// @param B Second `IndexPair` to compare.
+/// @param A
+///     First `IndexPair` to compare.
+/// @param B
+///     Second `IndexPair` to compare.
 #define CE3D2_REQUIRE_INDEX_PAIRS_EQUAL(A, B) \
     CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, REQUIRE)
 
@@ -186,10 +220,12 @@
 /// You should consider using the specializations CE3D2_WARN_INDEX_PAIRS_EQUAL,
 /// CE3D2_CHECK_INDEX_PAIRS_EQUAL and CE3D2_REQUIRE_INDEX_PAIRS_EQUAL instead.
 ///
-/// @param A     First `IndexPair` to compare.
-/// @param B     Second `IndexPair` to compare.
-/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
-///              "REQUIRE".
+/// @param A
+///     First `IndexPair` to compare.
+/// @param B
+///     Second `IndexPair` to compare.
+/// @param LEVEL
+///     The assertion level. Valid values are "WARN", "CHECK" or "REQUIRE".
 #define CE3D2_ASSERT_INDEX_PAIRS_EQUAL(A, B, LEVEL)                     \
 {                                                                       \
     BOOST_##LEVEL##_MESSAGE(                                            \
@@ -205,24 +241,30 @@
 
 /// Warns for TextSurface equality.
 ///
-/// @param A First TextSurface to compare.
-/// @param B Second TextSurface to compare.
+/// @param A
+///     First TextSurface to compare.
+/// @param B
+///     Second TextSurface to compare.
 #define CE3D2_WARN_TEXTSURFACES_EQUAL(A, B) \
     CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, WARN)
 
 
 /// Checks for TextSurface equality.
 ///
-/// @param A First TextSurface to compare.
-/// @param B Second TextSurface to compare.
+/// @param A
+///     First TextSurface to compare.
+/// @param B
+///     Second TextSurface to compare.
 #define CE3D2_CHECK_TEXTSURFACES_EQUAL(A, B) \
     CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, CHECK)
 
 
 /// Requires TextSurface equality.
 ///
-/// @param A First TextSurface to compare.
-/// @param B Second TextSurface to compare.
+/// @param A
+///     First TextSurface to compare.
+/// @param B
+///     Second TextSurface to compare.
 #define CE3D2_REQUIRE_TEXTSURFACES_EQUAL(A, B) \
     CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, REQUIRE)
 
@@ -232,10 +274,12 @@
 /// You should consider using the specializations CE3D2_WARN_TEXTSURFACES_EQUAL,
 /// CE3D2_CHECK_TEXTSURFACES_EQUAL and CE3D2_REQUIRE_TEXTSURFACES_EQUAL instead.
 ///
-/// @param A     First TextSurface to compare.
-/// @param B     Second TextSurface to compare.
-/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
-///              "REQUIRE".
+/// @param A
+///     First TextSurface to compare.
+/// @param B
+///     Second TextSurface to compare.
+/// @param LEVEL
+///     The assertion level. Valid values are "WARN", "CHECK" or "REQUIRE".
 #define CE3D2_ASSERT_TEXTSURFACES_EQUAL(A, B, LEVEL)                          \
 {                                                                             \
     BOOST_##LEVEL##_MESSAGE(                                                  \
@@ -263,9 +307,12 @@
 
 /// Compares the length of two strings.
 ///
-/// @param a The first string to compare.
-/// @param b The second string to compare.
-/// @returns If the size of `a` is smaller than the size of `b`.
+/// @param a
+///     The first string to compare.
+/// @param b
+///     The second string to compare.
+/// @returns
+///     If the size of `a` is smaller than the size of `b`.
 bool
 _compare_string_sizes(std::string const& a, std::string const& b)
 {
@@ -275,11 +322,12 @@ _compare_string_sizes(std::string const& a, std::string const& b)
 
 /// Creates a TextSurface.
 ///
-/// @param data A vector of strings where each string represents a single row of
-///             the TextSurface to create. Width of the surface is determined
-///             from the longest string in `data`, height from the number of
-///             elements in it.
-/// @returns    The TextSurface.
+/// @param data
+///     A vector of strings where each string represents a single row of the
+///     TextSurface to create. Width of the surface is determined from the
+///     longest string in `data`, height from the number of elements in it.
+/// @returns
+///     The TextSurface.
 std::shared_ptr<CE3D2::Render::TextSurface>
 _create_textsurface(std::vector<std::string> const& data)
 {
@@ -312,30 +360,33 @@ _create_textsurface(std::vector<std::string> const& data)
 
 /// Creates a TextSurface.
 ///
-/// @param ... Parameters of strings where each string represents a single row
-///            of the TextSurface to create. Width of the surface is determined
-///            from the longest string in `data`, height from the number of
-///            elements in it.
+/// @param ...
+///     Parameters of strings where each string represents a single row of the
+///     TextSurface to create. Width of the surface is determined from the
+///     longest string in `data`, height from the number of elements in it.
 ///
-///            For example:
-///            CE3D2_CREATE_TEXTSURFACE(" + ", "+++", " + ")
-///            This would create a 3x3 TextSurface with following content:
+///     For example:
+///     CE3D2_CREATE_TEXTSURFACE(" + ", "+++", " + ")
+///     This would create a 3x3 TextSurface with following content:
 ///
-///             +
-///            +++
-///             +
+///      +
+///     +++
+///      +
 ///
-/// @returns   The TextSurface.
+/// @returns
+///     The TextSurface.
 #define CE3D2_CREATE_TEXTSURFACE(...) \
     _create_textsurface(std::vector<std::string>({__VA_ARGS__}))
 
 
 /// Asserts that two models are equal.
 ///
-/// @param a     First Model to compare.
-/// @param b     Second Model to compare.
-/// @param LEVEL The assertion level. Valid values are "WARN", "CHECK" or
-///              "REQUIRE".
+/// @param a
+///     First Model to compare.
+/// @param b
+///     Second Model to compare.
+/// @param LEVEL
+///     The assertion level. Valid values are "WARN", "CHECK" or "REQUIRE".
 #define CE3D2_ASSERT_MODELS_EQUAL(a, b, LEVEL)                           \
 {                                                                        \
     BOOST_##LEVEL##_EQUAL((a).get_name(), (b).get_name());               \
@@ -378,24 +429,30 @@ _create_textsurface(std::vector<std::string> const& data)
 
 /// Warns if two models are not equal.
 ///
-/// @param a First Model to compare.
-/// @param b Second Model to compare.
+/// @param a
+///     First Model to compare.
+/// @param b
+///     Second Model to compare.
 #define CE3D2_WARN_MODELS_EQUAL(A, B) \
     CE3D2_ASSERT_MODELS_EQUAL(A, B, WARN)
 
 
 /// Checks two models being equal.
 ///
-/// @param a First Model to compare.
-/// @param b Second Model to compare.
+/// @param a
+///     First Model to compare.
+/// @param b
+///     Second Model to compare.
 #define CE3D2_CHECK_MODELS_EQUAL(A, B) \
     CE3D2_ASSERT_MODELS_EQUAL(A, B, CHECK)
 
 
 /// Requires two models being equal.
 ///
-/// @param a First Model to compare.
-/// @param b Second Model to compare.
+/// @param a
+///     First Model to compare.
+/// @param b
+///     Second Model to compare.
 #define CE3D2_REQUIRE_MODELS_EQUAL(A, B) \
     CE3D2_ASSERT_MODELS_EQUAL(A, B, REQUIRE)
 

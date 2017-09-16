@@ -19,7 +19,8 @@ namespace Transformation
         /// Override this function to define how your object should get
         /// transformed.
         ///
-        /// @param transform The Transformation to transform with.
+        /// @param transform
+        ///     The Transformation to transform with.
         virtual void
         transform(Transformation const& transform) = 0;
     };

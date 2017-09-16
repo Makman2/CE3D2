@@ -28,26 +28,29 @@ namespace Render
 
         /// Returns the char used for rendering points.
         ///
-        /// @returns The render-char.
+        /// @returns
+        ///     The render-char.
         char
         get_rendered_char() const;
 
         /// Sets the char used for rendering points.
         ///
-        /// @param value The new char.
+        /// @param value
+        ///     The new char.
         void
         set_rendered_char(char value);
 
         /// Returns a shared reference to the render target.
         ///
-        /// @returns A shared reference.
+        /// @returns
+        ///     A shared reference.
         std::shared_ptr<TextSurface>
         get_target() const;
 
         /// Sets the render target where the models are rendered to.
         ///
-        /// @param target A shared reference of a `TextSurface` to use as
-        ///               target.
+        /// @param target
+        ///     A shared reference of a `TextSurface` to use as target.
         void
         set_target(std::shared_ptr<TextSurface> const& target);
 
@@ -56,7 +59,8 @@ namespace Render
         /// Each model inside this list will be rendered with the render-char at
         /// the specified vectors in it.
         ///
-        /// @returns A reference to the model list.
+        /// @returns
+        ///     A reference to the model list.
         std::vector<std::shared_ptr<CE3D2::Models::Model>>&
         models();
 
@@ -65,7 +69,8 @@ namespace Render
         /// Each model inside this list will be rendered with the render-char at
         /// the specified vectors in it.
         ///
-        /// @returns A read-only reference to the model list.
+        /// @returns
+        ///     A read-only reference to the model list.
         std::vector<std::shared_ptr<CE3D2::Models::Model>> const&
         models() const;
 
@@ -78,7 +83,8 @@ namespace Render
         /// connection characters override the dot-characters on the provided
         /// `TextSurface` target!
         ///
-        /// @returns A reference to the line-model list.
+        /// @returns
+        ///     A reference to the line-model list.
         std::vector<std::shared_ptr<CE3D2::Models::LineModel>>&
         line_models();
 
@@ -91,7 +97,8 @@ namespace Render
         /// connection characters override the dot-characters on the provided
         /// `TextSurface` target!
         ///
-        /// @returns A read-only reference to the line-model list.
+        /// @returns
+        ///     A read-only reference to the line-model list.
         std::vector<std::shared_ptr<CE3D2::Models::LineModel>> const&
         line_models() const;
 
@@ -100,7 +107,8 @@ namespace Render
         /// The target surface is not cleared before rendering, you need to do
         /// it yourself using `TextSurface.clear()`!
         ///
-        /// @throws std::logic_error Thrown when no target is set.
+        /// @throws std::logic_error
+        ///     Thrown when no target is set.
         void
         render();
 

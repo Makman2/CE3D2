@@ -14,9 +14,12 @@ namespace Math
 {
     /// Calculates the intersection points when a line intersects a box.
     ///
-    /// @param line The line.
-    /// @param box  The box.
-    /// @returns    A vector of intersection points.
+    /// @param line
+    ///     The line.
+    /// @param box
+    ///     The box.
+    /// @returns
+    ///     A vector of intersection points.
     std::vector<std::pair<PrecisionType, PrecisionType>>
     line_intersection_with_box(LinearAffineFunction const& line,
                                Box const& box);

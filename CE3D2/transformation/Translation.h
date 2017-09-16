@@ -14,26 +14,30 @@ namespace Transformation
     public:
         /// Constructs a new Translation.
         ///
-        /// @param translation The inital translation vector.
+        /// @param translation
+        ///     The inital translation vector.
         Translation(CE3D2::Vector const& translation);
 
         virtual ~Translation();
 
         /// Returns the translation vector.
         ///
-        /// @returns The translation vector.
+        /// @returns
+        ///     The translation vector.
         CE3D2::Vector&
         get_translation();
 
         /// Returns the translation vector (non-modifiable).
         ///
-        /// @returns The translation vector.
+        /// @returns
+        ///     The translation vector.
         CE3D2::Vector const&
         get_translation() const;
 
         /// Sets the translation vector.
         ///
-        /// @param value The new translation vector.
+        /// @param value
+        ///     The new translation vector.
         void
         set_translation(CE3D2::Vector const& value);
 

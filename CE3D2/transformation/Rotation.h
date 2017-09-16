@@ -39,15 +39,20 @@ namespace Transformation
 
         /// Instantiates a new `Rotation` with an angle of 0.
         ///
-        /// @param v1 The first plane vector.
-        /// @param v2 The second plane vector.
+        /// @param v1
+        ///     The first plane vector.
+        /// @param v2
+        ///     The second plane vector.
         Rotation(CE3D2::Vector const& v1, CE3D2::Vector const& v2);
 
         /// Instantiates a new `Rotation`.
         ///
-        /// @param v1    The first plane vector.
-        /// @param v2    The second plane vector.
-        /// @param angle The rotation angle (in radians).
+        /// @param v1
+        ///     The first plane vector.
+        /// @param v2
+        ///     The second plane vector.
+        /// @param angle
+        ///     The rotation angle (in radians).
         Rotation(CE3D2::Vector const& v1,
                  CE3D2::Vector const& v2,
                  PrecisionType angle);
@@ -56,56 +61,66 @@ namespace Transformation
 
         /// Gets the first vector describing the rotation plane.
         ///
-        /// @returns A vector.
+        /// @returns
+        ///     A vector.
         CE3D2::Vector const&
         get_plane_vector1() const;
 
         /// Sets the first vector describing the rotation plane.
         ///
-        /// @param value The new vector.
+        /// @param value
+        ///     The new vector.
         void
         set_plane_vector1(CE3D2::Vector const& value);
 
         /// Gets the second vector describing the rotation plane.
         ///
-        /// @returns A vector.
+        /// @returns
+        ///     A vector.
         CE3D2::Vector const&
         get_plane_vector2() const;
 
         /// Sets the second vector describing the rotation plane.
         ///
-        /// @param value The new vector.
+        /// @param value
+        ///     The new vector.
         void
         set_plane_vector2(CE3D2::Vector const& value);
 
         /// Sets the vectors that span the rotation plane.
         ///
-        /// @param v1 The first vector.
-        /// @param v2 The second vector.
+        /// @param v1
+        ///     The first vector.
+        /// @param v2
+        ///     The second vector.
         void
         set_plane_vectors(CE3D2::Vector const& v1, CE3D2::Vector const& v2);
 
         /// Gets the rotation angle (in radians).
         ///
-        /// @returns The angle in radians.
+        /// @returns
+        ///     The angle in radians.
         PrecisionType
         get_angle() const;
 
         /// Sets the rotation angle (in radians).
         ///
-        /// @param value The new angle in radians.
+        /// @param value
+        ///     The new angle in radians.
         void
         set_angle(PrecisionType value);
 
         /// Gets the rotation angle (in degrees).
         ///
-        /// @returns The angle in degrees.
+        /// @returns
+        ///     The angle in degrees.
         PrecisionType
         get_angle_in_degrees() const;
 
         /// Sets the rotation angle (in degrees).
         ///
-        /// @param value The new angle in degrees.
+        /// @param value
+        ///     The new angle in degrees.
         void
         set_angle_in_degrees(PrecisionType value);
 

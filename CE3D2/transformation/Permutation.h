@@ -27,26 +27,30 @@ namespace Transformation
     public:
         /// Creates a new permutation transformation.
         ///
-        /// @param permutation The permutation vector.
+        /// @param permutation
+        ///     The permutation vector.
         Permutation(PermutationVector const& permutation);
 
         /// Creates a new permutation transformation which reverses the elements
         /// inside the givwen vector.
         ///
-        /// @param size The size of the permutation matrix.
+        /// @param size
+        ///     The size of the permutation matrix.
         Permutation(PermutationVector::size_type size);
 
         virtual ~Permutation();
 
         /// Gets the permutation vector set.
         ///
-        /// @return The permutation vector.
+        /// @return
+        ///     The permutation vector.
         PermutationVector const&
         get_permutation_vector() const;
 
         /// Sets the permutation vector.
         ///
-        /// @param value The new permutation vector.
+        /// @param value
+        ///     The new permutation vector.
         void
         set_permutation_vector(PermutationVector const& value);
 
@@ -58,8 +62,10 @@ namespace Transformation
     private:
         /// Creates a reverse-permutation vector.
         ///
-        /// @param size The size of the permutation vector.
-        /// @return     A permutation vector.
+        /// @param size
+        ///     The size of the permutation vector.
+        /// @return
+        ///     A permutation vector.
         static PermutationVector
         generate_reverse_permutation(PermutationVector::size_type size);
 

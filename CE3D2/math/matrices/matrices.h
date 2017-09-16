@@ -13,13 +13,15 @@ namespace Matrices
 {
     /// Inverts a matrix.
     ///
-    /// @param input   The matrix to invert. Invertable matrices have quadratic
-    ///                size (means they have the same count of rows like
-    ///                columns). Passing non-quadratic matrices results in
-    ///                undefined behaviour.
-    /// @param inverse A reference to the matrix where to store the inverse.
-    /// @returns       true if invertable, false if not (because row/column
-    ///                vectors are lineary dependent).
+    /// @param input
+    ///     The matrix to invert. Invertable matrices have quadratic size
+    ///     (means they have the same count of rows like columns). Passing
+    ///     non-quadratic matrices results in undefined behaviour.
+    /// @param inverse
+    ///     A reference to the matrix where to store the inverse.
+    /// @returns
+    ///     true if invertable, false if not (because row/column vectors are
+    ///     lineary dependent).
     template<typename T>
     bool
     invert(boost::numeric::ublas::matrix<T> const& input,

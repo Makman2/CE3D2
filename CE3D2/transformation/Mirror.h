@@ -17,21 +17,23 @@ namespace Transformation
     public:
         /// Instantiates a new mirror transformation.
         ///
-        /// @param reflection_plane_normal The normal vector of the reflection
-        ///                                plane.
+        /// @param reflection_plane_normal
+        ///     The normal vector of the reflection plane.
         Mirror(CE3D2::Vector const& reflection_plane_normal);
 
         virtual ~Mirror();
 
         /// Returns the normal vector of the reflection plane.
         ///
-        /// @returns The normal vector.
+        /// @returns
+        ///     The normal vector.
         CE3D2::Vector const&
         get_reflection_plane_normal() const;
 
         /// Sets the normal vector of the reflection plane.
         ///
-        /// @param value The new normal vector.
+        /// @param value
+        ///     The new normal vector.
         void
         set_reflection_plane_normal(CE3D2::Vector const& value);
 

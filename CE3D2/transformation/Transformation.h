@@ -19,8 +19,10 @@ namespace Transformation
 
         /// Transforms an iterable of vectors (in-place).
         ///
-        /// @tparam T      The iterable type of vectors to transform.
-        /// @param vectors The iterable of vectors to transform.
+        /// @tparam T
+        ///     The iterable type of vectors to transform.
+        /// @param vectors
+        ///     The iterable of vectors to transform.
         template<typename T>
         void
         transform(T& vectors) const;
@@ -29,7 +31,8 @@ namespace Transformation
         ///
         /// Override this function to implement your own transformation.
         ///
-        /// @param vector The vector to transform.
+        /// @param vector
+        ///     The vector to transform.
         virtual void
         transform_vector(CE3D2::Vector& vector) const = 0;
     };

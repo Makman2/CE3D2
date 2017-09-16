@@ -19,32 +19,46 @@ namespace CE3D2
 
     /// Creates a 1-dimensional vector.
     ///
-    /// @param v0 The 1st value.
-    /// @returns  A 1-dimensional vector.
+    /// @param v0
+    ///     The 1st value.
+    /// @returns
+    ///     A 1-dimensional vector.
     Vector
     create_vector(PrecisionType v0);
     /// Creates a 2-dimensional vector.
     ///
-    /// @param v0 The 1st value.
-    /// @param v1 The 2nd value.
-    /// @returns  A 2-dimensional vector.
+    /// @param v0
+    ///     The 1st value.
+    /// @param v1
+    ///     The 2nd value.
+    /// @returns
+    ///     A 2-dimensional vector.
     Vector
     create_vector(PrecisionType v0, PrecisionType v1);
     /// Creates a 3-dimensional vector.
     ///
-    /// @param v0 The 1st value.
-    /// @param v1 The 2nd value.
-    /// @param v2 The 3rd value.
-    /// @returns  A 3-dimensional vector.
+    /// @param v0
+    ///     The 1st value.
+    /// @param v1
+    ///     The 2nd value.
+    /// @param v2
+    ///     The 3rd value.
+    /// @returns
+    ///     A 3-dimensional vector.
     Vector
     create_vector(PrecisionType v0, PrecisionType v1, PrecisionType v2);
     /// Creates a 4-dimensional vector.
     ///
-    /// @param v0 The 1st value.
-    /// @param v1 The 2nd value.
-    /// @param v2 The 3rd value.
-    /// @param v3 The 4th value.
-    /// @returns  A 4-dimensional vector.
+    /// @param v0
+    ///     The 1st value.
+    /// @param v1
+    ///     The 2nd value.
+    /// @param v2
+    ///     The 3rd value.
+    /// @param v3
+    ///     The 4th value.
+    /// @returns
+    ///     A 4-dimensional vector.
     Vector
     create_vector(PrecisionType v0,
                   PrecisionType v1,
@@ -52,12 +66,18 @@ namespace CE3D2
                   PrecisionType v3);
     /// Creates a 5-dimensional vector.
     ///
-    /// @param v0 The 1st value.
-    /// @param v1 The 2nd value.
-    /// @param v2 The 3rd value.
-    /// @param v3 The 4th value.
-    /// @param v4 The 5th value.
-    /// @returns  A 5-dimensional vector.
+    /// @param v0
+    ///     The 1st value.
+    /// @param v1
+    ///     The 2nd value.
+    /// @param v2
+    ///     The 3rd value.
+    /// @param v3
+    ///     The 4th value.
+    /// @param v4
+    ///     The 5th value.
+    /// @returns
+    ///     A 5-dimensional vector.
     Vector
     create_vector(PrecisionType v0,
                   PrecisionType v1,

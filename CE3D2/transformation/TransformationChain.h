@@ -25,8 +25,9 @@ namespace Transformation
         /// residing at the lowest index is applied first and the one at the
         /// highest index last.
         ///
-        /// @return A reference to the list holding shared pointers pointing at
-        ///         the stored transformations.
+        /// @return
+        ///     A reference to the list holding shared pointers pointing at
+        ///     the stored transformations.
         std::vector<std::shared_ptr<Transformation>>&
         transformations();
 

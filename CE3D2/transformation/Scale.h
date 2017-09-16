@@ -21,27 +21,32 @@ namespace Transformation
     public:
         /// Instantiates a new scaling transformation.
         ///
-        /// @param scale The initial scaling vector.
+        /// @param scale
+        ///     The initial scaling vector.
         Scale(CE3D2::Vector const& scale);
 
         virtual ~Scale();
 
         /// Returns the scaling vector which contains the scaling factors.
         ///
-        /// @returns The scaling vector.
+        /// @returns
+        ///     The scaling vector.
         CE3D2::Vector const&
         get_scale() const;
 
         /// Sets the scaling vector which contains the scaling factors.
         ///
-        /// @param scale The new scaling vector.
+        /// @param scale
+        ///     The new scaling vector.
         void
         set_scale(CE3D2::Vector const& scale);
 
         /// Sets a scaling factor inside the scaling vector.
         ///
-        /// @param index The index of the vector-element to set the scaling for.
-        /// @param scale The new scaling factor.
+        /// @param index
+        ///     The index of the vector-element to set the scaling for.
+        /// @param scale
+        ///     The new scaling factor.
         void
         set_scale(CE3D2::Vector::size_type index, CE3D2::PrecisionType scale);
 
