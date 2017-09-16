@@ -80,14 +80,14 @@ namespace Models
         /// Returns whether the model is visible or not.
         ///
         /// @returns
-        ///     true if visible, false if not.
+        ///     `true` if visible, `false` if not.
         bool
         is_visible() const;
 
         /// Sets whether the model should be visible.
         ///
         /// @param value
-        ///     true if visible, false if not.
+        ///     `true` if visible, `false` if not.
         void
         set_visibility(bool value);
 
