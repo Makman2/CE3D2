@@ -24,7 +24,7 @@ namespace Render
 
         /// Instantiates a new `TextSurface`.
         ///
-        /// The surface gets cleared during instantation with spaces.
+        /// The surface gets cleared during instantiation with spaces.
         ///
         /// @param width
         ///     The width of the surface.
