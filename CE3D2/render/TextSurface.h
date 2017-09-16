@@ -102,7 +102,8 @@ namespace Render
 
         /// Copies the given source surface to the current target surface.
         ///
-        /// The source TextSurface is copied completely to this instance at 0,0.
+        /// The source `TextSurface` is copied completely to this instance at
+        /// 0,0.
         ///
         /// Note that invalid bounds do not raise an exception!
         ///
@@ -113,8 +114,8 @@ namespace Render
 
         /// Copies the given source surface to the current target surface.
         ///
-        /// The source TextSurface is copied completely to this instance at the
-        /// given coordinates.
+        /// The source `TextSurface` is copied completely to this instance at
+        /// the given coordinates.
         ///
         /// Note that invalid bounds do not raise an exception!
         ///
