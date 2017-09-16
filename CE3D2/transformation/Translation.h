@@ -15,7 +15,7 @@ namespace Transformation
         /// Constructs a new Translation.
         ///
         /// @param translation
-        ///     The inital translation vector.
+        ///     The initial translation vector.
         Translation(CE3D2::Vector const& translation);
 
         virtual ~Translation();
