@@ -24,7 +24,7 @@ namespace Transformation
     public:
         /// Instantiates a new `LinearTransformation`.
         ///
-        /// A matrix update via `on_update()` is scheduled at instantation.
+        /// A matrix update via `on_update()` is scheduled at instantiation.
         LinearTransformation();
 
         virtual ~LinearTransformation();
