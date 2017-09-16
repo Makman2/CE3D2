@@ -32,7 +32,7 @@ namespace Transformation
         Permutation(PermutationVector const& permutation);
 
         /// Creates a new permutation transformation which reverses the elements
-        /// inside the givwen vector.
+        /// inside the given vector.
         ///
         /// @param size
         ///     The size of the permutation matrix.
