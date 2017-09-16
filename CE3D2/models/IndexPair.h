@@ -11,7 +11,7 @@ namespace CE3D2
 {
 namespace Models
 {
-    /// An IndexPair stores two indices of two vectors inside a model.
+    /// An `IndexPair` stores two indices of two vectors inside a model.
     using IndexPair = std::pair<StorageType<CE3D2::Vector>::size_type,
                                 StorageType<CE3D2::Vector>::size_type>;
 }
