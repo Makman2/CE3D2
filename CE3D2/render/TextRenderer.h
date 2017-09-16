@@ -21,7 +21,7 @@ namespace Render
         ///
         /// By default `TextRenderer` uses a dot to render points.
         ///
-        /// Contains no target and no models at instantation.
+        /// Contains no target and no models at instantiation.
         TextRenderer();
 
         virtual ~TextRenderer();
