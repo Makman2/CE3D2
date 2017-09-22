@@ -33,6 +33,7 @@ function(add_docs doxyfile)  # TODO Accepts doxyfile only (optinally defaults to
     endif()
 endfunction()
 # TODO Actually this function could be put into a separate repository!
+# TODO Maybe there are already existing functions?
 
 
 add_custom_target(docs
