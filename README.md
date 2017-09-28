@@ -74,7 +74,7 @@ HTML-documentation can be built easily with `./make.sh docs` into `build/docs`.
 To display the documentation webpage, invoke your favorite browser with
 `build/docs/html/index.html`.
 
-CE3D2 uses doxygen (version 1.8.8 and above required) to generate documentation.
+CE3D2 uses doxygen (version 1.8.8 or above required) to generate documentation.
 
 ## Debugging
 
