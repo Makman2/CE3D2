@@ -15,7 +15,7 @@ the vector arithmetic is very flexible.
 
 Clone this repository, cd into and build it!
 
-```
+```bash
 git clone https://github.com/Makman2/CE3D2
 cd CE3D2
 ./make.sh release
@@ -23,7 +23,7 @@ cd CE3D2
 
 You can speed things up by using parallel builds!
 
-```
+```bash
 ./make.sh release -j8
 ```
 
@@ -40,7 +40,7 @@ CE3D2 is only supported on linux platforms.
 
 To install CE3D2, just type:
 
-```
+```bash
 ./make.sh install release
 ```
 
@@ -97,7 +97,7 @@ If you want to see all "build targets" of the make-script, type
 
 CE3D2 supports [Vagrant](https://www.vagrantup.com/)! Just type
 
-```
+```bash
 vagrant up --provider=virtualbox
 ```
 
