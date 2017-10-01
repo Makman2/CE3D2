@@ -21,6 +21,12 @@ cd CE3D2
 ./make.sh release
 ```
 
+You can speed things up by using parallel builds!
+
+```
+./make.sh release -j8
+```
+
 The libary is located inside the `build/release` directory.
 
 To build CE3D2 you need:

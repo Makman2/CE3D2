@@ -44,7 +44,7 @@ function build {
     cd $1
 
     cmake $working_dir $CMAKE_FLAGS $2
-    make $3
+    make "${@:3}"
 
     cd $working_dir
 }
@@ -56,8 +56,12 @@ function TARGET_help {
     echo "help       Displays this help."
     echo
     echo "debug      Build CE3D2 (debug) into '$CE3D2_DEBUG_BUILD_DIRECTORY'."
+    echo "           To decrease build time using parallel builds, you can"
+    echo "           append '-j <number-of-processes>'."
     echo "release    Build CE3D2 (release) into" \
                      "'$CE3D2_RELEASE_BUILD_DIRECTORY'."
+    echo "           To decrease build time using parallel builds, you can"
+    echo "           append '-j <number-of-processes>'."
     echo "docs       Builds the HTML documentation into" \
                      "'$CE3D2_DOCS_BUILD_DIRECTORY/html'."
     echo "install debug|release"
@@ -73,11 +77,11 @@ function TARGET_help {
 }
 
 function TARGET_debug {
-    build $CE3D2_DEBUG_BUILD_DIRECTORY "$CMAKE_DEBUG_FLAGS"
+    build $CE3D2_DEBUG_BUILD_DIRECTORY "$CMAKE_DEBUG_FLAGS" "$@"
 }
 
 function TARGET_release {
-    build $CE3D2_RELEASE_BUILD_DIRECTORY "$CMAKE_RELEASE_FLAGS"
+    build $CE3D2_RELEASE_BUILD_DIRECTORY "$CMAKE_RELEASE_FLAGS" "$@"
 }
 
 function TARGET_docs {
@@ -249,9 +253,9 @@ case $1 in
     "help")
         TARGET_help;;
     "debug")
-        TARGET_debug;;
+        TARGET_debug "${@:2}";;
     "release")
-        TARGET_release;;
+        TARGET_release "${@:2}";;
     "docs")
         TARGET_docs;;
     "install")
