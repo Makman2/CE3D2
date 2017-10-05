@@ -77,10 +77,20 @@ function TARGET_help {
 }
 
 function TARGET_debug {
+    if [[ $1 != -* ]]; then
+        CMAKE_DEBUG_FLAGS="-DCMAKE_BUILD_ARCHITECTURE=$1"
+        shift
+    fi
+
     build $CE3D2_DEBUG_BUILD_DIRECTORY "$CMAKE_DEBUG_FLAGS" "$@"
 }
 
 function TARGET_release {
+    if [[ $1 != -* ]]; then
+        CMAKE_RELEASE_FLAGS="-DCMAKE_BUILD_ARCHITECTURE=$1"
+        shift
+    fi
+
     build $CE3D2_RELEASE_BUILD_DIRECTORY "$CMAKE_RELEASE_FLAGS" "$@"
 }
 
