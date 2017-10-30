@@ -18,6 +18,9 @@ configure_file(${CMAKE_CURRENT_LIST_DIR}/DoxygenLayout.xml
 function(add_docs doxyfile)  # TODO Accepts doxyfile only (optinally defaults to ${CMAKE_CURRENT_LIST_DIR/doxyfile) (And optionally a target name that defaults to "docs")
     find_package(Doxygen 1.8.6 REQUIRED)
     if (DOXYGEN_FOUND)
+        file(READ ${doxyfile} doxyfile_contents)
+
+
     # TODO Scan for implicit dependencies by scanning for variables that accept paths and add
     # TODO    according targets and commands.
 
