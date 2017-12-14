@@ -74,14 +74,40 @@ namespace Render
         std::vector<std::shared_ptr<CE3D2::Models::Model>> const&
         models() const;
 
+        /// Returns a reference to the dot-line-model list.
+        ///
+        /// Each model inside this list will be rendered using the render-char
+        /// connecting the specified index pairs.
+        ///
+        /// Dot-line-models have higher priority than normal models but less
+        /// priority than line-models!
+        ///
+        /// @returns
+        ///     A reference to the dot-line-model list.
+        std::vector<std::shared_ptr<CE3D2::Models::LineModel>>&
+        dotline_models();
+
+        /// Returns a reference to the dot-line-model list.
+        ///
+        /// Each model inside this list will be rendered using the render-char
+        /// connecting the specified index pairs.
+        ///
+        /// Dot-line-models have higher priority than normal models but less
+        /// priority than line-models!
+        ///
+        /// @returns
+        ///     A read-only reference to the dot-line-model list.
+        std::vector<std::shared_ptr<CE3D2::Models::LineModel>> const&
+        dotline_models() const;
+
         /// Returns a reference to the line-model list.
         ///
         /// Each model inside this list will be rendered using the chars `_`,
         /// `\\`, `|` and `/` connecting the specified index pairs.
         ///
-        /// Line-models have higher priority than normal models, means the line
-        /// connection characters override the dot-characters on the provided
-        /// `TextSurface` target!
+        /// Line-models have higher priority than normal and dot-line models,
+        /// means the line connection characters override the dot-characters
+        /// on the provided `TextSurface` target!
         ///
         /// @returns
         ///     A reference to the line-model list.
@@ -93,9 +119,9 @@ namespace Render
         /// Each model inside this list will be rendered using the chars `_`,
         /// `\\`, `|` and `/` connecting the specified index pairs.
         ///
-        /// Line-models have higher priority than normal models, means the line
-        /// connection characters override the dot-characters on the provided
-        /// `TextSurface` target!
+        /// Line-models have higher priority than normal and dot-line models,
+        /// means the line connection characters override the dot-characters
+        /// on the provided `TextSurface` target!
         ///
         /// @returns
         ///     A read-only reference to the line-model list.
@@ -114,11 +140,13 @@ namespace Render
 
     private:
         void render_points();
+        void render_dotlines();
         void render_lines();
 
         char m_RenderChar;
         std::shared_ptr<TextSurface> m_Target;
         std::vector<std::shared_ptr<CE3D2::Models::Model>> m_Models;
+        std::vector<std::shared_ptr<CE3D2::Models::LineModel>> m_DotlineModels;
         std::vector<std::shared_ptr<CE3D2::Models::LineModel>> m_LineModels;
     };
 }
