@@ -15,6 +15,8 @@ script:
     - ./make.sh release
     - ./make.sh docs
     # Install debug build. Also necessary to compile examples.
-    - sudo ./make.sh install debug
+    # The `env "PATH=$PATH"` part is required so cmake is available with sudo.
+    # See https://github.com/travis-ci/travis-ci/issues/1350
+    - sudo env "PATH=$PATH" ./make.sh install debug
     # Compile examples.
     - echo "Compiling examples..."; set -e; for dir in examples/*/; do (cd "$dir" && ./make.sh && echo "- ${dir%*/} compiled successfully."); done
