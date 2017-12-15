@@ -53,7 +53,7 @@ namespace Models
 
         /// Constructs a unit-hypercube.
         ///
-        /// @param dimensions
+        /// @param dimension
         ///     The dimension of the hypercube.
         /// @throws std::invalid_argument
         ///     Thrown when dimension is 0 or less or it's so big that it
