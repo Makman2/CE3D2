@@ -174,7 +174,7 @@ function TARGET_publish {
 
     # Modify versions and other information in source.
     replace "set(CE3D2_VERSION_MICRO dev)" "set(CE3D2_VERSION_MICRO 0)" CMakeLists.txt
-    replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION}\"" CE3D2/doxyfile.in
+    replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION}\"" docs/doxyfile.in
 
     # Stage all modified files and commit. Ignore all untracked files.
     git commit -a -m "Release $CE3D2_VERSION_MAJOR.$CE3D2_VERSION_MINOR"
@@ -223,7 +223,7 @@ function TARGET_publish {
     replace "set(CE3D2_VERSION_MAJOR [0-9]\+)" "set(CE3D2_VERSION_MAJOR $CE3D2_NEXT_VERSION_MAJOR)" CMakeLists.txt
     replace "set(CE3D2_VERSION_MINOR [0-9]\+)" "set(CE3D2_VERSION_MINOR $CE3D2_NEXT_VERSION_MINOR)" CMakeLists.txt
     replace "set(CE3D2_VERSION_MICRO 0)" "set(CE3D2_VERSION_MICRO dev)" CMakeLists.txt
-    replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION}\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" CE3D2/doxyfile.in
+    replace "PROJECT_NUMBER\( *\)= \"\\\${PROJECT_VERSION}\"" "PROJECT_NUMBER\1= \"\\\${PROJECT_VERSION} (at \\\${GIT_HEAD} on \\\${GIT_BRANCH})\"" docs/doxyfile.in
 
     git commit -a -m "Increment version to $CE3D2_NEXT_VERSION_MAJOR.$CE3D2_NEXT_VERSION_MINOR.dev"
 
