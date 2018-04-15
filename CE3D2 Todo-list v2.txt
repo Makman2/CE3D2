@@ -1,0 +1,112 @@
+#0.1
+- IStandardTransformable:
+  Not related to ITransformable, allows to scale, rotate (?), translate and
+  maybe some other common stuff you should be able to do with vectors.
+  Maybe not using an interface is better, just implement it into the Model
+  directly. I mean when does it matter if an object is scalable as long as I
+  can apply any valid transformation on it? (even it's a bit more imperformant,
+  but anyway).
+  EDIT: After thinking again: I vote this again up +1 (means implementing
+  directly into the Model)
+- Custom Matrix transformation (this is a must-have)
+- Rotation transformation
+- (Non-linear) transformation chain
+- Linear transformation chain (orientate on CE3D)
+- Text(Buffer)Renderer (overthink the name), Printer comes later in 0.2
+    Think about the format where to render on (array, complete string with \n, ...)
+- Predefined models (cube, plane, circle, cylinder, pyramid)
+    = Construction functions in CE3D2::Models::cube() etc.
+- doxygen
+- full documentation (also template parameters)
+- to check: what was the problem with using boost < 1.50? I remember it was
+  something wrong when using C++11. Let's look when the travis builds crash :)
+    --> if no problems on travis, move this issue to 0.2
+- Examples?!?!
+    --> Examples in a separate repository.
+- Guides!!!
+    --> look for doxygen integration
+- Make a CE2D2 config header from CMake that supplies version etc? (at least version is not unuseful)
+- Write into the readme that C++11 is used.
+- coala? yeah why not
+- Allow to disable checks??? (in OrthogonalProjection, the checks inside
+  on_update() which checks for right vectors etc.)
+  --> Maybe using here also a lazy evaluation system that is triggered automatically
+      if not checked by user via check() or whatever?
+      On first sight this looks bad...
+- Construction of object:
+    Construction:
+    Object elem(ctorparam1, ctorparam2, ...)
+    OR:
+    Object elem = Object(ctorparam1, ctorparam2, ...)
+    Syntactically the first one is shorter and should be faster, but I think the
+    compiler recognizes it and optimizes the second statement so it does not
+    create an intermediate copy.
+    I'm anyway in favor of first one because it's shorter and no boilerplate.
+    **It's decided: first one!!!**
+- "Super-header"
+  --> Includes all CE3D2 stuff so user only needs `#include <CE3D2>`
+      for installation
+- Include headers directly even if parent includes it, so files keep being
+  independent from each other in matters of headers and inclusion.
+- Install target
+- Logo?
+- Rename custom boost-called asserts (BOOST_###) to CE3D2? (CE3D2_CHECK_VECTORS_BLA)
+  --> YES
+
+0.2
+- some codestyle rules? at least the special stuff like test layout maybe?
+- Because I allow non-linear transformations, I can
+  implement a RealPerspectiveProjection which has no Z-fighting etc., it's
+  the real deal!!!
+  This would also go well for the orthogonal projection.
+- (linear) Identity transformation? (in fact it is not useful)
+- (linear) Perspective projection
+- ModelGroup? (needs-design)
+    Models as set or again std::vector?
+- PrintRenderer/ConsoleRenderer
+     --> ncurses or other console libraries to manage console content + automatic size detection
+- Using a *World* class for the Renderer instead of passing directly models?
+  I think that's a good idea, then world transformation and model-storing is
+  handled by this World, while renderer just needs to take the models, copy
+  them, transform them and we're good to go.
+  Possibly a 0.2 goal :D
+- math-function helper classes
+  --> CE3D used helper objects for mathematical functions (like linear_function).
+      Maybe it's worth to copy them since I know it's needed for line-mode drawing.
+      (at least I remember that they were quite helpful).
+      but line-mode and triangle-drawing come in 0.2.
+- Line mode + Triangle mode
+  --> don't use a custom connector class, use std::pair and std::tuple!!!
+  --> Introduce some "nicer-readable" functions for connecting vertices? like
+      `connect()` and `disconnect()`?
+- Performance tuning: Implement trans_prod(A, first_transposed?) which
+  multiplies a matrix with it's own transposed matrix.
+  --> Would be used in OrthogonalProjection (and maybe PerspectiveProjection)
+- Orthogonal Projection (and other classes)
+  Implement interface for more detailed projection vector setting
+  (set_at_position, set_at_position_at_elem_index, add, remove, clear...)
+  
+0.3
+- Hybrid Mode? or in 0.4?
+- Python bindings
+- C bindings
+
+// Using sets for even for Models? Maybe introduce LineDrawing ... in 0.2
+// with index wise connections, and try for 0.3 to introduce sets (if they are
+// cooler and nicer).
+// EDIT: I think that's not so cool. You can only access items by iterators,
+//       not by references or pointers. And iterators don't support by default
+//       `peek()`, so returning the element is quite a heavy task (copy
+//       iterator,
+//       advance the copy, get element from copy). Also the users get access
+//       via the iterators to the background set and this is super-unintuitive.
+// But sets work completely with iterators, maybe they just return the single
+// value... Need to test that and maybe making a wrapper is a good idea.
+// Maybe it's cool, let's try it for 0.3 at least on a test branch.
+
+0.4
+- Other language bindings (java, .NET, ...)
+- for 0.4 or 0.5: animations -> rigging and animators? animators maybe even
+  earlier.
+
+0.5
